@@ -1,4 +1,4 @@
-const VERSION='r4-20261029-workbench2';
+const VERSION='r6-20261029-pages-speed1';
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
 const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','vendor/three/SkeletonUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;
