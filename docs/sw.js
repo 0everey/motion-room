@@ -1,6 +1,6 @@
-const VERSION='r6-20261029-native-root1';
+const VERSION='r8-20261030-single-screen2';
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
-const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js'];
+const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;
 const INSTANCE=self.crypto.randomUUID();let clearNumber=0,epoch=INSTANCE+':0',enabled=true,queue=Promise.resolve();const inflight=new Map();
 const serial=fn=>{const result=queue.then(fn,fn);queue=result.catch(()=>{});return result;};
@@ -65,7 +65,7 @@ self.addEventListener('message',event=>{
     let result;
     if(message.type==='STATUS')result=await status(message.url,message.resources||[]);
     else if(message.type==='RESUME'){await serial(()=>{enabled=true;});result={epoch,enabled};}
-    else if(message.type==='CACHE_RESOURCES'){for(const url of (message.urls||[]).slice(0,100))await cacheResource(url,{resume:!!message.resume});result=await status(message.url,message.resources||[]);}
+    else if(message.type==='CACHE_RESOURCES'){for(const url of (message.urls||[]).slice(0,256))await cacheResource(url,{resume:!!message.resume});result=await status(message.url,message.resources||[]);}
     else if(message.type==='INVALIDATE'){const url=new URL(message.url,ROOT);if(category(url)==='preview')await serial(async()=>{await(await caches.open(PREVIEW)).delete(url.href);});result={invalidated:true};}
     else if(message.type==='CLEAR_PREVIEW'){
       // Advance before cancellation; every older queued write will fail its epoch check.
