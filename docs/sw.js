@@ -1,12 +1,12 @@
-const VERSION='r6-20261029-pages-speed1';
+const VERSION='r6-20261029-native-root1';
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
-const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','vendor/three/SkeletonUtils.js'];
+const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;
 const INSTANCE=self.crypto.randomUUID();let clearNumber=0,epoch=INSTANCE+':0',enabled=true,queue=Promise.resolve();const inflight=new Map();
 const serial=fn=>{const result=queue.then(fn,fn);queue=result.catch(()=>{});return result;};
 function relative(url){return url.origin===ROOT.origin&&url.pathname.startsWith(ROOT.pathname)?url.pathname.slice(ROOT.pathname.length):null;}
 function canonicalURL(value){const url=new URL(value,ROOT),path=relative(url);if(!url.search&&['','index.html','workbench.html'].includes(path))url.hash='';return url;}
-function category(url){const path=relative(url);if(path===null||url.search||url.hash)return null;if(!path||path==='index.html'||path==='workbench.html'||path==='data/catalog.json'||path==='credits.txt'||/\.(?:js|mjs|css|ttf|woff2?)$/i.test(path))return 'shell';if(/^data\/clips\/[^/]+\.mvp\.gz$/i.test(path)||/^data\/roots\/[^/]+\.json$/i.test(path)||/^(?:assets|models|textures|vendor)\/.+\.(?:glb|gltf|bin|png|jpe?g|webp|ktx2?)$/i.test(path))return 'preview';return null;}
+function category(url){const path=relative(url);if(path===null||url.search||url.hash)return null;if(!path||path==='index.html'||path==='workbench.html'||path==='data/catalog.json'||path==='credits.txt'||/\.(?:js|mjs|css|ttf|woff2?)$/i.test(path))return 'shell';if(/^data\/clips\/[^/]+\.mvp\.gz$/i.test(path)||/^data\/(?:roots|animator-roots)\/[^/]+\.json$/i.test(path)||/^(?:assets|models|textures|vendor)\/.+\.(?:glb|gltf|bin|png|jpe?g|webp|ktx2?)$/i.test(path))return 'preview';return null;}
 async function broadcast(type,detail={}){for(const client of await self.clients.matchAll({type:'window',includeUncontrolled:true}))client.postMessage({source:'motion-room-cache',type,...detail});}
 async function entries(){const cache=await caches.open(PREVIEW),keys=await cache.keys();return Promise.all(keys.map(async key=>{const response=await cache.match(key);return {key,bytes:Number(response?.headers.get('x-motion-bytes'))||0,stored:Number(response?.headers.get('x-motion-stored'))||0};}));}
 async function writeComplete(request,response,ticket){

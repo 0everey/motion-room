@@ -1,9 +1,9 @@
 {
-  "files": 187,
-  "bytes": 45167616,
+  "files": 223,
+  "bytes": 46342922,
   "ids": 97,
   "variants": 129,
-  "sourceCommit": "da01ef50f1347124e33900de2510c1ed8c78a228",
+  "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
   "fileIdentities": [
     {
       "path": "app.js",
@@ -36,9 +36,184 @@
       "sha256": "ec8c202ac8ad4b3d5b400793c9d199544a0d417f045c97129eb74913a7bd6b03"
     },
     {
+      "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
+      "bytes": 28588,
+      "sha256": "3be6caf3d6f2aa40e7e8a48f775095e0feb747db5e59b489cf0b557dfb70a652"
+    },
+    {
+      "path": "data/animator-roots/native-c9c64f3c_Driving-4498944308cb.json",
+      "bytes": 44025,
+      "sha256": "4498944308cb90ad4044bd7510db18a3ee39f263c57ff7752b27ded61caf2eb8"
+    },
+    {
+      "path": "data/animator-roots/native-c9c6500d_Talking-7d3b3a663a7a.json",
+      "bytes": 44235,
+      "sha256": "7d3b3a663a7a986e8d7356a2576fe75328dc511cd4a8481d4fd92896b73ef535"
+    },
+    {
+      "path": "data/animator-roots/native-c9c693bf_Pointing-669fa5e69bfe.json",
+      "bytes": 31198,
+      "sha256": "669fa5e69bfeafa18683c1e66528702a34b8135b5ccc3d497f8230d617778ed9"
+    },
+    {
+      "path": "data/animator-roots/native-c9c6c5eb_Picking_Up_Object-50ccfa9d1882.json",
+      "bytes": 29695,
+      "sha256": "50ccfa9d1882f13fc94a771b73b2406b68f0d20265a66b5f7a36e1e940d9b3aa"
+    },
+    {
+      "path": "data/animator-roots/native-c9c6d86d_Putting_Down-4156b4a7d0dd.json",
+      "bytes": 74062,
+      "sha256": "4156b4a7d0dd686c949759b142766b59c3566225bbf3ecc5081fe2e745b57e8d"
+    },
+    {
+      "path": "data/animator-roots/native-c9c809b5_Swimming_To_Edge-167a7ed7666a.json",
+      "bytes": 41803,
+      "sha256": "167a7ed7666ac1bf9d3a31655c8b226fb1540f2af3813df2bd4c0f90bad0d45b"
+    },
+    {
+      "path": "data/animator-roots/native-c9c82dfa_Carrying-3b6cddb898f0.json",
+      "bytes": 84703,
+      "sha256": "3b6cddb898f05d639e5a74081c5d35715bb792b604f02a66bf139cecbf31f224"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8524e_Pulling_Lever-fd383f751998.json",
+      "bytes": 53043,
+      "sha256": "fd383f751998dba9b485776d7e1cb47230b36388506df4734473f36bb1b6578f"
+    },
+    {
+      "path": "data/animator-roots/native-c9c85311_Carrying_Turn-05fb8cb3a1e4.json",
+      "bytes": 32961,
+      "sha256": "05fb8cb3a1e4ae51c37af9b4b265d91d938e4ec8b613be2b99991d41ac034a2e"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8772f_Prone_To_Crouch_Transition-dcaed6a6ad3a.json",
+      "bytes": 14526,
+      "sha256": "dcaed6a6ad3a233c38044735d573d5548544f4a0e71fd11afc298d55e8c80aef"
+    },
+    {
+      "path": "data/animator-roots/native-c9c87ad9_Crouch_To_Prone-41636d9b2eac.json",
+      "bytes": 14520,
+      "sha256": "41636d9b2eac0067aaae88e872f7ac548145997a56694001c0a687f04204132a"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8939f_Reloading-a9770156f9b8.json",
+      "bytes": 28841,
+      "sha256": "a9770156f9b80d82ade4d66c55df6efadc9cf6620fb3a8b93ba02edfe98ab1a0"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8bc4d_Vault_Over_Box-8619643884d3.json",
+      "bytes": 29674,
+      "sha256": "8619643884d35d7e25682045a814b4fa19f2d2332263f478532e5fa27f91b8cd"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8f267_Button_Pushing-a93d94c78ba4.json",
+      "bytes": 28672,
+      "sha256": "a93d94c78ba4420162df1bf109813a89b85584e73bf98bc0783bc024d0858c60"
+    },
+    {
+      "path": "data/animator-roots/native-c9c8fb6e_Lifting_Object-cf4c372bca77.json",
+      "bytes": 81855,
+      "sha256": "cf4c372bca770277bdfb7b48c2404487a87ac2f63b5f8c37b254a7365cdf9273"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9611b_Climbing_To_Top-145cb00c9ece.json",
+      "bytes": 33194,
+      "sha256": "145cb00c9ece9d0a18aa5a60f0e202214032d9c18adfd8737190db0a23c2c1a4"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9aef0_Pull_Heavy_Object-6357ff6b13bb.json",
+      "bytes": 10899,
+      "sha256": "6357ff6b13bb84979a18e6b4e3b68f112e652ec110f6c179d684f6f2e1a71cd5"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9b139_Pull_Heavy_Object_Start-51f3c8d2344d.json",
+      "bytes": 12727,
+      "sha256": "51f3c8d2344dd8fd62a2604d17df1c55a70cf71008c15066a9e270c9e6875f79"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9b37a_Pull_Heavy_Object_Stop-39efc3447cf3.json",
+      "bytes": 12543,
+      "sha256": "39efc3447cf32f48a1e84d34e2bbacb0356825a10b663b93a3debf0d8eb2f68f"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9bd67_Right_Shimmy-83cc7aff621f.json",
+      "bytes": 13270,
+      "sha256": "83cc7aff621faee37c19edc57606a4e81fce0f7fa622996d61ec3435519a3a85"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9ce91_Freehang_Climb-2b65d06e602c.json",
+      "bytes": 32327,
+      "sha256": "2b65d06e602caf160da7d0edefd5c06e5eb4599317d0fc973f80668836df9863"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9d4a0_Push_Start-c749870219f7.json",
+      "bytes": 39296,
+      "sha256": "c749870219f716e0a78fd5ebc90cb8bf99361cae5937139442c229a2ca6329a3"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9d617_Pushing-264268b64007.json",
+      "bytes": 23512,
+      "sha256": "264268b64007444eb09e03e5019bd06e3323fa303157574c90fc61362bb2f078"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9d793_Push_Stop-182ef9754e45.json",
+      "bytes": 22465,
+      "sha256": "182ef9754e45c8926be23b68e2cae9e23bda9974086e9eee91da3ac233bde439"
+    },
+    {
+      "path": "data/animator-roots/native-c9c9e3b2_Sheathing_Sword-240938bbf5bf.json",
+      "bytes": 15304,
+      "sha256": "240938bbf5bf503f157b7a88171c9212de3128c382c22868992674a3ca0d8b12"
+    },
+    {
+      "path": "data/animator-roots/native-c9ca099c_Opening_Door_Inwards-b50f8067342e.json",
+      "bytes": 52028,
+      "sha256": "b50f8067342ee5f7500d79842d1708d1eccf3da801804236630758aa4d8972ea"
+    },
+    {
+      "path": "data/animator-roots/native-c9cca2dc_Draw_Sword_1-883edff9a134.json",
+      "bytes": 6029,
+      "sha256": "883edff9a1341b97c9361e843eded1104d36b108a45dc668d765727c315c0b3b"
+    },
+    {
+      "path": "data/animator-roots/native-c9cce376_Entering_Car-0f73a823b49d.json",
+      "bytes": 44924,
+      "sha256": "0f73a823b49df1d84bf93b0c6971d5dc1d7b3a6e47118cbf25caa6f726ea35d0"
+    },
+    {
+      "path": "data/animator-roots/native-c9cd08db_Exiting_Car-812da2b5df39.json",
+      "bytes": 47428,
+      "sha256": "812da2b5df399c1c6d798c68e6e627c3a1d0c9f722475f580530be621386ac27"
+    },
+    {
+      "path": "data/animator-roots/native-c9cd8d90_Box_Idle-b09703734ca0.json",
+      "bytes": 53464,
+      "sha256": "b09703734ca02c58e953f89c6fa9c1a1443b1be7d689652ca4c52ccb46b00bc0"
+    },
+    {
+      "path": "data/animator-roots/native-c9cd8e51_Box_Walk_Arc-2844a2fe66a1.json",
+      "bytes": 11672,
+      "sha256": "2844a2fe66a17dd9700eaf26efce899bd1317e7052c6e926e48bf63f2ff41b66"
+    },
+    {
+      "path": "data/animator-roots/native-c9cd8f1a_Box_Turn-79ed9c3a0b86.json",
+      "bytes": 14103,
+      "sha256": "79ed9c3a0b869e2fddba01a5205fcfa9e64d4648e7d8e56e802e94e53b0694f4"
+    },
+    {
+      "path": "data/animator-roots/native-c9cd8fe5_Box_Turn-ecc831be06f6.json",
+      "bytes": 11349,
+      "sha256": "ecc831be06f6888b65b6c9ca70370964cb97c098894c7b1de07a13ee58be70e5"
+    },
+    {
+      "path": "data/animator-roots/native-c9ceacc6_Standing_Draw_Arrow-98651a8fc525.json",
+      "bytes": 10323,
+      "sha256": "98651a8fc5258ee1ccc9eb2e12c08d450962d57ea29cb0c1e3d52c8b86565c53"
+    },
+    {
       "path": "data/catalog.json",
-      "bytes": 1463908,
-      "sha256": "ff80ee7d5ca4f592db8cdcb510a987f51f1e0e75298fb3baecff116c80944a2f"
+      "bytes": 1495947,
+      "sha256": "e17761a3e832f1e37e3cf3062b8625b847d301cd4592ae0df9f7570f27e43b8a"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -686,6 +861,275 @@
       "sha256": "f5a1a699274a8dcae362c86a0429c1e2021a11b3523e21659a32562ccf8cb2e1"
     },
     {
+      "path": "data/roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-23af6fff192b.json",
+      "bytes": 134610,
+      "sha256": "23af6fff192befa28b9f43a9d35de1c10be79fe9d7d8edbcd053b8ceeae1cc50"
+    },
+    {
+      "path": "data/roots/native-c9c64f3c_Driving-d87f13fbf69d.json",
+      "bytes": 178476,
+      "sha256": "d87f13fbf69d72fc98c98806ea66438cba6cece91eeb291a33852e527352036c"
+    },
+    {
+      "path": "data/roots/native-c9c6500d_Talking-c5829ffc1a8a.json",
+      "bytes": 177366,
+      "sha256": "c5829ffc1a8a85f4d243c1383b05fe2cf8b0ebfe4de070ce89357f66edd71e69"
+    },
+    {
+      "path": "data/roots/native-c9c693bf_Pointing-9f16cb5e4604.json",
+      "bytes": 128428,
+      "sha256": "9f16cb5e4604104953a661abf43fdead2057eeef6661a889f2e5078e21936fdf"
+    },
+    {
+      "path": "data/roots/native-c9c6c5eb_Picking_Up_Object-5c1e4e1649c5.json",
+      "bytes": 121856,
+      "sha256": "5c1e4e1649c5c3af93629c8b537466394455b50e39102059ebcd1891f97a06fb"
+    },
+    {
+      "path": "data/roots/native-c9c6d86d_Putting_Down-e7c3d733fd4d.json",
+      "bytes": 361947,
+      "sha256": "e7c3d733fd4d54dc49e4b52f64bb7bcf31e87d7e45cfe83364f5bf55d753aa58"
+    },
+    {
+      "path": "data/roots/native-c9c809b5_Swimming_To_Edge-e3e57052bf35.json",
+      "bytes": 175246,
+      "sha256": "e3e57052bf35ac57450f9bf0a8c26dfb0a801323f897875bff9ab77ac15db7dd"
+    },
+    {
+      "path": "data/roots/native-c9c82dfa_Carrying-1c80a0f79411.json",
+      "bytes": 354198,
+      "sha256": "1c80a0f79411d222817ced4018f5b129f0a8051c4a5677e4a313558c0d958bc6"
+    },
+    {
+      "path": "data/roots/native-c9c8524e_Pulling_Lever-917ce6d123b9.json",
+      "bytes": 221910,
+      "sha256": "917ce6d123b94ce86bfce7b57f6fa016a33ee68d59efe78254a8c66e763601dd"
+    },
+    {
+      "path": "data/roots/native-c9c85311_Carrying_Turn-19e493223ff0.json",
+      "bytes": 137355,
+      "sha256": "19e493223ff0422ef5c28b6702faa07f7b22e2189068b45fb1f1616bf6fc53f5"
+    },
+    {
+      "path": "data/roots/native-c9c8772f_Prone_To_Crouch_Transition-7c544c0f59fc.json",
+      "bytes": 64269,
+      "sha256": "7c544c0f59fc6c2faa430fb57cfbf25b99087888a7d20962939092ce6817d2d8"
+    },
+    {
+      "path": "data/roots/native-c9c87ad9_Crouch_To_Prone-1239101e36b0.json",
+      "bytes": 64459,
+      "sha256": "1239101e36b0d35495e6c607de77b63c6287f8e399fdda6cc284f31fe6351432"
+    },
+    {
+      "path": "data/roots/native-c9c8939f_Reloading-6ce6cead05e5.json",
+      "bytes": 116867,
+      "sha256": "6ce6cead05e5874d9807b54e0b9d16eda710e713aabf2519a853de58b129a4b4"
+    },
+    {
+      "path": "data/roots/native-c9c8bc4d_Vault_Over_Box-d5f13cbf0bc6.json",
+      "bytes": 123698,
+      "sha256": "d5f13cbf0bc6e505864c7e8b6111b835117fa3cdd5bfd5275a861d160b8ce854"
+    },
+    {
+      "path": "data/roots/native-c9c8f267_Button_Pushing-6b935811ba0a.json",
+      "bytes": 116570,
+      "sha256": "6b935811ba0a92d5b3d978b6fee11658be7404ec72f6c69a3d9a118f3ded7252"
+    },
+    {
+      "path": "data/roots/native-c9c8fb6e_Lifting_Object-4af1f95cc5c5.json",
+      "bytes": 400638,
+      "sha256": "4af1f95cc5c50a742601010316fd4308a429139f9fe21be1b3d11e7f043277bc"
+    },
+    {
+      "path": "data/roots/native-c9c9611b_Climbing_To_Top-725bb0cce304.json",
+      "bytes": 139917,
+      "sha256": "725bb0cce304fdea76c87c75c091abb79e5295842b9abf4f07ffca68bdf7059d"
+    },
+    {
+      "path": "data/roots/native-c9c9aef0_Pull_Heavy_Object-fb16255e5f0b.json",
+      "bytes": 40460,
+      "sha256": "fb16255e5f0b87d623644d65387a20f5ab12f736f0920b4b64a99a9954919b4e"
+    },
+    {
+      "path": "data/roots/native-c9c9b139_Pull_Heavy_Object_Start-862ba08e4e0b.json",
+      "bytes": 49573,
+      "sha256": "862ba08e4e0b5f894299bf2ebfa15f2ddfb1c2c2ad4500778ce3e68ce7bd7546"
+    },
+    {
+      "path": "data/roots/native-c9c9b37a_Pull_Heavy_Object_Stop-749646b7d6d2.json",
+      "bytes": 48544,
+      "sha256": "749646b7d6d2fc1f97564a72d6f645d49d1355b04662a0914244e9c079bfa1a5"
+    },
+    {
+      "path": "data/roots/native-c9c9bd67_Right_Shimmy-587c262d1490.json",
+      "bytes": 50995,
+      "sha256": "587c262d1490b6d5571cec567b389678d6df42f5bd9ba51b1cc2e11604679091"
+    },
+    {
+      "path": "data/roots/native-c9c9ce91_Freehang_Climb-944911852f23.json",
+      "bytes": 135180,
+      "sha256": "944911852f234210a66cdc27770f98b4cf89b3ff53d18a7939d8282c73be08e0"
+    },
+    {
+      "path": "data/roots/native-c9c9d4a0_Push_Start-3bd4a3921c04.json",
+      "bytes": 165895,
+      "sha256": "3bd4a3921c048d85688917791d2f5f4709798691142a6c37b8a41d4b82862343"
+    },
+    {
+      "path": "data/roots/native-c9c9d617_Pushing-effd48f711ef.json",
+      "bytes": 94918,
+      "sha256": "effd48f711eff0a5955a576b3cb0aa4eeaac11a4d2eab32bfdad39c6c6f57c4b"
+    },
+    {
+      "path": "data/roots/native-c9c9d793_Push_Stop-25479065bd26.json",
+      "bytes": 92171,
+      "sha256": "25479065bd263a493dd0c04e8e33cd919251b7fcd5f58dc4d228cf17817530dc"
+    },
+    {
+      "path": "data/roots/native-c9c9e3b2_Sheathing_Sword-276f8e39dc8e.json",
+      "bytes": 60073,
+      "sha256": "276f8e39dc8e0a050627d077f9a0565b42bc0b76bfac429a0e3e129d2e9d5b20"
+    },
+    {
+      "path": "data/roots/native-c9ca099c_Opening_Door_Inwards-e8495f178b49.json",
+      "bytes": 221610,
+      "sha256": "e8495f178b49c6660c2439f0d41e65cbbeae02e739395d242db4c9a36713cf05"
+    },
+    {
+      "path": "data/roots/native-c9cca2dc_Draw_Sword_1-cb7028692563.json",
+      "bytes": 19819,
+      "sha256": "cb7028692563ca1d13cf295ad01b64039979ee64ab0f290dba9adb1b8d7d5399"
+    },
+    {
+      "path": "data/roots/native-c9cce376_Entering_Car-208ef75265f4.json",
+      "bytes": 190475,
+      "sha256": "208ef75265f4480356229057b9c7afaba6f7ff3631a5c55ba7cbf795266d913f"
+    },
+    {
+      "path": "data/roots/native-c9cd08db_Exiting_Car-fb50316d57cc.json",
+      "bytes": 201862,
+      "sha256": "fb50316d57cc7bd72d88c5a813e4814018413404c8fbad52b1cfb0a1abee086f"
+    },
+    {
+      "path": "data/roots/native-c9cd8d90_Box_Idle-7f30fdf7593e.json",
+      "bytes": 222660,
+      "sha256": "7f30fdf7593e2e93077311892c7db54391c5462db2f8270d0f9571130d1cc06d"
+    },
+    {
+      "path": "data/roots/native-c9cd8e51_Box_Walk_Arc-c89596016e03.json",
+      "bytes": 45119,
+      "sha256": "c89596016e03b5938aea9c87c702b9fe949c8400f6d6b1cc0bf22c33e35be1ca"
+    },
+    {
+      "path": "data/roots/native-c9cd8f1a_Box_Turn-188fe4c1fcd7.json",
+      "bytes": 55243,
+      "sha256": "188fe4c1fcd74f6a19042247ad54f456fd8a6013a88e43c13804d6f410a27473"
+    },
+    {
+      "path": "data/roots/native-c9cd8fe5_Box_Turn-fce7537eabe4.json",
+      "bytes": 42673,
+      "sha256": "fce7537eabe47e772ebb51b148886c0170317c0253189019f40e21c006e7d325"
+    },
+    {
+      "path": "data/roots/native-c9ceacc6_Standing_Draw_Arrow-697e4211e84e.json",
+      "bytes": 38221,
+      "sha256": "697e4211e84e77ae6edfd5bfab222e918924a52c5d4775ebca1aef22639b763e"
+    },
+    {
+      "path": "index.html",
+      "bytes": 10372,
+      "sha256": "871545f2345b8fa02d5f652aa98a1106096ca387434f89d186c65e784e89e01d"
+    },
+    {
+      "path": "models/herta-7c88eda67cb9.glb",
+      "bytes": 10962304,
+      "sha256": "7c88eda67cb95ce9cbae488d90300eea7e432e52e9884939bbcb3d925aa0d626"
+    },
+    {
+      "path": "motion-session.js",
+      "bytes": 16677,
+      "sha256": "a3af4749094a91318b0d9723ed4b0625c17db344f521b241f3fd2ee908ee78e8"
+    },
+    {
+      "path": "mvp.js",
+      "bytes": 8121,
+      "sha256": "78c418ca03ee338bad710247901c072d4c8e8f1c3e8e1263e416bd6c41bd94cc"
+    },
+    {
+      "path": "native-root.js",
+      "bytes": 5374,
+      "sha256": "efc373624744b4ed81b44dd78a1ebd315459ea4d529a2feb01ccd11da3413bd6"
+    },
+    {
+      "path": "renderer.js",
+      "bytes": 14811,
+      "sha256": "36ebebc6262914c7c06b0fec63b3447167f1880d397d673fedba36bdc48a8527"
+    },
+    {
+      "path": "styles.css",
+      "bytes": 24525,
+      "sha256": "9178f63fc063caa0a153dc8d930b648a4ba9dcec45c60793e3d702aa8efe5e33"
+    },
+    {
+      "path": "sw.js",
+      "bytes": 8628,
+      "sha256": "a1f9ff72792adf480ab2e5db492548ad78dcf08f89c0e6fb6e22321527495d98"
+    },
+    {
+      "path": "vendor/three/BufferGeometryUtils.js",
+      "bytes": 31784,
+      "sha256": "b9ea77ef3aacbf82d386c33311067e6ea4a3aac4190b32e001bdd11d063fb6ae"
+    },
+    {
+      "path": "vendor/three/GLTFLoader.js",
+      "bytes": 110282,
+      "sha256": "d6b517ee599c974f9b3648b11621dc23d41de24adcac3c826b3985a9313f6b84"
+    },
+    {
+      "path": "vendor/three/LICENSE",
+      "bytes": 1081,
+      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
+    },
+    {
+      "path": "vendor/three/SkeletonUtils.js",
+      "bytes": 9346,
+      "sha256": "bd9f787ba88d6c3f28acef04e4b9fd43ba050c38a7ce9a34551357d7a91daa35"
+    },
+    {
+      "path": "vendor/three/three.module.min.js",
+      "bytes": 691648,
+      "sha256": "08fd7545d13d2c7fb65ab691530a802dafefd638596501854f267d0fb13c39e7"
+    },
+    {
+      "path": "workbench-renderer.js",
+      "bytes": 16452,
+      "sha256": "fbb165681a7cc2725ed6a36725f2d0fec17d0d563b99afb26c617dd1bc3ea038"
+    },
+    {
+      "path": "workbench.css",
+      "bytes": 11500,
+      "sha256": "3a49e1c41280eda177a03d40ad80fed4858483730501984887781523c2fe3ce2"
+    },
+    {
+      "path": "workbench.html",
+      "bytes": 8014,
+      "sha256": "cc02fc0cfcf7cf32422ebc8c0c674ccf094a555e16cda5f0438285d4a92b111e"
+    },
+    {
+      "path": "workbench.js",
+      "bytes": 28548,
+      "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
+    }
+  ],
+  "applicationSourceCommit": "cf7a5f09a110af207555d90c7730d3ca43d7c87e",
+  "publisher": "GitHub Pages",
+  "publicRepository": "0everey/motion-room",
+  "publishingSource": {
+    "branch": "main",
+    "path": "/docs"
+  },
+  "retainedCacheResources": [
+    {
       "path": "data/roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-b34950410574.json",
       "bytes": 134484,
       "sha256": "b34950410574fe2508a421719e52c137486c1b9b486f3d51a23d44803bf31900"
@@ -859,93 +1303,7 @@
       "path": "data/roots/native-c9ceacc6_Standing_Draw_Arrow-dfdce829053f.json",
       "bytes": 38095,
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
-    },
-    {
-      "path": "index.html",
-      "bytes": 10372,
-      "sha256": "871545f2345b8fa02d5f652aa98a1106096ca387434f89d186c65e784e89e01d"
-    },
-    {
-      "path": "models/herta-7c88eda67cb9.glb",
-      "bytes": 10962304,
-      "sha256": "7c88eda67cb95ce9cbae488d90300eea7e432e52e9884939bbcb3d925aa0d626"
-    },
-    {
-      "path": "motion-session.js",
-      "bytes": 14590,
-      "sha256": "172480272ddf226731bae9939dfacc44f564a802c0b57c004160feb9c2ce84b7"
-    },
-    {
-      "path": "mvp.js",
-      "bytes": 8121,
-      "sha256": "78c418ca03ee338bad710247901c072d4c8e8f1c3e8e1263e416bd6c41bd94cc"
-    },
-    {
-      "path": "renderer.js",
-      "bytes": 14811,
-      "sha256": "36ebebc6262914c7c06b0fec63b3447167f1880d397d673fedba36bdc48a8527"
-    },
-    {
-      "path": "styles.css",
-      "bytes": 24525,
-      "sha256": "9178f63fc063caa0a153dc8d930b648a4ba9dcec45c60793e3d702aa8efe5e33"
-    },
-    {
-      "path": "sw.js",
-      "bytes": 8592,
-      "sha256": "79722a8106cf7f26a17c012cf963243934abbbcc813563cf4df98c371f27b014"
-    },
-    {
-      "path": "vendor/three/BufferGeometryUtils.js",
-      "bytes": 31784,
-      "sha256": "b9ea77ef3aacbf82d386c33311067e6ea4a3aac4190b32e001bdd11d063fb6ae"
-    },
-    {
-      "path": "vendor/three/GLTFLoader.js",
-      "bytes": 110282,
-      "sha256": "d6b517ee599c974f9b3648b11621dc23d41de24adcac3c826b3985a9313f6b84"
-    },
-    {
-      "path": "vendor/three/LICENSE",
-      "bytes": 1081,
-      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
-    },
-    {
-      "path": "vendor/three/SkeletonUtils.js",
-      "bytes": 9346,
-      "sha256": "bd9f787ba88d6c3f28acef04e4b9fd43ba050c38a7ce9a34551357d7a91daa35"
-    },
-    {
-      "path": "vendor/three/three.module.min.js",
-      "bytes": 691648,
-      "sha256": "08fd7545d13d2c7fb65ab691530a802dafefd638596501854f267d0fb13c39e7"
-    },
-    {
-      "path": "workbench-renderer.js",
-      "bytes": 14972,
-      "sha256": "7f34e3cfaefb7a590a8d12a5d1082d227c5da8cb2d6be4edfdea677029807fa3"
-    },
-    {
-      "path": "workbench.css",
-      "bytes": 11500,
-      "sha256": "3a49e1c41280eda177a03d40ad80fed4858483730501984887781523c2fe3ce2"
-    },
-    {
-      "path": "workbench.html",
-      "bytes": 7945,
-      "sha256": "e7959498f26fb833f2e82957ee20469473b6276ff091526791f3723b7474132a"
-    },
-    {
-      "path": "workbench.js",
-      "bytes": 27984,
-      "sha256": "054f8a0ed4cd5582dafd4c7eef79b9b0b89f9d6b2dc338e5b9022ae414a8e259"
     }
   ],
-  "applicationSourceCommit": "59a9f8d44aed16028eb9e959dc263cb27b1f6105",
-  "publisher": "GitHub Pages",
-  "publicRepository": "0everey/motion-room",
-  "publishingSource": {
-    "branch": "main",
-    "path": "/docs"
-  }
+  "totalPublishedApplicationFiles": 258
 }

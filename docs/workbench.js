@@ -30,7 +30,7 @@ function syncSpeed(){
   select.value=value;
 }
 async function edit(change){
-  try{const recipe=currentRecipe();change(recipe);if(recipe.view?.focus!=='all'&&!recipe.actors.some(a=>a.id===recipe.view.focus&&a.visible))recipe.view.focus=recipe.actors.find(a=>a.visible)?.id||'all';await session.setRecipe(recipe);syncUI();return true;}catch(error){fail(error);return false;}
+  try{const recipe=currentRecipe();change(recipe);for(const n of recipe.nodes.filter(n=>n.type==='clip')){if(recipe.rootMode==='animator'&&n.variant==='native'){const row=session.catalog.clips.find(c=>c.id===n.clipId),variant=row?.variants.find(v=>v.key===n.variant);n.animatorRootSha256=variant?.animatorRootSha256;}else delete n.animatorRootSha256;}if(recipe.view?.focus!=='all'&&!recipe.actors.some(a=>a.id===recipe.view.focus&&a.visible))recipe.view.focus=recipe.actors.find(a=>a.visible)?.id||'all';await session.setRecipe(recipe);syncUI();return true;}catch(error){fail(error);return false;}
 }
 function currentRecipe(refresh=true){if(refresh)session.clock();return {...session.exportRecipe(),view:{yaw:renderer.yaw,pitch:renderer.pitch,zoom:renderer.zoom,follow:renderer.follow,skeleton:renderer.skeleton,grid:renderer.trail,focus:renderer.focusActor||'all'}};}
 async function assign(id,kind=null,target=$('assignTarget').value){
@@ -53,7 +53,7 @@ function syncInputs(){
   if(mix?.type==='blend'){$('blendWeight').value=mix.weight;$('weightValue').textContent=mix.weight.toFixed(2);$('syncMode').value=mix.sync;}
   $('rootMode').value=session.recipe.rootMode;$('layoutMode').value=session.recipe.layout;syncSpeed();$('loopToggle').setAttribute('aria-pressed',String(session.recipe.loop));
   const natives=session.recipe.nodes.filter(n=>n.type==='clip'&&n.variant==='native');$('copyRootProbe').disabled=!natives.length;
-  $('rootNote').textContent=natives.length?`${natives.length} 个 Native 输入：原始七路曲线可探查；${natives.filter(n=>session.variant(n).rootDataSummary?.humanScale>0).length} 个有实际 Avatar 尺度。Animator 根投影／姿态分离仍待核，不额外应用 RootT。`:'Source / Cloud 仅提取实际水平髋平移；Native 根应用须有对应 Avatar 尺度与 Animator 消费证据。';
+  $('rootNote').textContent=natives.length?`${natives.length} 个 Native 输入：${natives.filter(n=>session.variant(n).rootDataSummary?.humanScale>0).length} 个已实测 Avatar 尺度，${natives.filter(n=>session.variant(n).animatorRoot).length} 个有实际 Animator 根轨迹。${session.recipe.rootMode==='animator'?'当前按真实叶时刻应用一次根运动。':'当前保留原未应用根姿态；可选择实际 Animator 根运动。'}`:'Source / Cloud 保留实际水平髋轨迹；原地模式移除该轨迹，不冒 Unity Animator 根运动。';
 }
 function syncActors(){
   const actors=session.recipe.actors,focus=session.recipe.view?.focus||$('focusActor').value;$('focusActor').replaceChildren(option('all','全部实例'));
@@ -120,7 +120,7 @@ async function ensureCache(){
     await offline.ensureCurrent(new URL(motions[0],location.href).href);
   }catch(error){if(ticket===session.generation){cacheGeneration=-1;$('cacheState').textContent='组合缓存未完整：'+error.message;}}
 }
-function requiredResources(){if(!renderer||!session?.recipe)return [];const variants=session.recipe.nodes.filter(n=>n.type==='clip').map(n=>session.variant(n));return [...new Set([...renderer.getOfflineAssets(),'vendor/three/SkeletonUtils.js','motion-session.js','workbench-renderer.js',...variants.map(v=>v.url),...variants.map(v=>v.rootData).filter(Boolean)])].map(url=>new URL(url,location.href).href).sort();}
+function requiredResources(){if(!renderer||!session?.recipe)return [];const variants=session.recipe.nodes.filter(n=>n.type==='clip').map(n=>session.variant(n));return [...new Set([...renderer.getOfflineAssets(),'vendor/three/SkeletonUtils.js','motion-session.js','workbench-renderer.js','native-root.js',...variants.map(v=>v.url),...variants.map(v=>v.rootData).filter(Boolean),...(session.recipe.rootMode==='animator'?variants.map(v=>v.animatorRoot).filter(Boolean):[])])].map(url=>new URL(url,location.href).href).sort();}
 async function ensureRootProofs(){
   if(session.phase!=='ready'||rootProofGeneration===session.generation)return;
   const ticket=session.generation;rootProofGeneration=ticket;

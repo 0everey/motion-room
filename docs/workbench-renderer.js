@@ -2,6 +2,7 @@ import * as THREE from './vendor/three/three.module.min.js';
 import {clone as cloneSkeleton} from './vendor/three/SkeletonUtils.js';
 import {MotionRenderer,buildRetargetMapping,disposeSkeletons} from './renderer.js';
 import {sampleMotion} from './mvp.js';
+import {sampleNativeRoot} from './native-root.js';
 
 const q=()=>new THREE.Quaternion(),v=()=>new THREE.Vector3();
 const Y=new THREE.Vector3(0,1,0);
@@ -17,7 +18,7 @@ function fingerprint(pose){let hash=2166136261;const view=new DataView(new Array
 export class TargetPoseSolver{
   constructor(template){this.root=cloneSkeleton(template);this.root.visible=true;Object.assign(this,inspect(this.root));this.calibrations=new WeakMap();this.samples=0;}
   reset(){for(const bone of this.list){const r=this.rests.get(bone.name);bone.quaternion.copy(r.localQ);bone.position.copy(r.localP);}this.root.position.set(0,0,0);this.root.quaternion.identity();this.root.updateMatrixWorld(true);}
-  sample(motion,time,rootMode){
+  sample(motion,time,rootMode,animatorRoot=null){
     this.reset();let c=this.calibrations.get(motion);
     if(!c){const hip=motion.meta.names.indexOf('Hips');if(hip<0)throw new Error('真实输入缺少 Hips。');c={mapping:buildRetargetMapping(motion,this.bones,this.rests),hip,ratio:this.rests.get('Hips').worldP.y/motion.meta.restPositions[hip][1],positions:new Float32Array(motion.meta.jointCount*3)};if(!Number.isFinite(c.ratio)||c.ratio<=0)throw new Error('目标与源的真实尺度无法校准。');this.calibrations.set(motion,c);}
     const {frame,next,alpha}=sampleMotion(motion,time,c.positions),n=motion.meta.jointCount;
@@ -34,14 +35,19 @@ export class TargetPoseSolver{
       // Translation-only hip trajectory is the declared preview extraction.
       // Body heading stays in pose; this is not Unity Humanoid Root Transform.
       residualP=rootP.map(x=>-x);
+    }else if(rootMode==='animator'){
+      if(!animatorRoot)throw new Error('当前 Native 缺少实际 Animator 根轨迹。');
+      const actual=sampleNativeRoot(animatorRoot,time);rootP=actual.position.map(x=>x*c.ratio);rootQ=actual.rotation;
     }
-    const pose={positions:this.list.map(b=>b.position.toArray()),rotations:this.list.map(b=>b.quaternion.toArray()),rootP:rootMode==='trajectory'?rootP:[0,0,0],rootQ,residualP,residualQ,frame,time,kind:motion.meta.kind,mapped:c.mapping.length};
+    const applied=motion.meta.kind==='native'&&rootMode==='animator';
+    const pose={positions:this.list.map(b=>b.position.toArray()),rotations:this.list.map(b=>b.quaternion.toArray()),rootP:rootMode!=='in-place'?rootP:[0,0,0],rootQ,residualP,residualQ,frame,time,kind:motion.meta.kind,mapped:c.mapping.length,rootScale:c.ratio,animatorRootApplied:applied,rootSampleTime:time,animatorRootContributions:applied?[{clipId:motion.meta.id,variant:'native',sha256:animatorRoot.sha256,time,sourceToTargetScale:c.ratio,weight:1}]:[]};
     this.samples++;return pose;
   }
   blend(a,b,weight){
     if(weight===0)return a;if(weight===1)return b;
     if(a.rotations.length!==b.rotations.length)throw new Error('混合目标骨架身份不一致。');
-    return {positions:a.positions.map((p,i)=>lerp(p,b.positions[i],weight)),rotations:a.rotations.map((r,i)=>slerp(r,b.rotations[i],weight)),rootP:lerp(a.rootP,b.rootP,weight),rootQ:slerp(a.rootQ,b.rootQ,weight),residualP:lerp(a.residualP,b.residualP,weight),residualQ:slerp(a.residualQ,b.residualQ,weight),kind:'blend',mapped:Math.min(a.mapped,b.mapped),frame:a.frame,time:a.time};
+    const contributions=[...(a.animatorRootContributions||[]).map(c=>({...c,weight:c.weight*(1-weight)})),...(b.animatorRootContributions||[]).map(c=>({...c,weight:c.weight*weight}))].filter(c=>c.weight>0);
+    return {positions:a.positions.map((p,i)=>lerp(p,b.positions[i],weight)),rotations:a.rotations.map((r,i)=>slerp(r,b.rotations[i],weight)),rootP:lerp(a.rootP,b.rootP,weight),rootQ:slerp(a.rootQ,b.rootQ,weight),residualP:lerp(a.residualP,b.residualP,weight),residualQ:slerp(a.residualQ,b.residualQ,weight),kind:'blend',mapped:Math.min(a.mapped,b.mapped),frame:a.frame,time:a.time,animatorRootApplied:contributions.length>0,animatorRootContributions:contributions};
   }
 }
 
@@ -97,7 +103,7 @@ export class WorkbenchRenderer extends MotionRenderer{
         const leaves=new Set(),seen=new Set();const visit=id=>{if(seen.has(id))return;seen.add(id);const n=nodes.get(id);if(n.type==='clip')leaves.add(n);else if(n.type==='blend'){visit(n.a);visit(n.b);}else if(n.type==='sequence')n.inputs.forEach(visit);else visit(n.input);};visit(actor.node);
         const box=new THREE.Box3();
         for(const n of leaves){const m=session.motions.get(session.key(n)),hi=m.meta.names.indexOf('Hips'),ratio=this.rests.get('Hips').worldP.y/m.meta.restPositions[hi][1],first=hi*3;
-          for(let f=0;f<m.meta.frameCount;f++){const o=(f*m.meta.jointCount+hi)*3,raw=v().set(m.positions[o],m.positions[o+1]-m.meta.restPositions[hi][1],m.positions[o+2]).multiplyScalar(ratio).add(this.rests.get('Hips').worldP);if(session.recipe.rootMode==='in-place'&&m.meta.kind!=='native'){raw.x-=(m.positions[o]-m.positions[first])*ratio;raw.z-=(m.positions[o+2]-m.positions[first+2])*ratio;}box.expandByPoint(raw);}
+          for(let f=0;f<m.meta.frameCount;f++){const o=(f*m.meta.jointCount+hi)*3,raw=v().set(m.positions[o],m.positions[o+1]-m.meta.restPositions[hi][1],m.positions[o+2]).multiplyScalar(ratio).add(this.rests.get('Hips').worldP);if(session.recipe.rootMode==='in-place'&&m.meta.kind!=='native'){raw.x-=(m.positions[o]-m.positions[first])*ratio;raw.z-=(m.positions[o+2]-m.positions[first+2])*ratio;}if(session.recipe.rootMode==='animator'&&m.meta.kind==='native'){const actual=sampleNativeRoot(session.roots.get(session.rootKey(n)),m.times[f]);raw.applyQuaternion(q().fromArray(actual.rotation)).add(v().fromArray(actual.position).multiplyScalar(ratio));}box.expandByPoint(raw);}
         }
         this.actorBounds.set(actor.id,box);
       }
@@ -129,6 +135,6 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.lastResult=result;return result;
   }
   diagnostics(){
-    return {modelReady:this.modelReady,time:this.lastTime,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get('Hips')?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get('Hips')!==b.bones.get('Hips'))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
+    return {modelReady:this.modelReady,time:this.lastTime,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get('Hips')?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,rootQ:pose?.rootQ,rootScale:pose?.rootScale,rootSampleTime:pose?.rootSampleTime,animatorRootApplied:pose?.animatorRootApplied||false,animatorRootContributions:pose?.animatorRootContributions||[],residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get('Hips')!==b.bones.get('Hips'))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
   }
 }
