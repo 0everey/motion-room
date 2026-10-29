@@ -194,10 +194,11 @@ function renderActorLabels(s){
 }
 
 function requiredResources(){const common=['studio.js','studio.css','library-browser.js','motion-wall.js','mvp.js','renderer.js','workbench-renderer.js','motion-session.js','native-root.js','cache-client.js','character.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js','vendor/three/SkeletonUtils.js'];if(renderer?.modelReady)common.push(...renderer.getOfflineAssets());if(state.mode==='wall')common.push(...bank.items.filter(x=>bank.motion(x)).map(x=>x.variant.url));else{const s=activeSession();if(s?.recipe)for(const n of s.recipe.nodes.filter(n=>n.type==='clip')){const v=s.variant(n);common.push(v.url);if(v.rootData)common.push(v.rootData);if(s.recipe.rootMode==='animator'&&v.animatorRoot)common.push(v.animatorRoot);}}return [...new Set(common)].map(x=>new URL(x,location.href).href).sort();}
+function cacheTicket(){return `${state.mode}:${state.mode==='wall'?bank.generation:activeSession().generation}:${state.mode==='wall'?state.style:'character'}:${renderer?.modelReady?'model':'pending-model'}`;}
 async function ensureCache(){
-  if(!offline?.available||clearing||(state.mode==='wall'&&bank.phase!=='ready'))return;const ticket=state.mode==='wall'?'wall:'+bank.generation:state.mode+':'+activeSession().generation;if(lastCacheGeneration===ticket)return;lastCacheGeneration=ticket;
+  if(!offline?.available||clearing||(state.mode==='wall'&&bank.phase!=='ready'))return;const ticket=cacheTicket();if(lastCacheGeneration===ticket)return;lastCacheGeneration=ticket;
   const resources=requiredResources(),motion=resources.find(x=>x.endsWith('.mvp.gz'));if(!motion)return;
-  const valid=()=>!clearing&&ticket===(state.mode==='wall'?'wall:'+bank.generation:state.mode+':'+activeSession().generation)&&(state.mode==='wall'?bank.phase==='ready':activeSession().phase==='ready');
+  const valid=()=>!clearing&&ticket===cacheTicket()&&(state.mode==='wall'?bank.phase==='ready':activeSession().phase==='ready');
   try{await offline.resume();if(!valid())return;await offline.registerResources(resources);if(!valid())return;await offline.ensureCurrent(motion);}catch(error){if(valid()){lastCacheGeneration='';$('cacheState').textContent='缓存未完整：'+error.message;}}
 }
 function boundCache(){
