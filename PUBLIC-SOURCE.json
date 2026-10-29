@@ -1,6 +1,6 @@
 {
   "files": 2580,
-  "bytes": 477397322,
+  "bytes": 477398270,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6654295,
-      "sha256": "fbd0af5e542885a6942a6109bc3c99d749c8777be0846db887184f4218b432e7"
+      "sha256": "ba6bfa2b1eb877bb8e362df60fe554fcac3a468da9366e492bf0b6e826bb4457"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12847,8 +12847,8 @@
     },
     {
       "path": "studio.js",
-      "bytes": 57565,
-      "sha256": "7eb1793210cfb831557131bacf9ffc9eb5ac92c2f2cec698c45009c9f3d55880"
+      "bytes": 58513,
+      "sha256": "711cf33fea38227220155c783e0fec634419319332d69c96d6fb40c4a692b485"
     },
     {
       "path": "styles.css",
@@ -12858,7 +12858,7 @@
     {
       "path": "sw.js",
       "bytes": 8717,
-      "sha256": "937c27236f02d00fefbc1a38a119d1f9b973433385f3bb2d8db67776263d82bd"
+      "sha256": "259b85e6bb9e851b722962f7300fee9fe0cabf07c66d399e55f135495b4ee06c"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12906,7 +12906,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "bfe984335e5480776aea989925c99ca32fea89b7",
+  "applicationSourceCommit": "30a8708784ac34c8c95fc8c3d1e00567a0f31f95",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
