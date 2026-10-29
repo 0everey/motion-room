@@ -23,6 +23,12 @@ function draw(now){
 function node(id){return session?.recipe?.nodes.find(n=>n.id===id);}
 function readyRows(){return session.catalog.clips.filter(c=>c.variants?.some(v=>v.hasRotations===true));}
 function option(value,text){const o=document.createElement('option');o.value=value;o.textContent=text;return o;}
+function syncSpeed(){
+  const select=$('speedSelect'),value=String(session.speed);
+  for(const item of [...select.options])if(item.dataset.custom==='true'&&item.value!==value)item.remove();
+  if(![...select.options].some(item=>item.value===value)){const item=option(value,value+'× · 自定义');item.dataset.custom='true';select.append(item);}
+  select.value=value;
+}
 async function edit(change){
   try{const recipe=currentRecipe();change(recipe);if(recipe.view?.focus!=='all'&&!recipe.actors.some(a=>a.id===recipe.view.focus&&a.visible))recipe.view.focus=recipe.actors.find(a=>a.visible)?.id||'all';await session.setRecipe(recipe);syncUI();return true;}catch(error){fail(error);return false;}
 }
@@ -45,7 +51,7 @@ function syncInputs(){
   }
   const mix=node('Mix');$('blendWeight').disabled=!mix||mix.type!=='blend';$('syncMode').disabled=!mix||mix.type!=='blend';
   if(mix?.type==='blend'){$('blendWeight').value=mix.weight;$('weightValue').textContent=mix.weight.toFixed(2);$('syncMode').value=mix.sync;}
-  $('rootMode').value=session.recipe.rootMode;$('layoutMode').value=session.recipe.layout;$('speedSelect').value=String(session.speed);$('loopToggle').setAttribute('aria-pressed',String(session.recipe.loop));
+  $('rootMode').value=session.recipe.rootMode;$('layoutMode').value=session.recipe.layout;syncSpeed();$('loopToggle').setAttribute('aria-pressed',String(session.recipe.loop));
   const natives=session.recipe.nodes.filter(n=>n.type==='clip'&&n.variant==='native');$('copyRootProbe').disabled=!natives.length;
   $('rootNote').textContent=natives.length?`${natives.length} 个 Native 输入：原始七路曲线可探查；${natives.filter(n=>session.variant(n).rootDataSummary?.humanScale>0).length} 个有实际 Avatar 尺度。Animator 根投影／姿态分离仍待核，不额外应用 RootT。`:'Source / Cloud 仅提取实际水平髋平移；Native 根应用须有对应 Avatar 尺度与 Animator 消费证据。';
 }
