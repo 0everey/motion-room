@@ -1,6 +1,6 @@
 {
   "files": 2580,
-  "bytes": 477394948,
+  "bytes": 477397222,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6654295,
-      "sha256": "ab9b01474b471f9480ae3c32d5975c8edfaf23af0934b1466ec7855017fc0bb6"
+      "sha256": "27fd7194cade7b4cfc0b6698fd78cbb4dabd4c205cde5aff0959dc740bd39702"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12847,8 +12847,8 @@
     },
     {
       "path": "studio.js",
-      "bytes": 55191,
-      "sha256": "556303b09a9d8bec3dfa57cddfcd06ccb2ebf5863045e193b76791fe40c1f785"
+      "bytes": 57465,
+      "sha256": "b2edbd1e1156cc69b1696fd8645699acccbe9e9e517dd10ec992604270454b91"
     },
     {
       "path": "styles.css",
@@ -12906,7 +12906,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "75994b3c5f5f32c4f7b88ff28b8907c134643ff2",
+  "applicationSourceCommit": "8214e9ba1ea7cd55a94a19793b1f1320ef356e26",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
