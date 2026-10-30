@@ -1,6 +1,6 @@
 {
   "files": 2582,
-  "bytes": 478419387,
+  "bytes": 478422831,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -27,8 +27,8 @@
     },
     {
       "path": "character.js",
-      "bytes": 2445,
-      "sha256": "c0d90992fbeb33a739a60202e6d20ddab79e5ad88f9c0a3b1bd9b07fb8370894"
+      "bytes": 2795,
+      "sha256": "7bd20abd71a4a66f08b99ba8484f7307ba88eb04dce10528f2b9727e63c9fa9f"
     },
     {
       "path": "credits.txt",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 5978059,
-      "sha256": "7c701452ac5bece3bcf58abf3afd9aacab0cc3ed39d7120b72ddac2ee5a8cae4"
+      "sha256": "4b01bc50eaf49748307f57b66b8456cd7001830a84b97a689cfb027c54a45c74"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12812,8 +12812,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 7813,
-      "sha256": "a9617e38761661c7405f8db354d6c88f728fe758df5737c412de5653e7539305"
+      "bytes": 8655,
+      "sha256": "f9695eece7239aac664000bcfe17fda3a97b15715a96af93aa91cc5f71d70342"
     },
     {
       "path": "models/herta-7c88eda67cb9.glb",
@@ -12847,8 +12847,8 @@
     },
     {
       "path": "renderer.js",
-      "bytes": 14599,
-      "sha256": "642ab3b9722f4375e9506b1864e97316d4528345c3edf63e6abbbf3141015823"
+      "bytes": 16761,
+      "sha256": "869c6cb3b73e9834a107bb9f818870b0530b7e7841821d078fa52a16b1be4c60"
     },
     {
       "path": "studio.css",
@@ -12867,8 +12867,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 8771,
-      "sha256": "2765d73f93f2385edd601d667c14db32da22686f7d81e64a099b54930e1d1028"
+      "bytes": 8772,
+      "sha256": "4e056ea5157d0af67a7057bbcf795b8f5a633f0b786416685ace818beea9f97c"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12897,8 +12897,8 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 21836,
-      "sha256": "9825db0e82611e329662d4e0aa21da5bce2e3bf41a61d4d2f96a28a1d1b5a7c5"
+      "bytes": 21925,
+      "sha256": "80bbb18f665d09e4f57945f328e16a08be4dc4da9e2c8fde8395ecfee19b9b5c"
     },
     {
       "path": "workbench.css",
@@ -12916,7 +12916,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "3b0a48038d3cfdb57a1bcf71aaed1bb2105a9144",
+  "applicationSourceCommit": "432ed2a8a385bb1b3e63446f892318233310fdbe",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {

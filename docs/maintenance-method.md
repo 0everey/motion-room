@@ -65,3 +65,9 @@ python -X utf8 tools/query_zh.py "新增别名" --limit 10
 默认主题在studio.css一个连续的主题段维护，color-scheme同时声明给原生控件，HTML theme-color对应外壳。区域色表达职责：筛选青蓝、预览深蓝、取用详情紫、播放偏暖，主动作再用精看青/下载绿/路径紫/收藏金；类别与A/B/Mix有自己的语义，不沿区域色覆盖其身份。
 
 改主题时覆盖普通/hover/focus/active/selected/disabled，以及原生下拉、更多菜单、JSON弹窗和高级区，避免暗背景中留下浅色岛或旧暗字。实际混色/透明度后的必要文本核对比；搜索有focus-within，不能因input outline:none丢焦点。主题不改尺寸/点击范围/模型材质；亲看完整默认与关键状态、窄屏核心取用，继承未变动作/数据证据。更新SW版本并经原投影发布，离线包同步同一壳。
+
+## 动作部位辨识色
+
+UE4模型的bodyColors在character profile中声明palette与骨分支根。加载基础模型时按每顶点四路蒙皮权重在线性RGB混色，颜色跟随原蒙皮运输；不用世界位置/屏幕左右分类，避免角色转身或交叉时换色。躯干中性，头与左右肢体分别识别；混合节点/实例的标签色保留，但不再给该材质整身染色覆盖部位色。
+
+该模型仍用原网格/骨骼/权重/原件hash，基础共享geometry仅替换一次color属性；actor复用它，材质按原owner分别归还。RGBA16白属性替为Float32RGB时每模板净增约93KB，不增mesh/material/drawcall数；不要声称零成本或为改色重烤全动作。核独立骨branch/顶点色/释放后，实际看交叉、背身和小墙的可辨改善，不能仅RGB表认证效果。

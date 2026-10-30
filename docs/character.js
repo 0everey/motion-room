@@ -13,3 +13,9 @@ for(const [side,suffix]of [['Left','L'],['Right','R']]){
 function successors(mapping){const next={Hips:'Spine',Spine:'Spine1',Spine1:'Spine2',Spine2:'Neck',Neck:'Head'};for(const side of ['Left','Right'])Object.assign(next,{[side+'UpLeg']:side+'Leg',[side+'Leg']:side+'Foot',[side+'Foot']:side+'ToeBase',[side+'Shoulder']:side+'Arm',[side+'Arm']:side+'ForeArm',[side+'ForeArm']:side+'Hand',[side+'Hand']:side+'HandMiddle1'});const result={};for(const[from,to]of Object.entries(next))if(mapping[from]!==mapping[to])result[mapping[from]]=mapping[to];return result;}
 export const CHARACTER_PROFILES={herta:{key:'herta',label:'大黑塔',asset:MODEL_ASSET,sha256:MODEL_SHA256,hip:'Hips',mapping:herta,next:successors(herta),material:'toon'},ue4:{key:'ue4',label:'UE4 Mannequin',asset:'models/ue4-mannequin-83ea4c910dc2.glb',sha256:'83ea4c910dc29be4b89648a513eef6bd10a9c281e6b52999fbcaa352dddfd187',hip:'pelvis',mapping:ue4,next:successors(ue4),material:'standard'}};
 export const DEFAULT_CHARACTER='ue4';
+
+// Character-relative regions; vertex colors are weighted in linear RGB once per base mesh.
+CHARACTER_PROFILES.ue4.bodyColors={
+ palette:{torso:'#a7b2c2',head:'#edbd58',leftArm:'#30c3d4',rightArm:'#ed775f',leftLeg:'#668ce3',rightLeg:'#69bd7b'},
+ roots:{head:'head',clavicle_l:'leftArm',clavicle_r:'rightArm',thigh_l:'leftLeg',thigh_r:'rightLeg'}
+};

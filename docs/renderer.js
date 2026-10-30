@@ -9,6 +9,26 @@ const safeName=name=>name?.replace(/\s/g,'_');
 export function disposeSkeletons(root){const skeletons=new Set();root?.traverse(o=>{if(o.isSkinnedMesh&&o.skeleton)skeletons.add(o.skeleton);});for(const skeleton of skeletons)skeleton.dispose();}
 function disposeObject(root){if(!root)return;disposeSkeletons(root);const textures=new Set();root.traverse(o=>{o.geometry?.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material]))if(m){for(const value of Object.values(m))if(value?.isTexture)textures.add(value);m.dispose();}});for(const t of textures){t.image?.close?.();t.dispose();}}
 
+// The base geometry owns one color buffer. Cloned actors share it like positions/skin weights.
+export function applyBodyColors(mesh,profile){
+  const config=profile.bodyColors;if(!config||!mesh.isSkinnedMesh)return null;
+  if(mesh.geometry.userData.bodyColorProfile===profile.key)return mesh.geometry.userData.bodyColorStats;
+  const indices=mesh.geometry.getAttribute('skinIndex'),weights=mesh.geometry.getAttribute('skinWeight');
+  if(!indices||!weights)throw new Error('分区预览缺少真实蒙皮权重。');
+  const palette=Object.fromEntries(Object.entries(config.palette).map(([key,hex])=>[key,new THREE.Color(hex)]));
+  const regions=mesh.skeleton.bones.map(bone=>{for(let node=bone;node?.isBone;node=node.parent)if(config.roots[node.name])return config.roots[node.name];return 'torso';});
+  const color=new Float32Array(indices.count*3),vertices=Object.fromEntries(Object.keys(palette).map(key=>[key,0]));
+  for(let i=0;i<indices.count;i++){
+    const totals={};let sum=0;
+    for(let k=0;k<4;k++){const weight=weights.getComponent(i,k);if(!Number.isFinite(weight)||weight<0)throw new Error('分区预览蒙皮权重无效。');if(!weight)continue;const region=regions[indices.getComponent(i,k)];if(!region)throw new Error('分区预览骨骼身份无效。');const value=palette[region];color[i*3]+=value.r*weight;color[i*3+1]+=value.g*weight;color[i*3+2]+=value.b*weight;totals[region]=(totals[region]||0)+weight;sum+=weight;}
+    if(sum<=0)throw new Error('分区预览出现未绑定顶点。');for(let k=0;k<3;k++)color[i*3+k]/=sum;
+    vertices[Object.keys(totals).reduce((a,b)=>totals[a]>=totals[b]?a:b)]++;
+  }
+  mesh.geometry.setAttribute('color',new THREE.BufferAttribute(color,3));
+  const stats={profile:profile.key,palette:config.palette,vertices,bufferBytes:color.byteLength,coordinateBasis:'character bone branches and original skin weights'};
+  mesh.geometry.userData.bodyColorProfile=profile.key;mesh.geometry.userData.bodyColorStats=stats;return stats;
+}
+
 // One calibration authority for the compatibility player and workbench solver.
 export function buildRetargetMapping(m,bones,rests,profile=CHARACTER_PROFILES.herta){
   if(!m?.rotations)return [];
@@ -60,7 +80,7 @@ export class MotionRenderer{
       this.character.updateMatrixWorld(true);
       this.character.traverse(o=>{
         if(o.isBone){this.bones.set(o.name,o);const q=Q(),p=V();o.getWorldQuaternion(q);o.getWorldPosition(p);this.rests.set(o.name,{worldQ:q,worldP:p,localQ:o.quaternion.clone(),localP:o.position.clone()});}
-        if(o.isMesh){o.frustumCulled=false;const convert=m=>{if(!m)return m;const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:0xd8dce2,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:0xffffff,map:m.map,side:THREE.DoubleSide,transparent:m.transparent,opacity:m.opacity,alphaTest:m.transparent?0.3:0,depthWrite:!m.transparent});m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
+        if(o.isMesh){o.frustumCulled=false;const bodyColors=applyBodyColors(o,this.characterProfile);const convert=m=>{if(!m)return m;const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:bodyColors?0xffffff:0xd8dce2,vertexColors:!!bodyColors,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:0xffffff,map:m.map,side:THREE.DoubleSide,transparent:m.transparent,opacity:m.opacity,alphaTest:m.transparent?0.3:0,depthWrite:!m.transparent});if(bodyColors)next.userData.bodyColorProfile=this.characterProfile.key;m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
       });
       if(!this.bones.has(this.hipName))throw new Error('角色缺少真实髋骨绑定。');
       this.scene.add(this.character);this.character.updateMatrixWorld(true);
