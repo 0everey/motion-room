@@ -73,7 +73,7 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.character.visible=false;if(this.helper)this.helper.visible=false;return true;
   }
   removeActor(rig){rig.group.removeFromParent();rig.helper.removeFromParent();rig.scene?.clear();rig.ownedMaterials?.forEach(m=>m.dispose());rig.helper.geometry.dispose();rig.helper.material.dispose();disposeSkeletons(rig.root);}
-  dropActors(){if(!this.actorRigs)return;for(const rig of this.actorRigs.values())this.removeActor(rig);this.actorRigs.clear();disposeSkeletons(this.solver?.root);this.solver=null;this.template=null;this.lastResult=[];this.influenceBounds?.clear();this.actorBounds?.clear();this.labelPositions=[];this.boundsKey=null;this.clipFrames=new WeakMap();}
+  dropActors(){if(!this.actorRigs)return;for(const rig of this.actorRigs.values())this.removeActor(rig);this.actorRigs.clear();disposeSkeletons(this.solver?.root);this.solver=null;this.template=null;this.lastResult=[];this.preparingActors=0;this.renderedActors=0;this.influenceBounds?.clear();this.actorBounds?.clear();this.labelPositions=[];this.boundsKey=null;this.clipFrames=new WeakMap();}
   clearPreviewResources(){this.dropActors();super.clearPreviewResources();}
   makeActor(id){
     const group=new THREE.Group(),motionRoot=new THREE.Group(),poseRoot=new THREE.Group(),root=cloneSkeleton(this.character);root.visible=true;group.add(motionRoot);motionRoot.add(poseRoot);poseRoot.add(root);
@@ -100,23 +100,32 @@ export class WorkbenchRenderer extends MotionRenderer{
     if(this.follow){this.framingReady=true;return true;}
     const clips=[...session.nodes.values()].filter(n=>n.type==='clip'),records=clips.map(n=>this.fixedClipFrame(session,n)),start=performance.now();
     const raw={root:this.solver.root,bounds:new THREE.Box3()},position=v(),rotation=q(),scale=v().set(1,1,1),outer=new THREE.Matrix4(),inner=new THREE.Matrix4();
-    for(const record of records){while(!record.ready&&performance.now()-start<7){const f=record.index/2,t=record.motion.times[Math.floor(f)]+(record.index%2?(record.motion.times[Math.min(record.motion.meta.frameCount-1,Math.ceil(f))]-record.motion.times[Math.floor(f)])/2:0),pose=this.solver.sample(record.motion,t,record.mode,record.root);
+    const offset=(this.framingCursor||0)%Math.max(1,records.length);this.framingCursor=offset+1;
+    for(let i=0;i<records.length;i++){const record=records[(offset+i)%records.length];while(!record.ready&&performance.now()-start<7){const f=record.index/2,t=record.motion.times[Math.floor(f)]+(record.index%2?(record.motion.times[Math.min(record.motion.meta.frameCount-1,Math.ceil(f))]-record.motion.times[Math.floor(f)])/2:0),pose=this.solver.sample(record.motion,t,record.mode,record.root);
       outer.compose(position.fromArray(pose.rootP),rotation.fromArray(pose.rootQ),scale);inner.compose(position.fromArray(pose.residualP),rotation.fromArray(pose.residualQ),scale);outer.multiply(inner);
       record.box.union(this.skinBounds(raw).clone().applyMatrix4(outer));record.index++;if(record.index>=record.total){record.box.expandByScalar(record.padding);record.ready=true;}
     }}
     this.framingReady=records.every(r=>r.ready);if(!this.framingReady)this.onChange();return this.framingReady;
   }
+  nodeFrameReady(session,id){
+    if(this.follow)return true;const node=session.nodes.get(id);if(!node)return false;
+    if(node.type==='clip')return this.fixedClipFrame(session,node).ready;
+    if(node.type==='blend')return this.nodeFrameReady(session,node.a)&&this.nodeFrameReady(session,node.b);
+    if(node.type==='sequence')return node.inputs.every(input=>this.nodeFrameReady(session,input));
+    return this.nodeFrameReady(session,node.input);
+  }
   drawSession(session,time){
     this.lastTime=time;this.webgl.info.reset();
     if(!this.prepare()){super.draw(0);return [];}
-    if(session.phase!=='ready'){this.webgl.setScissorTest(false);this.webgl.clear();this.boundsKey=null;return [];}
-    if(!this.prepareFixedFrames(session)){this.webgl.setScissorTest(false);this.webgl.clear();this.lastResult=[];return [];}
-    const computed=session.evaluate(time,this.solver),result=this.focusActor?computed.filter(r=>r.actor.id===this.focusActor):computed,ids=new Set(result.map(r=>r.actor.id));
+    if(session.phase!=='ready'){this.webgl.setScissorTest(false);this.webgl.clear();this.boundsKey=null;this.lastResult=[];this.preparingActors=0;this.renderedActors=0;return [];}
+    this.prepareFixedFrames(session);
+    const computed=session.evaluate(time,this.solver),visible=this.focusActor?computed.filter(r=>r.actor.id===this.focusActor):computed,result=visible.filter(r=>this.nodeFrameReady(session,r.actor.node)),ids=new Set(result.map(r=>r.actor.id));
+    this.preparingActors=visible.length-result.length;this.renderedActors=result.length;
     for(const [id,rig] of this.actorRigs)if(!ids.has(id)){this.removeActor(rig);this.actorRigs.delete(id);}
     if(!result.length){this.webgl.setScissorTest(false);this.webgl.setViewport(0,0,this.width||1,this.height||1);this.webgl.clear();this.labelPositions=[];this.lastResult=[];this.boundsKey=null;return [];}
     let centerX=0,centerZ=0;
     for(const [index,{actor,pose}] of result.entries()){
-      const rig=this.actorRigs.get(actor.id)||this.makeActor(actor.id);rig.group.position.set(session.recipe.layout==='world'?(index-(result.length-1)/2)*2.15:0,0,0);
+      const rig=this.actorRigs.get(actor.id)||this.makeActor(actor.id);rig.group.position.set(session.recipe.layout==='world'?(session.recipe.actors.findIndex(a=>a.id===actor.id)-(session.recipe.actors.length-1)/2)*2.15:0,0,0);
       const destination=session.recipe.layout==='world'?this.scene:rig.scene;if(rig.group.parent!==destination){destination.add(rig.group);destination.add(rig.helper);}
       rig.grid.visible=this.trail;
       const tint=actor.color||(actor.node==='A'?'#43bdd7':actor.node==='B'?'#ed8979':actor.node==='Mix'?'#dfbd67':'#c1b7d5');if(rig.tint!==tint){rig.tint=tint;for(const material of rig.ownedMaterials)if(!material.userData.bodyColorProfile)material.color.set('#ffffff').lerp(new THREE.Color(tint),.14);}
@@ -128,7 +137,7 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.floor.position.set(0,0,0);this.floor.visible=false;this.worldGrid.visible=this.trail;
     const rect=this.canvas.getBoundingClientRect(),width=Math.max(1,Math.round(rect.width)),height=Math.max(1,Math.round(rect.height));
     if(this.width!==width||this.height!==height){this.width=width;this.height=height;this.webgl.setSize(width,height,false);this.camera.aspect=width/height;this.camera.updateProjectionMatrix();}
-    const count=Math.max(1,session.recipe.wallCount||result.length),boundsKey=session.generation+':ready:'+result.map(x=>x.actor.id+':'+x.actor.node).join(',')+':'+session.recipe.rootMode+':'+session.recipe.layout;
+    const count=Math.max(1,session.recipe.wallCount||visible.length),boundsKey=session.generation+':ready:'+result.map(x=>x.actor.id+':'+x.actor.node).join(',')+':'+session.recipe.rootMode+':'+session.recipe.layout;
     if(this.boundsKey!==boundsKey){
       this.actorBounds=new Map();const nodes=session.nodes;
       for(const {actor} of result){
@@ -152,7 +161,7 @@ export class WorkbenchRenderer extends MotionRenderer{
       const columns=session.recipe.wallColumns||Math.min(3,count),rows=Math.ceil(count/columns);this.webgl.setScissorTest(true);
       const bodies=new Map(),commonBody=new THREE.Box3();for(const {actor} of result){const rig=this.actorRigs.get(actor.id),body=this.skinBounds(rig),hip=rig.bones.get(this.hipName).getWorldPosition(v());bodies.set(actor.id,body);commonBody.union(body.clone().translate(hip.negate()));}
       for(const [i,{actor}] of result.entries()){
-        const slot=actor.slot??i,col=slot%columns,row=Math.floor(slot/columns),x=Math.floor(col*width/columns),bottom=session.recipe.wallCount?35:8,y=Math.floor((rows-row-1)*height/rows)+bottom,w=Math.floor(width/columns),h=Math.max(1,Math.floor(height/rows)-bottom-22),rig=this.actorRigs.get(actor.id);rig.root.visible=this.model;rig.helper.visible=this.skeleton;
+        const slot=actor.slot??visible.findIndex(r=>r.actor.id===actor.id),col=slot%columns,row=Math.floor(slot/columns),x=Math.floor(col*width/columns),bottom=session.recipe.wallCount?35:8,y=Math.floor((rows-row-1)*height/rows)+bottom,w=Math.floor(width/columns),h=Math.max(1,Math.floor(height/rows)-bottom-22),rig=this.actorRigs.get(actor.id);rig.root.visible=this.model;rig.helper.visible=this.skeleton;
         const body=bodies.get(actor.id),hip=rig.bones.get(this.hipName||'Hips').getWorldPosition(v()),range=this.actorBounds.get(actor.id),leaf=session.nodes.get(actor.node),fixed=leaf?.type==='clip'?this.fixedClipFrame(session,leaf).box:null,box=this.follow?(session.recipe.wallCount?body.clone():commonBody.clone().translate(hip)):(fixed?fixed.clone():range.clone().expandByScalar(this.reachRadius));
         box.expandByScalar(.08);
         fit(box,w/h);this.webgl.setViewport(x,y,w,h);this.webgl.setScissor(x,y,w,h);this.webgl.render(rig.scene,this.camera);this.labelPositions.push({id:actor.id,x:(col+.5)/columns,y:(row+1)/rows});
@@ -166,6 +175,6 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.lastResult=result;return result;
   }
   diagnostics(){
-    return {modelReady:this.modelReady,framingReady:this.framingReady,character:this.characterProfile.key,characterLabel:this.characterProfile.label,bodyColors:this.characterProfile.bodyColors||null,hipBone:this.hipName,camera:{policy:this.follow?'follow':'fixed-full-motion',position:this.camera.position.toArray(),viewMatrix:this.camera.matrixWorldInverse.toArray(),projectionMatrix:this.camera.projectionMatrix.toArray(),yaw:this.yaw,pitch:this.pitch,zoom:this.zoom},reachRadius:this.reachRadius,time:this.lastTime,renderCalls:this.webgl.info.render.calls,triangles:this.webgl.info.render.triangles,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get(this.hipName)?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,rootQ:pose?.rootQ,rootScale:pose?.rootScale,rootSampleTime:pose?.rootSampleTime,animatorRootApplied:pose?.animatorRootApplied||false,animatorRootContributions:pose?.animatorRootContributions||[],residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get(this.hipName)!==b.bones.get(this.hipName))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
+    return {modelReady:this.modelReady,framingReady:this.framingReady,preparingActors:this.preparingActors||0,renderedActors:this.renderedActors||0,face:this.characterProfile.face||null,character:this.characterProfile.key,characterLabel:this.characterProfile.label,bodyColors:this.characterProfile.bodyColors||null,hipBone:this.hipName,camera:{policy:this.follow?'follow':'fixed-full-motion',position:this.camera.position.toArray(),viewMatrix:this.camera.matrixWorldInverse.toArray(),projectionMatrix:this.camera.projectionMatrix.toArray(),yaw:this.yaw,pitch:this.pitch,zoom:this.zoom},reachRadius:this.reachRadius,time:this.lastTime,renderCalls:this.webgl.info.render.calls,triangles:this.webgl.info.render.triangles,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get(this.hipName)?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,rootQ:pose?.rootQ,rootScale:pose?.rootScale,rootSampleTime:pose?.rootSampleTime,animatorRootApplied:pose?.animatorRootApplied||false,animatorRootContributions:pose?.animatorRootContributions||[],residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get(this.hipName)!==b.bones.get(this.hipName))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
   }
 }

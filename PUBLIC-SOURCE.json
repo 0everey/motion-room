@@ -1,6 +1,6 @@
 {
   "files": 2582,
-  "bytes": 478422831,
+  "bytes": 478428518,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -27,8 +27,8 @@
     },
     {
       "path": "character.js",
-      "bytes": 2795,
-      "sha256": "7bd20abd71a4a66f08b99ba8484f7307ba88eb04dce10528f2b9727e63c9fa9f"
+      "bytes": 2962,
+      "sha256": "4b0947177c534e10150cfcf77db346df5372217b2fcdd8a29abdf70dea23060a"
     },
     {
       "path": "credits.txt",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 5978059,
-      "sha256": "4b01bc50eaf49748307f57b66b8456cd7001830a84b97a689cfb027c54a45c74"
+      "sha256": "ed1fe4e3fa53525be072901df3b682170e599d127c23d546870be2b609e98841"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12812,8 +12812,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 8655,
-      "sha256": "f9695eece7239aac664000bcfe17fda3a97b15715a96af93aa91cc5f71d70342"
+      "bytes": 9525,
+      "sha256": "9cf97f0a9fc0a461a6064f1a9b7936a4037402309cd756b174252260c477588e"
     },
     {
       "path": "models/herta-7c88eda67cb9.glb",
@@ -12847,18 +12847,18 @@
     },
     {
       "path": "renderer.js",
-      "bytes": 16761,
-      "sha256": "869c6cb3b73e9834a107bb9f818870b0530b7e7841821d078fa52a16b1be4c60"
+      "bytes": 18971,
+      "sha256": "3748f56b07d717a62a52f94b0cff17483c6006ae95ee6426c5c6d938e5e3dead"
     },
     {
       "path": "studio.css",
-      "bytes": 34722,
-      "sha256": "983acb4e29cd62c6b70fc4459f20026ec1b2553854205e4e3562c71deb1e733e"
+      "bytes": 35002,
+      "sha256": "14a1dd27507045a71cbaaa7a452f22dfebac49c6074f3eea2a91cf788dd7de89"
     },
     {
       "path": "studio.js",
-      "bytes": 61984,
-      "sha256": "d6125d79dac5d32fc958a28f16efdfb7bbdf7de4b2c637a4fcfcefdf069a6970"
+      "bytes": 63136,
+      "sha256": "e7c5d1e43bdf35600023ef9698acf8f40ed3a463baf1d7ccbf4bcba5bd6a96f1"
     },
     {
       "path": "styles.css",
@@ -12867,8 +12867,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 8772,
-      "sha256": "4e056ea5157d0af67a7057bbcf795b8f5a633f0b786416685ace818beea9f97c"
+      "bytes": 8776,
+      "sha256": "d8877948acce784064a181271ea72f558c1e590cc9358f407d4effb64c57ac7e"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12897,8 +12897,8 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 21925,
-      "sha256": "80bbb18f665d09e4f57945f328e16a08be4dc4da9e2c8fde8395ecfee19b9b5c"
+      "bytes": 22929,
+      "sha256": "8add67bee9256330ea3bd668fc15c48c7fb367c4bbea1a466ee60e6b562bfb3a"
     },
     {
       "path": "workbench.css",
@@ -12916,7 +12916,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "432ed2a8a385bb1b3e63446f892318233310fdbe",
+  "applicationSourceCommit": "2fee1883ff5b166013aa1e2d863c5aec7bcf1d10",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {

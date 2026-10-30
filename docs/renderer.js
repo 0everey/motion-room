@@ -25,8 +25,24 @@ export function applyBodyColors(mesh,profile){
     vertices[Object.keys(totals).reduce((a,b)=>totals[a]>=totals[b]?a:b)]++;
   }
   mesh.geometry.setAttribute('color',new THREE.BufferAttribute(color,3));
-  const stats={profile:profile.key,palette:config.palette,vertices,bufferBytes:color.byteLength,coordinateBasis:'character bone branches and original skin weights'};
+  const face=applyFaceColors(mesh,profile);
+  const stats={profile:profile.key,palette:config.palette,vertices,bufferBytes:color.byteLength,coordinateBasis:'character bone branches and original skin weights',face};
   mesh.geometry.userData.bodyColorProfile=profile.key;mesh.geometry.userData.bodyColorStats=stats;return stats;
+}
+
+// Paint the real head in bind-local coordinates, so turning the head never moves the face.
+export function applyFaceColors(mesh,profile){
+  const config=profile.face;if(!config)return null;const boneIndex=mesh.skeleton.bones.findIndex(b=>b.name===config.bone);if(boneIndex<0)throw new Error('头部朝向预览缺少目标骨骼。');
+  const transform=mesh.skeleton.boneInverses[boneIndex].clone().multiply(mesh.bindMatrix),positions=mesh.geometry.attributes.position,indices=mesh.geometry.attributes.skinIndex,weights=mesh.geometry.attributes.skinWeight,color=mesh.geometry.attributes.color,box=new THREE.Box3(),points=[];
+  for(let i=0;i<positions.count;i++){let weight=0;for(let k=0;k<4;k++)if(indices.getComponent(i,k)===boneIndex)weight+=weights.getComponent(i,k);if(weight>.6){const point=new THREE.Vector3().fromBufferAttribute(positions,i).applyMatrix4(transform);box.expandByPoint(point);points.push({i,point});}}
+  const span=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3()),paint={skin:new THREE.Color(config.skin),ink:new THREE.Color(config.ink),nose:new THREE.Color(config.nose)},counts={skin:0,eyes:0,nose:0,mouth:0};
+  for(const{i,point}of points){const p=point.toArray(),lo=box.min.toArray(),hi=box.max.toArray(),u=(p[config.across]-center.getComponent(config.across))/(span.getComponent(config.across)/2),v=(p[config.up]-lo[config.up])/span.getComponent(config.up),front=config.frontSign<0?(hi[config.front]-p[config.front])/span.getComponent(config.front):(p[config.front]-lo[config.front])/span.getComponent(config.front);if(front<.65)continue;
+    let kind=null,tone=null;if(Math.abs(u)<.84&&v>.18&&v<.86){kind='skin';tone=paint.skin;}
+    if(((Math.abs(u)-.36)/.20)**2+((v-.62)/.07)**2<1){kind='eyes';tone=paint.ink;}
+    if(Math.abs(u)<.11&&v>.40&&v<.55){kind='nose';tone=paint.nose;}
+    if(Math.abs(u)<.38&&v>.26&&v<.32){kind='mouth';tone=paint.ink;}
+    if(tone){color.setXYZ(i,tone.r,tone.g,tone.b);counts[kind]++;}
+  }color.needsUpdate=true;return{bone:config.bone,coordinates:'head bind-local',counts,frontSign:config.frontSign};
 }
 
 // One calibration authority for the compatibility player and workbench solver.
@@ -36,7 +52,7 @@ export function buildRetargetMapping(m,bones,rests,profile=CHARACTER_PROFILES.he
   for(let i=m.meta.names.length-1;i>=0;i--){
     const targetName=profile.mapping[m.meta.names[i]],bone=bones.get(safeName(targetName));if(!bone||used.has(bone))continue;used.add(bone);
     const rest=rests.get(bone.name),nextName=profile.next[targetName],child=nextName?bones.get(safeName(nextName)):bone.children.find(x=>x.isBone);
-    const targetDirection=child&&targetName!==profile.mapping.Head?rests.get(child.name).worldP.clone().sub(rest.worldP):new THREE.Vector3(0,1,0).applyQuaternion(rest.worldQ);
+    const targetDirection=child&&targetName!==profile.mapping.Head?rests.get(child.name).worldP.clone().sub(rest.worldP):new THREE.Vector3(...(targetName===profile.mapping.Head?(profile.headAimAxis||[0,1,0]):[0,1,0])).applyQuaternion(rest.worldQ);
     const sourceDirection=new THREE.Vector3(...m.meta.restDirections[i]).normalize();
     const corrected=Q().setFromUnitVectors(targetDirection.normalize(),sourceDirection).multiply(rest.worldQ.clone());
     const offset=new THREE.Quaternion(...m.meta.restWorldQuaternions[i]).invert().multiply(corrected);

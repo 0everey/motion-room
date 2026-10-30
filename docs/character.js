@@ -19,3 +19,6 @@ CHARACTER_PROFILES.ue4.bodyColors={
  palette:{torso:'#a7b2c2',head:'#edbd58',leftArm:'#30c3d4',rightArm:'#ed775f',leftLeg:'#668ce3',rightLeg:'#69bd7b'},
  roots:{head:'head',clavicle_l:'leftArm',clavicle_r:'rightArm',thigh_l:'leftLeg',thigh_r:'rightLeg'}
 };
+
+CHARACTER_PROFILES.ue4.face={bone:'head',up:0,across:2,front:1,frontSign:-1,skin:'#ffdb86',ink:'#162c42',nose:'#bd7425'};
+CHARACTER_PROFILES.ue4.headAimAxis=[1,0,0];

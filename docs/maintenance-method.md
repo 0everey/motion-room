@@ -71,3 +71,9 @@ python -X utf8 tools/query_zh.py "新增别名" --limit 10
 UE4模型的bodyColors在character profile中声明palette与骨分支根。加载基础模型时按每顶点四路蒙皮权重在线性RGB混色，颜色跟随原蒙皮运输；不用世界位置/屏幕左右分类，避免角色转身或交叉时换色。躯干中性，头与左右肢体分别识别；混合节点/实例的标签色保留，但不再给该材质整身染色覆盖部位色。
 
 该模型仍用原网格/骨骼/权重/原件hash，基础共享geometry仅替换一次color属性；actor复用它，材质按原owner分别归还。RGBA16白属性替为Float32RGB时每模板净增约93KB，不增mesh/material/drawcall数；不要声称零成本或为改色重烤全动作。核独立骨branch/顶点色/释放后，实际看交叉、背身和小墙的可辨改善，不能仅RGB表认证效果。
+
+## 后台加载与模型朝向
+
+加载不能把整页已就绪内容遮掉：原stage状态栏报进度，空/错误提示用无挡的小状态；网络loaded、固定取景ready、实际rendered分别处理。每actor按自己真实节点叶依赖决定能否绘制，保原slot；不能因某个长片准备而全canvas清空。暂停动画时后台准备仍调度，clear/换页代次和缓存真值继续原合同，MotionSession提交前phase护栏不能删除。
+
+头部朝向按真实rest轴。UE4 head局部+X向上、-Y向前，不能沿通用头骨+Y假设重定向；profile明确headAimAxis，再把头部正脸色投影在head bind-local空间，通过原蒙皮运输。眼鼻嘴只修改原共享color，不增纹理/mesh或改骨/位置；背面不画同脸，正侧背实际图和转头过程分别核。旧颜色分支/原动作/Root不因此重做。

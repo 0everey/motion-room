@@ -189,11 +189,14 @@ function draw(now){
       lastDraw=now;
     }
   }catch(error){modelError=error.message;fail(error);if(!gallery)s?.pause();}
-  const ready=(modelReady?renderer.framingReady!==false:true)&&(gallery?bank.phase!=='error'&&bank.items.some(item=>bank.motion(item)):s?.phase==='ready'&&modelReady);
-  $('stageMessage').hidden=ready&&!modelError;$('stageMessage').textContent=modelError||(modelReady&&renderer.framingReady===false?'正在准备整段动作的固定取景…':gallery&&bank.error?bank.error:(gallery?bank.phase:s?.phase)==='cleared'?'预览已清理；在视图页重新载入，或切换动作页继续。':!filtered.length&&gallery?'没有匹配动作，请修改关键词或重置筛选。':!gallery&&s?.error?s.error:character&&!modelReady?'读取真实角色与贴图…':'读取当前页真实动作…');
+  if(gallery&&modelReady&&!renderer.lastResult?.length&&bank.items.some(item=>bank.motion(item))){$('motionCanvas').hidden=true;$('wallCanvas').hidden=false;wall.draw(bank,time,{loop:state.loop});}
+  const hasRendered=!!renderer?.lastResult?.length,ready=(modelReady?hasRendered:true)&&(gallery?bank.phase!=='error'&&bank.items.some(item=>bank.motion(item)):s?.phase==='ready'&&modelReady);
+  const loadingNote=modelReady&&renderer.framingReady===false?'后台准备取景 · 已就绪内容可继续查看':character&&!modelReady?'后台加载角色与贴图…':!ready?'后台加载动作…':'';
+  $('stageMessage').hidden=!(modelError||(gallery?bank.error:s?.error)||(gallery?bank.phase:s?.phase)==='cleared'||!filtered.length&&gallery);$('stageMessage').textContent=modelError||(modelReady&&renderer.framingReady===false?'正在准备整段动作的固定取景…':gallery&&bank.error?bank.error:(gallery?bank.phase:s?.phase)==='cleared'?'预览已清理；在视图页重新载入，或切换动作页继续。':!filtered.length&&gallery?'没有匹配动作，请修改关键词或重置筛选。':!gallery&&s?.error?s.error:character&&!modelReady?'读取真实角色与贴图…':'读取当前页真实动作…');
   $('renderBadge').textContent=gallery?(modelReady?'真实角色 · '+bank.items.filter(x=>bank.motion(x)).length+'片原地对照':'骨架速览 · 原始世界姿态'):(state.mode==='mix'?'A / B / 混合 · 实际角色':'单片实际角色');
   $('playButton').textContent=playing?'Ⅱ':'▶';$('playButton').disabled=!ready;$('currentTime').textContent=(gallery&&state.loop?time%duration:time).toFixed(2);$('durationTime').textContent=duration.toFixed(2)+' s';$('timeline').max=String(duration);$('timeline').value=String(gallery&&state.loop?time%duration:time);$('timeline').disabled=!ready;$('loopToggle').setAttribute('aria-pressed',String(gallery?state.loop:s?.recipe?.loop));
-  if(!gallery){$('stageStatus').textContent=s?.phase==='cleared'?'预览已清理':s?.phase==='error'?'载入失败':ready?(playing?'实际角色播放中':'实际角色已暂停'):'准备角色与动作';renderActorLabels(s);}
+  if(gallery&&modelReady){const rendered=new Set((renderer.lastResult||[]).map(r=>r.actor.id));for(const[i,tile]of [...$('wallTiles').children].entries()){const item=bank.items[i],message=tile.querySelector('.tile-message');if(item&&bank.motion(item)&&!bank.errors.has(item.row.id)){message.hidden=rendered.has('wallactor'+i);message.textContent='后台准备取景…';}}$('stageStatus').textContent=`${renderer.lastResult?.length||0} / ${pageRows.length} 片可看${renderer.framingReady===false?' · 其余后台准备':''}`;}
+  if(!gallery){$('stageStatus').textContent=s?.phase==='cleared'?'预览已清理':s?.phase==='error'?'载入失败':ready?(playing?'实际角色播放中':'实际角色已暂停')+(renderer.preparingActors?' · '+renderer.preparingActors+'项后台准备':''):(loadingNote||'准备角色与动作');renderActorLabels(s);}
   $('retryLoad').hidden=!(modelError||s?.phase==='error'||s?.phase==='cleared'||bank.phase==='error'||bank.phase==='cleared'||bank.errors.size>0);
   drawTimes.push(performance.now()-began);if(drawTimes.length>300)drawTimes.shift();
   if(ready)ensureCache().catch(()=>{});if((playing&&ready||modelReady&&renderer.framingReady===false)&&!modelError)request();
