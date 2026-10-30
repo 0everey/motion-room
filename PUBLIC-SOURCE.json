@@ -1,6 +1,6 @@
 {
-  "files": 2580,
-  "bytes": 477398333,
+  "files": 2582,
+  "bytes": 478410529,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -27,13 +27,13 @@
     },
     {
       "path": "character.js",
-      "bytes": 298,
-      "sha256": "fe38970bb2727d7b91989fc74af2e3da4515904049b01ac7c140cd1c3a574620"
+      "bytes": 2445,
+      "sha256": "c0d90992fbeb33a739a60202e6d20ddab79e5ad88f9c0a3b1bd9b07fb8370894"
     },
     {
       "path": "credits.txt",
-      "bytes": 789,
-      "sha256": "ec8c202ac8ad4b3d5b400793c9d199544a0d417f045c97129eb74913a7bd6b03"
+      "bytes": 1747,
+      "sha256": "2f1c9db6f9516b310fba1a10b75c3794fbb069e6a052bb9a3b00c8711956eb9a"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -212,8 +212,8 @@
     },
     {
       "path": "data/catalog.json",
-      "bytes": 6654295,
-      "sha256": "13e726694b9b85f8bd5c82ccb98205e3acb9b64e005d995ef359c9d6bbd84f25"
+      "bytes": 5978059,
+      "sha256": "b6ef7014b645a5c843036cd6e4ac904ccd7f5125aabf7c1569d63e8a4d6eb120"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12811,9 +12811,19 @@
       "sha256": "5a7d08740dd2f3db3262ec01195e79fc5e70d157be277e97c342fc3794ec5ee8"
     },
     {
+      "path": "maintenance-method.md",
+      "bytes": 6938,
+      "sha256": "c702ff1a95f0177b21b33df38796f2d0842d6b609278cbab48ba659d3b1f0a11"
+    },
+    {
       "path": "models/herta-7c88eda67cb9.glb",
       "bytes": 10962304,
       "sha256": "7c88eda67cb95ce9cbae488d90300eea7e432e52e9884939bbcb3d925aa0d626"
+    },
+    {
+      "path": "models/ue4-mannequin-83ea4c910dc2.glb",
+      "bytes": 1667944,
+      "sha256": "83ea4c910dc29be4b89648a513eef6bd10a9c281e6b52999fbcaa352dddfd187"
     },
     {
       "path": "motion-session.js",
@@ -12837,18 +12847,18 @@
     },
     {
       "path": "renderer.js",
-      "bytes": 14811,
-      "sha256": "36ebebc6262914c7c06b0fec63b3447167f1880d397d673fedba36bdc48a8527"
+      "bytes": 14599,
+      "sha256": "642ab3b9722f4375e9506b1864e97316d4528345c3edf63e6abbbf3141015823"
     },
     {
       "path": "studio.css",
-      "bytes": 24841,
-      "sha256": "a819f6726bd450d2ce61179c15d77c0f3461f60253cb0526484dcec3ea47035c"
+      "bytes": 26825,
+      "sha256": "925422302db726517eed9379e2822e27fdfa24d1c1dada00ce9cc3090b5eb3f4"
     },
     {
       "path": "studio.js",
-      "bytes": 58576,
-      "sha256": "7c46ba9c318454506040c64d3054e51cdc79507762af1fa7f8500dd603fa34fc"
+      "bytes": 61984,
+      "sha256": "d6125d79dac5d32fc958a28f16efdfb7bbdf7de4b2c637a4fcfcefdf069a6970"
     },
     {
       "path": "styles.css",
@@ -12857,8 +12867,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 8717,
-      "sha256": "259b85e6bb9e851b722962f7300fee9fe0cabf07c66d399e55f135495b4ee06c"
+      "bytes": 8769,
+      "sha256": "bc276c21a880b490d5982e38f572df33c6d5380e76be15fe7ae73b8071835a36"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12887,8 +12897,8 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 17696,
-      "sha256": "8e79d818e8840750031e7fe53d8a5186858ee848b59b4e49fcd185dbc713ba79"
+      "bytes": 21836,
+      "sha256": "9825db0e82611e329662d4e0aa21da5bce2e3bf41a61d4d2f96a28a1d1b5a7c5"
     },
     {
       "path": "workbench.css",
@@ -12897,8 +12907,8 @@
     },
     {
       "path": "workbench.html",
-      "bytes": 12309,
-      "sha256": "f5b557221e0d398d43d6cf466384f1e95ad2ecd902d355ca2988f547af897329"
+      "bytes": 13382,
+      "sha256": "8177e8aa3a9795b9efe5dc9eee3b7d03469d7256cb62b70d4738d431d8d9248f"
     },
     {
       "path": "workbench.js",
@@ -12906,7 +12916,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "34c4efd1472cf082e31a7270d535f4cf17439d3b",
+  "applicationSourceCommit": "5aefe6032ab2896ee927ea9bfb5e06d808afbe66",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -13090,5 +13100,5 @@
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
     }
   ],
-  "totalPublishedApplicationFiles": 2615
+  "totalPublishedApplicationFiles": 2617
 }

@@ -1,3 +1,16 @@
+动作工作台：默认UE4 Mannequin白模
+
+UE4 Mannequin模板网格：Epic Games, Inc.
+本预览使用UE4标准模板Mannequin的本机导出变体，仅制作白色预览材质，不包含第三方动画包/纹理/蓝图。原骨架67骨，pelvis为顶层；网页Root Motion不表示原FBX新增独立UE根骨。
+Unreal Engine EULA Examples条款：模板内容及其修改可按5(b)分发。
+条款来源：https://store.steampowered.com/eula/2373700_eula_1
+模板来源：https://dev.epicgames.com/documentation/en-us/unreal-engine/third-person-template?application_version=4.27
+动作工作台 uses Unreal® Engine. Unreal® is a trademark or registered trademark of Epic Games, Inc. in the United States of America and elsewhere.
+Unreal® Engine, Copyright 1998 – 2026, Epic Games, Inc. All rights reserved.
+这里使用UE4模板内容；网页由Three.js呈现，不包含Unreal Engine运行时。本工作台非Epic官方产品。
+
+可选大黑塔角色的原说明：
+
 动作预览室 · 大黑塔
 
 角色版权：miHoYo
