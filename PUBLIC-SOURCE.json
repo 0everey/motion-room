@@ -1,6 +1,6 @@
 {
   "files": 2582,
-  "bytes": 478428566,
+  "bytes": 478428962,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 5978059,
-      "sha256": "4652db95ac27082dd80308d8fda819ad43bb4b638d52330b17dc9ea18fe9356a"
+      "sha256": "4a8b204f67086f47c1588b2e7145a5ad668850183c024b1f5593b1cf8a18abc3"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12827,8 +12827,8 @@
     },
     {
       "path": "motion-session.js",
-      "bytes": 16677,
-      "sha256": "a3af4749094a91318b0d9723ed4b0625c17db344f521b241f3fd2ee908ee78e8"
+      "bytes": 16917,
+      "sha256": "f3da307753952ce3b88589f8889afb9266260bc2b6c8bc036bc72ef86ac1da55"
     },
     {
       "path": "motion-wall.js",
@@ -12852,8 +12852,8 @@
     },
     {
       "path": "studio.css",
-      "bytes": 35002,
-      "sha256": "14a1dd27507045a71cbaaa7a452f22dfebac49c6074f3eea2a91cf788dd7de89"
+      "bytes": 35156,
+      "sha256": "8037c494935bdb4838ea2a0ff75623ebf13b405273f171328176558872d5583f"
     },
     {
       "path": "studio.js",
@@ -12867,8 +12867,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 8776,
-      "sha256": "d8877948acce784064a181271ea72f558c1e590cc9358f407d4effb64c57ac7e"
+      "bytes": 8778,
+      "sha256": "070f0c70280c338afb258091ab95a599759193c53f6ec555eba35d4d06796854"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12916,7 +12916,7 @@
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
     }
   ],
-  "applicationSourceCommit": "aa9a3ba656070c80195a6cc0ff484fc0aafb0951",
+  "applicationSourceCommit": "7aa47c6f6395e788013cbf28ce250b43b79bbc1c",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {

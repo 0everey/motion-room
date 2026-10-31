@@ -1,4 +1,4 @@
-const VERSION='r12-20261030-background-face1';
+const VERSION='r14-20261031-sequence-terminal1';
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
 const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','maintenance-method.md','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;

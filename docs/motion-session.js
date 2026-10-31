@@ -6,6 +6,15 @@ const clone=value=>structuredClone(value);
 const finite=(value,min,max)=>typeof value==='number'&&Number.isFinite(value)&&value>=min&&value<=max;
 const ident=value=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,120}$/.test(value);
 
+// A single-shot parent keeps the final sample at a repeated child's boundary.
+// Other repeated times, including non-boundary terminal times, retain their phase.
+function playbackTime(time,duration,repeat,terminal){
+  const t=Math.max(0,time);
+  if(!repeat||duration<=0)return Math.min(duration,t);
+  const local=t%duration;
+  return terminal&&t>0&&(local<1e-7||duration-local<1e-7)?duration:local;
+}
+
 export function validateRecipe(input,catalog){
   if(!input||input.schema!==SESSION_SCHEMA||!Array.isArray(input.nodes)||!Array.isArray(input.actors))throw new Error('配方格式不受支持。');
   if(input.nodes.length<1||input.nodes.length>32||input.actors.length<1||input.actors.length>8)throw new Error('配方支持 1–32 个节点、1–8 个实例。');
@@ -117,7 +126,7 @@ export class MotionSession{
   seek(time){if(!finite(time,0,3600))throw new Error('时间必须在 0–3600 秒内。');this.playing=false;this.time=Math.min(time,this.duration);this.anchorTime=this.time;this.onChange();}
   setSpeed(speed){if(!finite(speed,.1,4))throw new Error('速度必须在 0.1–4 倍之间。');this.clock();this.speed=speed;if(this.recipe)this.recipe.speed=speed;this.anchorTime=this.time;this.anchorNow=performance.now();this.onChange();}
   clear(){this.generation++;this.controller?.abort();this.motions.clear();this.roots.clear();this.playing=false;this.phase='cleared';this.error=null;this.onChange();}
-  localTime(node,time,terminal=false){const duration=this.motions.get(this.key(node)).duration,t=Math.max(0,time*node.speed+node.phase);if(node.loop==='repeat'&&duration>0){const local=t%duration;return terminal&&t>0&&(local<1e-7||duration-local<1e-7)?duration:local;}return Math.min(duration,t);}
+  localTime(node,time,terminal=false){return playbackTime(time*node.speed+node.phase,this.motions.get(this.key(node)).duration,node.loop==='repeat',terminal);}
   resolve(time,solver=null){
     if(this.phase!=='ready')return {outputs:[],evaluations:[]};
     const nodes=this.nodes,evaluations=[],durations=new Map(),durationOf=id=>this.durationOf(id,durations,nodes);
@@ -135,7 +144,7 @@ export class MotionSession{
           const a=solve(node.a,ta,terminal),b=solve(node.b,tb,terminal);if(solver)pose=solver.blend(a,b,node.weight);
         }else if(node.type==='output')pose=solve(node.input,t,terminal);
         else{
-          const parts=this.sequenceParts(node,durationOf),duration=parts.at(-1).end,local=node.loop==='repeat'&&duration>0?Math.max(0,t)%duration:Math.min(duration,Math.max(0,t));
+          const parts=this.sequenceParts(node,durationOf),duration=parts.at(-1).end,local=playbackTime(t,duration,node.loop==='repeat',terminal);
           let i=parts.findIndex(p=>local<p.end);if(i<0)i=parts.length-1;
           const current=parts[i],next=parts[i+1],atEnd=terminal||(node.loop==='once'&&local>=duration),a=solve(current.id,local-current.start,atEnd);
           if(next&&next.fade>0&&local>=next.start){let weight=(local-next.start)/next.fade;weight=Math.max(0,Math.min(1,weight));if(node.curve==='smoothstep')weight=weight*weight*(3-2*weight);const b=solve(next.id,local-next.start);if(solver)pose=solver.blend(a,b,weight);}
