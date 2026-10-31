@@ -36,3 +36,8 @@ Unreal® Engine, Copyright 1998 – 2026, Epic Games, Inc. All rights reserved.
 
 Three.js 0.170.0：MIT，见 vendor/three/LICENSE。
 标题字体：SIL Open Font License，见 assets/fonts/OFL.txt。
+
+可莉：模型编辑 神帝宇；模型版权 miHoYo。官方原件由浏览器直接从官方活动来源取得并在本机解析，本站不分发模型原件或转换GLB。仅用于非商业动作预览，请勿二次配布；完整规则随官方原包提供。
+官方活动：https://ys.biligame.com/pjdkx/
+可莉仅接原姿态/根/混合预览；未启用原MMD刚体、IK或grant运行时，不代表接触及全部动作质量验收。
+MMD解析：Three.js r170官方MIT模块，来源及哈希见vendor/three/mmd/SOURCES.json；许可证见vendor/three/LICENSE。

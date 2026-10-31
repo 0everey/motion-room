@@ -2,12 +2,13 @@ import * as THREE from './vendor/three/three.module.min.js';
 import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 import {sampleMotion} from './mvp.js';
 import {MODEL_ASSET,CHARACTER_PROFILES,DEFAULT_CHARACTER} from './character.js';
+import {materialTextures} from './klee-source.js';
 
 const ASSETS=[MODEL_ASSET,'character.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const Q=()=>new THREE.Quaternion(),V=()=>new THREE.Vector3();
 const safeName=name=>name?.replace(/\s/g,'_');
 export function disposeSkeletons(root){const skeletons=new Set();root?.traverse(o=>{if(o.isSkinnedMesh&&o.skeleton)skeletons.add(o.skeleton);});for(const skeleton of skeletons)skeleton.dispose();}
-function disposeObject(root){if(!root)return;disposeSkeletons(root);const textures=new Set();root.traverse(o=>{o.geometry?.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material]))if(m){for(const value of Object.values(m))if(value?.isTexture)textures.add(value);m.dispose();}});for(const t of textures){t.image?.close?.();t.dispose();}}
+function disposeObject(root){if(!root)return;disposeSkeletons(root);const textures=new Set();root.traverse(o=>{o.geometry?.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material]))if(m){for(const texture of materialTextures(m))textures.add(texture);m.dispose();}});for(const t of textures){t.image?.close?.();t.dispose();}}
 
 // The base geometry owns one color buffer. Cloned actors share it like positions/skin weights.
 export function applyBodyColors(mesh,profile){
@@ -81,23 +82,30 @@ export class MotionRenderer{
     canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();onError(new Error('图形上下文已丢失，请刷新页面恢复。'));});
     this.loadModel();
   }
-  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1)];}
+  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1),...(this.characterProfile.offlineAssets||[])];}
   async setCharacter(key){const profile=CHARACTER_PROFILES[key];if(!profile?.asset)throw new Error('该预览模型尚未准备完成。');if(profile===this.characterProfile&&this.modelReady)return true;this.clearPreviewResources();this.characterProfile=profile;this.hipName=profile.hip;await this.loadModel();return this.modelReady&&this.characterProfile===profile;}
   async loadModel(){
     if(this.loading)return this.loading;
     const generation=++this.loadGeneration;this.modelController=new AbortController();this.modelReady=false;
     this.loading=(async()=>{
-      const url=new URL(this.characterProfile.asset,import.meta.url),response=await fetch(url,{signal:this.modelController.signal,credentials:'same-origin'});
-      if(!response.ok)throw new Error(`${this.characterProfile.label}读取失败（HTTP ${response.status}）。`);
-      const buffer=await response.arrayBuffer();if(buffer.byteLength>64*1024*1024)throw new Error('角色数据超过加载限制。');
-      const asset=await new GLTFLoader().parseAsync(buffer,url.href.slice(0,url.href.lastIndexOf('/')+1));
+      const profile=this.characterProfile,signal=this.modelController.signal;let asset;
+      if(profile.format==='official-pmx-zip'){
+        const {loadKleeSource}=await import('./klee-source.js');signal.throwIfAborted();asset=await loadKleeSource({signal});
+      }else{
+        const url=new URL(profile.asset,import.meta.url),response=await fetch(url,{signal,credentials:'same-origin'});
+        if(!response.ok)throw new Error(`${profile.label}读取失败（HTTP ${response.status}）。`);
+        const buffer=await response.arrayBuffer();if(buffer.byteLength>64*1024*1024)throw new Error('角色数据超过加载限制。');
+        asset=await new GLTFLoader().parseAsync(buffer,url.href.slice(0,url.href.lastIndexOf('/')+1));
+      }
       if(generation!==this.loadGeneration){disposeObject(asset.scene);return;}
-      this.character=asset.scene;this.bones=new Map();this.rests=new Map();
+      this.character=asset.scene;this.modelSource=asset.source||null;this.bones=new Map();this.rests=new Map();
       this.character.updateMatrixWorld(true);
+      const replacedTextures=new Set(),retainedTextures=new Set();
       this.character.traverse(o=>{
         if(o.isBone){this.bones.set(o.name,o);const q=Q(),p=V();o.getWorldQuaternion(q);o.getWorldPosition(p);this.rests.set(o.name,{worldQ:q,worldP:p,localQ:o.quaternion.clone(),localP:o.position.clone()});}
-        if(o.isMesh){o.frustumCulled=false;const bodyColors=applyBodyColors(o,this.characterProfile);const convert=m=>{if(!m)return m;const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:bodyColors?0xffffff:0xd8dce2,vertexColors:!!bodyColors,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:0xffffff,map:m.map,side:THREE.DoubleSide,transparent:m.transparent,opacity:m.opacity,alphaTest:m.transparent?0.3:0,depthWrite:!m.transparent});if(bodyColors)next.userData.bodyColorProfile=this.characterProfile.key;m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
+        if(o.isMesh){o.frustumCulled=false;const bodyColors=applyBodyColors(o,this.characterProfile);const convert=m=>{if(!m)return m;for(const texture of materialTextures(m))replacedTextures.add(texture);const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:bodyColors?0xffffff:0xd8dce2,vertexColors:!!bodyColors,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:0xffffff,map:m.map,side:THREE.DoubleSide,transparent:m.transparent,opacity:m.opacity,alphaTest:m.transparent?0.3:0,depthWrite:!m.transparent});for(const texture of materialTextures(next))retainedTextures.add(texture);if(bodyColors)next.userData.bodyColorProfile=this.characterProfile.key;m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
       });
+      for(const texture of replacedTextures)if(!retainedTextures.has(texture)){texture.image?.close?.();texture.dispose();}
       if(!this.bones.has(this.hipName))throw new Error('角色缺少真实髋骨绑定。');
       this.scene.add(this.character);this.character.updateMatrixWorld(true);
       this.helper=new THREE.SkeletonHelper(this.character);this.helper.visible=this.skeleton;this.scene.add(this.helper);
@@ -111,7 +119,7 @@ export class MotionRenderer{
     if(this.character){this.scene.remove(this.character);disposeObject(this.character);this.character=null;}
     if(this.helper){this.scene.remove(this.helper);this.helper.geometry.dispose();this.helper.material.dispose();this.helper=null;}
     if(this.trailLine){this.scene.remove(this.trailLine);disposeObject(this.trailLine);this.trailLine=null;}
-    this.bones=new Map();this.rests=new Map();this.pose=null;this.modelStats=null;this.worldCenter=null;this.worldRadius=null;this.heightRatio=null;this.hipIndex=-1;this.modelController=null;
+    this.bones=new Map();this.rests=new Map();this.pose=null;this.modelStats=null;this.modelSource=null;this.worldCenter=null;this.worldRadius=null;this.heightRatio=null;this.hipIndex=-1;this.modelController=null;
     this.webgl.renderLists.dispose();this.onChange();
   }
   setMotion(motion){

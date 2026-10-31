@@ -1,0 +1,30 @@
+{
+  "version": "Three r170, unchanged official MIT modules",
+  "license": "../LICENSE",
+  "files": [
+    {
+      "path": "vendor/three/mmd/loaders/MMDLoader.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r170/examples/jsm/loaders/MMDLoader.js",
+      "bytes": 52572,
+      "sha256": "ea805ba7f189b335572be9604d132371d76a1295b7f2bbceffe481986cea4839"
+    },
+    {
+      "path": "vendor/three/mmd/loaders/TGALoader.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r170/examples/jsm/loaders/TGALoader.js",
+      "bytes": 11150,
+      "sha256": "ce938459ed99d5234f9665270cca8552464d0d1703a094e49760631e6b14c7a3"
+    },
+    {
+      "path": "vendor/three/mmd/shaders/MMDToonShader.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r170/examples/jsm/shaders/MMDToonShader.js",
+      "bytes": 3466,
+      "sha256": "b1e01ab0442c3c04ec7fbfb024c15d7636c1ff94de260a839ab4ecbd69ffca5b"
+    },
+    {
+      "path": "vendor/three/mmd/libs/mmdparser.module.js",
+      "source": "https://raw.githubusercontent.com/mrdoob/three.js/r170/examples/jsm/libs/mmdparser.module.js",
+      "bytes": 158598,
+      "sha256": "77562d8a91949633814a6ce1f4060dcb95b1a672e8549f41e6524eb6f1c30c68"
+    }
+  ]
+}

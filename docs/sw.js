@@ -1,12 +1,14 @@
-const VERSION='r15-20261031-graph-framing1';
+const VERSION='r16-20261031-klee-official1';
+const KLEE_URL='https://i0.hdslb.com/bfs/game-static/6c7d34e8ca3f07623f9de5ce03a0600eddfda45c.zip',KLEE_SHA256='894fb807efca259c75f663ae3c4798533d39506ea8c49d1ec1c7a1dc9e16ea4f';
+async function validOfficial(bytes){return bytes.byteLength===1235776&&Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('')===KLEE_SHA256;}
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
-const SHELL_PATHS=['./','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','maintenance-method.md','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
+const SHELL_PATHS=['./','klee-source.js','vendor/three/mmd/SOURCES.json','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','maintenance-method.md','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;
 const INSTANCE=self.crypto.randomUUID();let clearNumber=0,epoch=INSTANCE+':0',enabled=true,queue=Promise.resolve();const inflight=new Map();
 const serial=fn=>{const result=queue.then(fn,fn);queue=result.catch(()=>{});return result;};
 function relative(url){return url.origin===ROOT.origin&&url.pathname.startsWith(ROOT.pathname)?url.pathname.slice(ROOT.pathname.length):null;}
 function canonicalURL(value){const url=new URL(value,ROOT),path=relative(url);if(!url.search&&['','index.html','workbench.html'].includes(path))url.hash='';return url;}
-function category(url){const path=relative(url);if(path===null||url.search||url.hash)return null;if(!path||path==='index.html'||path==='workbench.html'||path==='data/catalog.json'||path==='credits.txt'||path==='maintenance-method.md'||/\.(?:js|mjs|css|ttf|woff2?)$/i.test(path))return 'shell';if(/^data\/clips\/[^/]+\.mvp\.gz$/i.test(path)||/^data\/(?:roots|animator-roots)\/[^/]+\.json$/i.test(path)||/^(?:assets|models|textures|vendor)\/.+\.(?:glb|gltf|bin|png|jpe?g|webp|ktx2?)$/i.test(path))return 'preview';return null;}
+function category(url){if(url.href===KLEE_URL)return 'preview';const path=relative(url);if(path===null||url.search||url.hash)return null;if(!path||path==='index.html'||path==='workbench.html'||path==='data/catalog.json'||path==='credits.txt'||path==='maintenance-method.md'||path==='vendor/three/mmd/SOURCES.json'||/\.(?:js|mjs|css|ttf|woff2?)$/i.test(path))return 'shell';if(/^data\/clips\/[^/]+\.mvp\.gz$/i.test(path)||/^data\/(?:roots|animator-roots)\/[^/]+\.json$/i.test(path)||/^(?:assets|models|textures|vendor)\/.+\.(?:glb|gltf|bin|png|jpe?g|webp|ktx2?)$/i.test(path))return 'preview';return null;}
 async function broadcast(type,detail={}){for(const client of await self.clients.matchAll({type:'window',includeUncontrolled:true}))client.postMessage({source:'motion-room-cache',type,...detail});}
 async function entries(){const cache=await caches.open(PREVIEW),keys=await cache.keys();return Promise.all(keys.map(async key=>{const response=await cache.match(key);return {key,bytes:Number(response?.headers.get('x-motion-bytes'))||0,stored:Number(response?.headers.get('x-motion-stored'))||0};}));}
 async function writeComplete(request,response,ticket){
@@ -14,6 +16,7 @@ async function writeComplete(request,response,ticket){
   const target=canonicalURL(request.url),kind=category(target);if(!kind)return;
   const length=Number(response.headers.get('content-length'));if(length>MAX_FILE)throw new Error('单个资源超过64 MB，未缓存，可在线预览。');
   const bytes=await response.arrayBuffer();if(bytes.byteLength>MAX_FILE)throw new Error('单个资源超过64 MB，未缓存，可在线预览。');
+  if(target.href===KLEE_URL&&!await validOfficial(bytes))throw new Error('可莉官方原件版本不符，未缓存，请重新载入。');
   await serial(async()=>{
     if(kind==='preview'&&(!enabled||ticket!==epoch))return;
     const headers=new Headers(response.headers);headers.delete('content-encoding');headers.set('content-length',String(bytes.byteLength));headers.set('x-motion-bytes',String(bytes.byteLength));headers.set('x-motion-stored',String(Date.now()));
@@ -29,10 +32,11 @@ async function cacheResource(url,{resume=false}={}){
   const target=canonicalURL(url),kind=category(target);if(!kind)throw new Error('资源不在本站预览缓存范围内。');
   if(resume)await serial(()=>{enabled=true;});
   if(kind==='preview'&&!enabled)return;
-  const cache=await caches.open(kind==='shell'?SHELL:PREVIEW);if(await cache.match(target.href))return;
+  const cache=await caches.open(kind==='shell'?SHELL:PREVIEW),cached=await cache.match(target.href);
+  if(cached){if(target.href!==KLEE_URL||await validOfficial(await cached.arrayBuffer()))return;await serial(()=>cache.delete(target.href));}
   if(inflight.has(target.href))return inflight.get(target.href).promise;
   const controller=new AbortController(),ticket=epoch;
-  const promise=(async()=>{const request=new Request(target.href,{credentials:'same-origin'}),response=await fetch(request,{signal:controller.signal,cache:kind==='preview'?'no-store':'default'});if(response.status!==200)throw new Error(`资源读取失败（HTTP ${response.status}）。`);await writeComplete(request,response,ticket);})().finally(()=>inflight.delete(target.href));
+  const promise=(async()=>{const request=new Request(target.href,{credentials:target.href===KLEE_URL?'omit':'same-origin',...(target.href===KLEE_URL?{referrerPolicy:'no-referrer'}:{})}),response=await fetch(request,{signal:controller.signal,cache:kind==='preview'?'no-store':'default',...(target.href===KLEE_URL?{credentials:'omit',referrerPolicy:'no-referrer'}:{})});if(response.status!==200)throw new Error(`资源读取失败（HTTP ${response.status}）。`);await writeComplete(request,response,ticket);})().finally(()=>inflight.delete(target.href));
   inflight.set(target.href,{promise,controller,kind});return promise;
 }
 async function status(url,resources=[]){
@@ -48,10 +52,11 @@ self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key
 self.addEventListener('fetch',event=>{
   const request=event.request;if(request.method!=='GET')return;const url=canonicalURL(request.url),kind=category(url);if(!kind)return;
   event.respondWith((async()=>{
-    const cache=await caches.open(kind==='shell'?SHELL:PREVIEW),cached=await cache.match(new Request(url.href));
+    const cache=await caches.open(kind==='shell'?SHELL:PREVIEW);let cached=await cache.match(new Request(url.href));
+    if(cached&&url.href===KLEE_URL&&!await validOfficial(await cached.clone().arrayBuffer())){await serial(()=>cache.delete(url.href));cached=null;}
     if(cached&&kind==='preview')return cached;
     const controller=new AbortController(),ticket=epoch,key=url.href;
-    const network=fetch(request,{signal:controller.signal,cache:kind==='preview'?'no-store':'default'});
+    const network=fetch(request,{signal:controller.signal,cache:kind==='preview'?'no-store':'default',...(url.href===KLEE_URL?{credentials:'omit',referrerPolicy:'no-referrer'}:{})});
     const task={controller,kind,promise:network.then(response=>writeComplete(request,response.clone(),ticket))};
     inflight.set(key,task);event.waitUntil(task.promise.catch(error=>{if(error.name!=='AbortError')return broadcast('CACHE_ERROR',{error:error.message});}).finally(()=>{if(inflight.get(key)===task)inflight.delete(key);}));
     try{
