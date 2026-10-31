@@ -53,7 +53,7 @@ export class TargetPoseSolver{
 }
 
 export class WorkbenchRenderer extends MotionRenderer{
-  constructor(canvas,options={}){super(canvas,options);this.webgl.info.autoReset=false;this.actorRigs=new Map();this.worldGrid=new THREE.GridHelper(24,24,0xb29a70,0xc7c4c1);this.worldGrid.position.y=-.015;this.worldGrid.material.transparent=true;this.worldGrid.material.opacity=.25;this.scene.add(this.worldGrid);this.follow=false;this.lastResult=[];this.clipFrames=new WeakMap();}
+  constructor(canvas,options={}){super(canvas,options);this.webgl.info.autoReset=false;this.actorRigs=new Map();this.worldGrid=new THREE.GridHelper(24,24,0xb29a70,0xc7c4c1);this.worldGrid.position.y=-.015;this.worldGrid.material.transparent=true;this.worldGrid.material.opacity=.25;this.scene.add(this.worldGrid);this.follow=false;this.lastResult=[];this.clipFrames=new WeakMap();this.graphFrames=new WeakMap();}
   prepare(){
     if(!this.modelReady||!this.character)return false;
     if(this.template!==this.character){this.dropActors();this.template=this.character;this.solver=new TargetPoseSolver(this.character,this.characterProfile);this.influenceBounds=new Map();
@@ -73,7 +73,7 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.character.visible=false;if(this.helper)this.helper.visible=false;return true;
   }
   removeActor(rig){rig.group.removeFromParent();rig.helper.removeFromParent();rig.scene?.clear();rig.ownedMaterials?.forEach(m=>m.dispose());rig.helper.geometry.dispose();rig.helper.material.dispose();disposeSkeletons(rig.root);}
-  dropActors(){if(!this.actorRigs)return;for(const rig of this.actorRigs.values())this.removeActor(rig);this.actorRigs.clear();disposeSkeletons(this.solver?.root);this.solver=null;this.template=null;this.lastResult=[];this.preparingActors=0;this.renderedActors=0;this.influenceBounds?.clear();this.actorBounds?.clear();this.labelPositions=[];this.boundsKey=null;this.clipFrames=new WeakMap();}
+  dropActors(){if(!this.actorRigs)return;for(const rig of this.actorRigs.values())this.removeActor(rig);this.actorRigs.clear();disposeSkeletons(this.solver?.root);this.solver=null;this.template=null;this.lastResult=[];this.preparingActors=0;this.renderedActors=0;this.influenceBounds?.clear();this.actorBounds?.clear();this.labelPositions=[];this.boundsKey=null;this.boundsSession=null;this.clipFrames=new WeakMap();this.graphFrames=new WeakMap();this.currentFrameRecords=[];this.frameSession=null;this.frameGeneration=null;}
   clearPreviewResources(){this.dropActors();super.clearPreviewResources();}
   makeActor(id){
     const group=new THREE.Group(),motionRoot=new THREE.Group(),poseRoot=new THREE.Group(),root=cloneSkeleton(this.character);root.visible=true;group.add(motionRoot);motionRoot.add(poseRoot);poseRoot.add(root);
@@ -96,19 +96,68 @@ export class WorkbenchRenderer extends MotionRenderer{
       record={motion,root,mode:session.recipe.rootMode,index:0,total:Math.max(1,motion.meta.frameCount*2-1),box:new THREE.Box3(),padding:.025+this.reachRadius*(1-Math.cos(maxAngle/4)),ready:false};variants.set(key,record);
     }return record;
   }
+  directFrameClip(session,id){
+    const node=session.nodes.get(id);if(node.type==='clip')return node;
+    if(node.type==='output')return this.directFrameClip(session,node.input);
+    if(node.type==='blend'&&(node.weight===0||node.weight===1))return this.directFrameClip(session,node.weight===0?node.a:node.b);
+    return null;
+  }
+  syncFrameGeneration(session){
+    const prior=this.graphFrames.get(session);
+    if(prior&&prior.generation!==session.generation){
+      for(const record of prior.records.values()){record.iterator?.return();record.iterator=null;record.previousWorld=null;record.session=null;record.actor=null;record.actors?.clear();}
+      prior.records.clear();this.graphFrames.delete(session);
+    }
+    if(this.frameSession!==session||this.frameGeneration!==session.generation||session.phase!=='ready'){
+      this.currentFrameRecords=[];this.frameSession=session;this.frameGeneration=session.generation;
+    }
+  }
+  fixedOutputFrame(session,actor){
+    const direct=this.directFrameClip(session,actor.node);if(direct)return this.fixedClipFrame(session,direct);
+    let current=this.graphFrames.get(session);
+    if(!current||current.generation!==session.generation){current={generation:session.generation,records:new Map()};this.graphFrames.set(session,current);}
+    const key=JSON.stringify([actor.node,actor.clock,actor.speed,actor.offset,actor.paused?actor.hold:null]);
+    let record=current.records.get(key);
+    if(!record){record={graph:true,actor,actors:new Set(),session,iterator:session.frameTimes(actor),index:0,steps:0,box:new THREE.Box3(),bounds:new THREE.Box3(),maxAngle:0,heldIncluded:false,ready:false};current.records.set(key,record);}
+    record.actors.add(actor.id);
+    return record;
+  }
+  includeGraphPose(record,pose,trackContinuity=true){
+    this.solver.reset();
+    for(let i=0;i<this.solver.list.length;i++){this.solver.list[i].position.fromArray(pose.positions[i]);this.solver.list[i].quaternion.fromArray(pose.rotations[i]);}
+    this.solver.root.updateMatrixWorld(true);
+    const outer=new THREE.Matrix4().compose(v().fromArray(pose.rootP),q().fromArray(pose.rootQ),v().set(1,1,1));
+    outer.multiply(new THREE.Matrix4().compose(v().fromArray(pose.residualP),q().fromArray(pose.residualQ),v().set(1,1,1)));
+    record.box.union(this.skinBounds({root:this.solver.root,bounds:record.bounds}).applyMatrix4(outer));
+    if(trackContinuity){
+      const world=new Float64Array(this.solver.list.length*4),rotation=q(),outerQ=q().fromArray(pose.rootQ).multiply(q().fromArray(pose.residualQ));
+      for(let i=0;i<this.solver.list.length;i++){
+        this.solver.list[i].getWorldQuaternion(rotation);rotation.premultiply(outerQ);rotation.toArray(world,i*4);
+        if(record.previousWorld){let dot=0;for(let k=0;k<4;k++)dot+=world[i*4+k]*record.previousWorld[i*4+k];record.maxAngle=Math.max(record.maxAngle,2*Math.acos(Math.min(1,Math.abs(dot))));}
+      }record.previousWorld=world;
+    }
+  }
   prepareFixedFrames(session){
     if(this.follow){this.framingReady=true;return true;}
-    const clips=[...session.nodes.values()].filter(n=>n.type==='clip'),records=clips.map(n=>this.fixedClipFrame(session,n)),start=performance.now();
+    const clips=[...session.nodes.values()].filter(n=>n.type==='clip'),graphs=session.recipe.layout==='compare'?(session.recipe.actors.filter(a=>a.visible).map(a=>this.fixedOutputFrame(session,a))):[],records=[...new Set([...clips.map(n=>this.fixedClipFrame(session,n)),...graphs])],start=performance.now();this.currentFrameRecords=records;
     const raw={root:this.solver.root,bounds:new THREE.Box3()},position=v(),rotation=q(),scale=v().set(1,1,1),outer=new THREE.Matrix4(),inner=new THREE.Matrix4();
     const offset=(this.framingCursor||0)%Math.max(1,records.length);this.framingCursor=offset+1;
-    for(let i=0;i<records.length;i++){const record=records[(offset+i)%records.length];while(!record.ready&&performance.now()-start<7){const f=record.index/2,t=record.motion.times[Math.floor(f)]+(record.index%2?(record.motion.times[Math.min(record.motion.meta.frameCount-1,Math.ceil(f))]-record.motion.times[Math.floor(f)])/2:0),pose=this.solver.sample(record.motion,t,record.mode,record.root);
+    for(let i=0;i<records.length;i++){const record=records[(offset+i)%records.length];while(!record.ready&&performance.now()-start<7){
+      if(record.graph){
+        if(!record.heldIncluded){this.includeGraphPose(record,session.sampleActor(record.actor,0,this.solver),false);record.heldIncluded=true;continue;}
+        const next=record.iterator.next();record.steps++;
+        if(next.done){record.padding=.025+this.reachRadius*(1-Math.cos(record.maxAngle/4));record.box.expandByScalar(record.padding);record.ready=true;record.iterator=null;record.previousWorld=null;continue;}
+        if(next.value!==null){this.includeGraphPose(record,session.sampleActor(record.actor,next.value,this.solver,{fullPlayback:true}));record.index++;}continue;
+      }
+      const f=record.index/2,t=record.motion.times[Math.floor(f)]+(record.index%2?(record.motion.times[Math.min(record.motion.meta.frameCount-1,Math.ceil(f))]-record.motion.times[Math.floor(f)])/2:0),pose=this.solver.sample(record.motion,t,record.mode,record.root);
       outer.compose(position.fromArray(pose.rootP),rotation.fromArray(pose.rootQ),scale);inner.compose(position.fromArray(pose.residualP),rotation.fromArray(pose.residualQ),scale);outer.multiply(inner);
       record.box.union(this.skinBounds(raw).clone().applyMatrix4(outer));record.index++;if(record.index>=record.total){record.box.expandByScalar(record.padding);record.ready=true;}
     }}
     this.framingReady=records.every(r=>r.ready);if(!this.framingReady)this.onChange();return this.framingReady;
   }
-  nodeFrameReady(session,id){
+  nodeFrameReady(session,id,actor=null){
     if(this.follow)return true;const node=session.nodes.get(id);if(!node)return false;
+    if(actor&&session.recipe.layout==='compare')return this.fixedOutputFrame(session,actor).ready;
     if(node.type==='clip')return this.fixedClipFrame(session,node).ready;
     if(node.type==='blend')return this.nodeFrameReady(session,node.a)&&this.nodeFrameReady(session,node.b);
     if(node.type==='sequence')return node.inputs.every(input=>this.nodeFrameReady(session,input));
@@ -116,10 +165,11 @@ export class WorkbenchRenderer extends MotionRenderer{
   }
   drawSession(session,time){
     this.lastTime=time;this.webgl.info.reset();
+    this.syncFrameGeneration(session);
     if(!this.prepare()){super.draw(0);return [];}
     if(session.phase!=='ready'){this.webgl.setScissorTest(false);this.webgl.clear();this.boundsKey=null;this.lastResult=[];this.preparingActors=0;this.renderedActors=0;return [];}
     this.prepareFixedFrames(session);
-    const computed=session.evaluate(time,this.solver),visible=this.focusActor?computed.filter(r=>r.actor.id===this.focusActor):computed,result=visible.filter(r=>this.nodeFrameReady(session,r.actor.node)),ids=new Set(result.map(r=>r.actor.id));
+    const computed=session.evaluate(time,this.solver),visible=this.focusActor?computed.filter(r=>r.actor.id===this.focusActor):computed,result=visible.filter(r=>this.nodeFrameReady(session,r.actor.node,r.actor)),ids=new Set(result.map(r=>r.actor.id));
     this.preparingActors=visible.length-result.length;this.renderedActors=result.length;
     for(const [id,rig] of this.actorRigs)if(!ids.has(id)){this.removeActor(rig);this.actorRigs.delete(id);}
     if(!result.length){this.webgl.setScissorTest(false);this.webgl.setViewport(0,0,this.width||1,this.height||1);this.webgl.clear();this.labelPositions=[];this.lastResult=[];this.boundsKey=null;return [];}
@@ -138,7 +188,7 @@ export class WorkbenchRenderer extends MotionRenderer{
     const rect=this.canvas.getBoundingClientRect(),width=Math.max(1,Math.round(rect.width)),height=Math.max(1,Math.round(rect.height));
     if(this.width!==width||this.height!==height){this.width=width;this.height=height;this.webgl.setSize(width,height,false);this.camera.aspect=width/height;this.camera.updateProjectionMatrix();}
     const count=Math.max(1,session.recipe.wallCount||visible.length),boundsKey=session.generation+':ready:'+result.map(x=>x.actor.id+':'+x.actor.node).join(',')+':'+session.recipe.rootMode+':'+session.recipe.layout;
-    if(this.boundsKey!==boundsKey){
+    if(this.boundsSession!==session||this.boundsKey!==boundsKey){
       this.actorBounds=new Map();const nodes=session.nodes;
       for(const {actor} of result){
         const leaves=new Set(),seen=new Set();const visit=id=>{if(seen.has(id))return;seen.add(id);const n=nodes.get(id);if(n.type==='clip')leaves.add(n);else if(n.type==='blend'){visit(n.a);visit(n.b);}else if(n.type==='sequence')n.inputs.forEach(visit);else visit(n.input);};visit(actor.node);
@@ -148,7 +198,7 @@ export class WorkbenchRenderer extends MotionRenderer{
         }
         this.actorBounds.set(actor.id,box);
       }
-      this.boundsKey=boundsKey;
+      this.boundsKey=boundsKey;this.boundsSession=session;
     }
     const fit=(box,aspect)=>{
       const center=box.getCenter(v()),right=v().set(Math.cos(this.yaw),0,-Math.sin(this.yaw)),up=v().set(-Math.sin(this.yaw)*Math.sin(this.pitch),Math.cos(this.pitch),-Math.cos(this.yaw)*Math.sin(this.pitch)),forward=v().set(Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),Math.cos(this.yaw)*Math.cos(this.pitch));
@@ -162,7 +212,7 @@ export class WorkbenchRenderer extends MotionRenderer{
       const bodies=new Map(),commonBody=new THREE.Box3();for(const {actor} of result){const rig=this.actorRigs.get(actor.id),body=this.skinBounds(rig),hip=rig.bones.get(this.hipName).getWorldPosition(v());bodies.set(actor.id,body);commonBody.union(body.clone().translate(hip.negate()));}
       for(const [i,{actor}] of result.entries()){
         const slot=actor.slot??visible.findIndex(r=>r.actor.id===actor.id),col=slot%columns,row=Math.floor(slot/columns),x=Math.floor(col*width/columns),bottom=session.recipe.wallCount?35:8,y=Math.floor((rows-row-1)*height/rows)+bottom,w=Math.floor(width/columns),h=Math.max(1,Math.floor(height/rows)-bottom-22),rig=this.actorRigs.get(actor.id);rig.root.visible=this.model;rig.helper.visible=this.skeleton;
-        const body=bodies.get(actor.id),hip=rig.bones.get(this.hipName||'Hips').getWorldPosition(v()),range=this.actorBounds.get(actor.id),leaf=session.nodes.get(actor.node),fixed=leaf?.type==='clip'?this.fixedClipFrame(session,leaf).box:null,box=this.follow?(session.recipe.wallCount?body.clone():commonBody.clone().translate(hip)):(fixed?fixed.clone():range.clone().expandByScalar(this.reachRadius));
+        const body=bodies.get(actor.id),hip=rig.bones.get(this.hipName||'Hips').getWorldPosition(v()),fixed=this.follow?null:this.fixedOutputFrame(session,actor).box,box=this.follow?(session.recipe.wallCount?body.clone():commonBody.clone().translate(hip)):fixed.clone();
         box.expandByScalar(.08);
         fit(box,w/h);this.webgl.setViewport(x,y,w,h);this.webgl.setScissor(x,y,w,h);this.webgl.render(rig.scene,this.camera);this.labelPositions.push({id:actor.id,x:(col+.5)/columns,y:(row+1)/rows});
       }
@@ -175,6 +225,6 @@ export class WorkbenchRenderer extends MotionRenderer{
     this.lastResult=result;return result;
   }
   diagnostics(){
-    return {modelReady:this.modelReady,framingReady:this.framingReady,preparingActors:this.preparingActors||0,renderedActors:this.renderedActors||0,face:this.characterProfile.face||null,character:this.characterProfile.key,characterLabel:this.characterProfile.label,bodyColors:this.characterProfile.bodyColors||null,hipBone:this.hipName,camera:{policy:this.follow?'follow':'fixed-full-motion',position:this.camera.position.toArray(),viewMatrix:this.camera.matrixWorldInverse.toArray(),projectionMatrix:this.camera.projectionMatrix.toArray(),yaw:this.yaw,pitch:this.pitch,zoom:this.zoom},reachRadius:this.reachRadius,time:this.lastTime,renderCalls:this.webgl.info.render.calls,triangles:this.webgl.info.render.triangles,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get(this.hipName)?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,rootQ:pose?.rootQ,rootScale:pose?.rootScale,rootSampleTime:pose?.rootSampleTime,animatorRootApplied:pose?.animatorRootApplied||false,animatorRootContributions:pose?.animatorRootContributions||[],residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get(this.hipName)!==b.bones.get(this.hipName))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
+    return {fixedFraming:(this.currentFrameRecords||[]).map(r=>({kind:r.graph?'graph':'clip',actor:r.actor?.id||null,actors:r.actors?[...r.actors]:[],clipId:r.motion?.meta.id||null,ready:r.ready,samples:r.index,steps:r.steps||0,padding:r.padding,box:r.box.isEmpty()?null:{min:r.box.min.toArray(),max:r.box.max.toArray()}})),modelReady:this.modelReady,framingReady:this.framingReady,preparingActors:this.preparingActors||0,renderedActors:this.renderedActors||0,face:this.characterProfile.face||null,character:this.characterProfile.key,characterLabel:this.characterProfile.label,bodyColors:this.characterProfile.bodyColors||null,hipBone:this.hipName,camera:{policy:this.follow?'follow':'fixed-full-motion',position:this.camera.position.toArray(),viewMatrix:this.camera.matrixWorldInverse.toArray(),projectionMatrix:this.camera.projectionMatrix.toArray(),yaw:this.yaw,pitch:this.pitch,zoom:this.zoom},reachRadius:this.reachRadius,time:this.lastTime,renderCalls:this.webgl.info.render.calls,triangles:this.webgl.info.render.triangles,actors:[...this.actorRigs.values()].map(r=>{const pose=this.lastResult.find(x=>x.actor.id===r.id)?.pose;return {id:r.id,bones:r.list.length,skeletonUuid:[...new Set(r.list.map(b=>b.uuid))].length,hip:r.bones.get(this.hipName)?.getWorldPosition(v()).toArray(),poseFingerprint:pose?fingerprint(pose):null,rootP:pose?.rootP,rootQ:pose?.rootQ,rootScale:pose?.rootScale,rootSampleTime:pose?.rootSampleTime,animatorRootApplied:pose?.animatorRootApplied||false,animatorRootContributions:pose?.animatorRootContributions||[],residualP:pose?.residualP};}),skeletonsIndependent:[...this.actorRigs.values()].every((a,i,all)=>all.every((b,j)=>i===j||a.bones.get(this.hipName)!==b.bones.get(this.hipName))),floorWorld:this.floor.position.toArray(),sharedAssetOwner:'base-model',poseSamples:this.solver?.samples||0};
   }
 }

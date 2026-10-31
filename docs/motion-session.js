@@ -15,6 +15,21 @@ function playbackTime(time,duration,repeat,terminal){
   return terminal&&t>0&&(local<1e-7||duration-local<1e-7)?duration:local;
 }
 
+// null is a cooperative work checkpoint, never a sample time.
+function* mapTimes(source,map){for(const time of source)yield time===null?null:map(time);}
+function* mergeTimes(sources){
+  const streams=sources.map(source=>source[Symbol.iterator]()),heads=[];
+  function* advance(i){let next=streams[i].next();while(!next.done&&next.value===null){yield null;next=streams[i].next();}heads[i]=next;}
+  for(let i=0;i<streams.length;i++)yield* advance(i);
+  while(true){
+    yield null;let minimum=Infinity;
+    for(const head of heads)if(!head.done)minimum=Math.min(minimum,head.value);
+    if(minimum===Infinity)return;
+    yield minimum;
+    for(let i=0;i<heads.length;i++)if(!heads[i].done&&heads[i].value===minimum)yield* advance(i);
+  }
+}
+
 export function validateRecipe(input,catalog){
   if(!input||input.schema!==SESSION_SCHEMA||!Array.isArray(input.nodes)||!Array.isArray(input.actors))throw new Error('配方格式不受支持。');
   if(input.nodes.length<1||input.nodes.length>32||input.actors.length<1||input.actors.length>8)throw new Error('配方支持 1–32 个节点、1–8 个实例。');
@@ -127,10 +142,15 @@ export class MotionSession{
   setSpeed(speed){if(!finite(speed,.1,4))throw new Error('速度必须在 0.1–4 倍之间。');this.clock();this.speed=speed;if(this.recipe)this.recipe.speed=speed;this.anchorTime=this.time;this.anchorNow=performance.now();this.onChange();}
   clear(){this.generation++;this.controller?.abort();this.motions.clear();this.roots.clear();this.playing=false;this.phase='cleared';this.error=null;this.onChange();}
   localTime(node,time,terminal=false){return playbackTime(time*node.speed+node.phase,this.motions.get(this.key(node)).duration,node.loop==='repeat',terminal);}
-  resolve(time,solver=null){
+  actorTime(actor,time){
+    const referenceTime=actor.paused?actor.hold:(time+actor.offset)*actor.speed;
+    return actor.clock==='phase'?referenceTime*this.durationOf(actor.node)/this.duration:referenceTime;
+  }
+  // Pure queries may supply a framing snapshot; live callers retain their actors.
+  resolve(time,solver=null,actors=this.recipe?.actors||[]){
     if(this.phase!=='ready')return {outputs:[],evaluations:[]};
     const nodes=this.nodes,evaluations=[],durations=new Map(),durationOf=id=>this.durationOf(id,durations,nodes);
-    const outputs=this.recipe.actors.filter(a=>a.visible).map(actor=>{
+    const outputs=actors.filter(a=>a.visible).map(actor=>{
       const memo=new Map();
       const solve=(id,t,terminal=false)=>{
         const key=id+':'+t+':'+terminal;if(memo.has(key))return memo.get(key);
@@ -152,13 +172,71 @@ export class MotionSession{
         }
         memo.set(key,pose);return pose;
       };
-      const referenceTime=actor.paused?actor.hold:(time+actor.offset)*actor.speed;
-      const nodeTime=actor.clock==='phase'?referenceTime*durationOf(actor.node)/this.duration:referenceTime;
-      return {actor,pose:solve(actor.node,nodeTime,!this.recipe.loop&&!actor.paused&&time>=this.duration)};
+      return {actor,pose:solve(actor.node,this.actorTime(actor,time),!this.recipe.loop&&!actor.paused&&time>=this.duration)};
     });
     return {outputs,evaluations};
   }
   evaluate(time,solver){return this.resolve(time,solver).outputs;}
+  sampleActor(actor,time,solver,{fullPlayback=false}={}){
+    return this.resolve(time,solver,[fullPlayback?{...actor,paused:false}:actor]).outputs[0]?.pose||null;
+  }
+  *nodeFrameTimes(id,from,to,nodes=this.nodes,durations=new Map()){
+    yield null;yield from;
+    const node=nodes.get(id),durationOf=key=>this.durationOf(key,durations,nodes),duration=durationOf(id);
+    if(!Number.isFinite(duration)||duration<=0||!Number.isFinite(from)||!Number.isFinite(to))throw new Error('当前节点的取景时域无效。');
+    if(node.type==='output')yield* this.nodeFrameTimes(node.input,from,to,nodes,durations);
+    else if(node.type==='blend'){
+      const children=[...new Set([node.a,node.b])].map(input=>{
+        const ratio=node.sync==='phase'?durationOf(input)/duration:1;
+        return mapTimes(this.nodeFrameTimes(input,from*ratio,to*ratio,nodes,durations),time=>time/ratio);
+      });yield* mergeTimes(children);
+    }else if(node.type==='clip'){
+      const motion=this.motions.get(this.key(node)),d=motion.duration,repeat=node.loop==='repeat';
+      const first=repeat?Math.floor((from*node.speed+node.phase)/d):0,last=repeat?Math.floor((to*node.speed+node.phase)/d):0;
+      const epsilon=Math.min(1e-6,d/Math.max(1,motion.times.length)*.001)/node.speed;
+      for(let cycle=first;cycle<=last;cycle++){
+        yield null;
+        for(let i=0;i<motion.times.length*2-1;i++){
+          yield null;const frame=Math.floor(i/2),key=i%2?(motion.times[frame]+motion.times[frame+1])/2:motion.times[frame];
+          if(repeat&&i===motion.times.length*2-2)continue;
+          const time=(cycle*d+key-node.phase)/node.speed;
+          if(repeat&&i===0){for(const t of [time-epsilon,time,time+epsilon])if(t>=from&&t<=to)yield t;}
+          else if(time>=from&&time<=to)yield time;
+        }
+      }
+    }else{
+      const parts=this.sequenceParts(node,durationOf),repeat=node.loop==='repeat',epsilon=Math.min(1e-6,duration*1e-8);
+      const first=repeat?Math.floor(from/duration):0,last=repeat?Math.floor(to/duration):0;
+      for(let cycle=first;cycle<=last;cycle++){
+        yield null;
+        const shift=cycle*duration,lo=Math.max(0,Math.min(duration,from-shift)),hi=Math.max(0,Math.min(duration,to-shift)),sources=[];
+        const edges=new Set([lo,hi]);
+        for(const part of parts){
+          yield null;
+          const a=Math.max(lo,part.start),b=Math.min(hi,part.end);
+          if(a<=b)sources.push(mapTimes(this.nodeFrameTimes(part.id,a-part.start,b-part.start,nodes,durations),t=>t+part.start));
+          for(const edge of [part.start,part.end])for(const t of [edge-epsilon,edge,edge+epsilon])if(t>=lo&&t<=hi)edges.add(t);
+          if(part.fade>0)for(let i=0;i<=8;i++){const t=part.start+part.fade*i/8;if(t>=lo&&t<=hi)edges.add(t);}
+        }
+        sources.push([...edges].sort((a,b)=>a-b));
+        for(const time of mergeTimes(sources)){if(time===null)yield null;else if(time+shift>=from&&time+shift<=to)yield time+shift;}
+      }
+    }
+    yield to;
+  }
+  *frameTimes(actor){
+    const playback={...actor,paused:false},duration=this.duration,start=this.actorTime(playback,0),end=this.actorTime(playback,duration),ratio=(end-start)/duration;
+    if(!Number.isFinite(ratio)||ratio<=0)throw new Error('实例的取景时域无效。');
+    let previous=-1;
+    for(const candidate of this.nodeFrameTimes(actor.node,start,end)){
+      if(candidate===null){yield null;continue;}
+      const time=Math.max(0,Math.min(duration,(candidate-start)/ratio));
+      if(time===previous)continue;
+      if(time<previous-1e-9)throw new Error('取景事件未按实际播放时序排序。');
+      if(previous>=0&&time>previous)yield (previous+time)/2;
+      yield time;previous=time;
+    }
+  }
   exportRecipe(){return {...clone(this.recipe),time:this.time};}
   snapshot(){
     return {schema:'motion-workbench.state.v1',phase:this.phase,error:this.error,generation:this.generation,time:this.time,duration:this.duration,playing:this.playing,speed:this.speed,decodedBytes:[...this.motions.values(),...this.roots.values()].reduce((n,m)=>n+m.byteLength,0),nativeAnimatorRootProfiles:this.roots.size,recipe:this.recipe?this.exportRecipe():null,
