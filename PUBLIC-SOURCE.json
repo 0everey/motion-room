@@ -1,6 +1,6 @@
 {
-  "files": 2588,
-  "bytes": 478679433,
+  "files": 2590,
+  "bytes": 478695470,
   "ids": 2446,
   "variants": 2482,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -27,13 +27,13 @@
     },
     {
       "path": "character.js",
-      "bytes": 4138,
-      "sha256": "aa4a67e9501c4fabf89f22ef378ae4b87e11bddb0b09c37c83f69c19b3f789a7"
+      "bytes": 4860,
+      "sha256": "ffc66310500b8235357f450f252e44652752d63af65210c1470aa1ca7a3133f1"
     },
     {
       "path": "credits.txt",
-      "bytes": 2366,
-      "sha256": "a6bb8f14da5f681bb67a6c6dd5b14ea2716f411088bf0e1efe3d7d93495a40d6"
+      "bytes": 3177,
+      "sha256": "94f762142c05b189909329f06e82866e4e32bae854edc0e2e1189f35330ce8f0"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -213,7 +213,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 5978059,
-      "sha256": "56378525233fb6afd5121b5904504672f1f1c2c74bb3e50512a6dd9a7eef44c1"
+      "sha256": "f50a1e3c34d9fd18a890c7380d313b076df0481681331012654ab424aff81b97"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12807,8 +12807,8 @@
     },
     {
       "path": "klee-source.js",
-      "bytes": 9501,
-      "sha256": "46a261b528ac2c8eb1f9f6abc8487b58d56e42e85eefe7510c86234ab5cb5c39"
+      "bytes": 2533,
+      "sha256": "9a82d8a604e561abc9e31109d419c1dd482fbd7a0c4a5296465d68c63e219748"
     },
     {
       "path": "library-browser.js",
@@ -12817,8 +12817,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 9525,
-      "sha256": "9cf97f0a9fc0a461a6064f1a9b7936a4037402309cd756b174252260c477588e"
+      "bytes": 11874,
+      "sha256": "4a35250401bdd0dfa0964d537bc19cbaa25ccd52577feee7c20b9df1e7061785"
     },
     {
       "path": "models/herta-7c88eda67cb9.glb",
@@ -12851,19 +12851,24 @@
       "sha256": "efc373624744b4ed81b44dd78a1ebd315459ea4d529a2feb01ccd11da3413bd6"
     },
     {
+      "path": "pmx-source.js",
+      "bytes": 8329,
+      "sha256": "737f32d6e0432da6aa9435c7feed2428d5ddd5a2310f28dec1175c694e4614e2"
+    },
+    {
       "path": "renderer.js",
-      "bytes": 19863,
-      "sha256": "cbc5f7a3775b5fb8bd64555658d920159470ede9d79763897a9c434371fc81c3"
+      "bytes": 20293,
+      "sha256": "4d9a9c75fe8e61e30335e0de8979efea0ea1e7d3953f322f0585b861cbcd69c8"
     },
     {
       "path": "studio.css",
-      "bytes": 35156,
-      "sha256": "8037c494935bdb4838ea2a0ff75623ebf13b405273f171328176558872d5583f"
+      "bytes": 36180,
+      "sha256": "fbca8665522d3e67a500e479e09f4230897507271aa0c9f8ce62b6bbc21210af"
     },
     {
       "path": "studio.js",
-      "bytes": 63768,
-      "sha256": "58564641d5d40421d6afa9d0bbd7b9b01b08063ccfdbc223f2d09261c356f0a7"
+      "bytes": 67560,
+      "sha256": "7694b1fb8ec4bc94d07f4625b2c04796412b8e2292d5b294041cf05d885ddaa1"
     },
     {
       "path": "styles.css",
@@ -12872,8 +12877,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 10055,
-      "sha256": "0bd3b6d67c9186fc70883cbfaef110dad4fadee7384a2bab41b037a6e56f7e39"
+      "bytes": 12112,
+      "sha256": "e19b80c20003ecd894d92734dfa6178d7225587455163b0d71a51853cb452efb"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12927,8 +12932,8 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 27472,
-      "sha256": "4869e248eff43d54029f6b110fed307f8c2b58274a53de6a22b36299622d7057"
+      "bytes": 27508,
+      "sha256": "d330fb152828d5cc588aa784fc67be8d72525558968b534034b97070f75bdb66"
     },
     {
       "path": "workbench.css",
@@ -12937,16 +12942,21 @@
     },
     {
       "path": "workbench.html",
-      "bytes": 13613,
-      "sha256": "6fdef58e8f2e365a2d3c43ebe4bd9c2e8c1a5281191ed491d99208ce7c022fb4"
+      "bytes": 14089,
+      "sha256": "8982109442b7f3d28a24e310de631b797f4f73a3352c76640a9fe663132c981b"
     },
     {
       "path": "workbench.js",
       "bytes": 28548,
       "sha256": "6e97ceb357f95f261c98846e88ed2f459ccf146e00f07d4ec1df837cfe46a08a"
+    },
+    {
+      "path": "yuuka-source.js",
+      "bytes": 2979,
+      "sha256": "2746d0d33dacd083e4d566bd09380aa147f79fb658812546ea9710bbc714ace2"
     }
   ],
-  "applicationSourceCommit": "cbb39784caf2fc5f4d02e690b9de6412a56057ee",
+  "applicationSourceCommit": "d8cbc078df381585c12a4f6882ba8696d86976f7",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -13130,5 +13140,5 @@
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
     }
   ],
-  "totalPublishedApplicationFiles": 2623
+  "totalPublishedApplicationFiles": 2625
 }

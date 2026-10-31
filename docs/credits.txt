@@ -41,3 +41,8 @@ Three.js 0.170.0：MIT，见 vendor/three/LICENSE。
 官方活动：https://ys.biligame.com/pjdkx/
 可莉仅接原姿态/根/混合预览；未启用原MMD刚体、IK或grant运行时，不代表接触及全部动作质量验收。
 MMD解析：Three.js r170官方MIT模块，来源及哈希见vendor/three/mmd/SOURCES.json；许可证见vendor/three/LICENSE。
+
+优香（早瀬ユウカ）：ゼーロ / zero3d 制作的 Blue Archive 二次创作模型，版权归原权利人。原作者：https://booth.pm/ja/items/3658411
+仅支持用户本人取得的 Yuuka_Hayase1_0_rev2.zip（1.0 rev2）在本浏览器导入、校验和预览。本站及离线分发包不包含其ZIP/PMX/纹理/转换模型，模型数据不上传；分享配方也不携带模型。
+请保留并遵守原包readme及 https://bluearchive.jp/fankit/Guidelines 的适用条件，包括非商业、个人改造及禁止改／未改二次配布等；本工具不代表原官方或授权公开分发模型。
+人物174骨、40材质、37份带图材质、7张人物纹理；不包含专用枪的外亲操作或完整MMD刚体、IK、grant运行时，不代表接触与全部动作质量通过。

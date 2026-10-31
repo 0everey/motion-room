@@ -1,4 +1,5 @@
 import {KLEE_SOURCE,KLEE_DEPENDENCIES} from './klee-source.js';
+import {YUUKA_SOURCE,YUUKA_DEPENDENCIES} from './yuuka-source.js';
 export const MODEL_ASSET="models/herta-7c88eda67cb9.glb";
 export const MODEL_SHA256="7c88eda67cb95ce9cbae488d90300eea7e432e52e9884939bbcb3d925aa0d626";
 export const MODEL_CREDITS={"character": "大黑塔", "copyright": "miHoYo", "editor": "流云景", "purpose": "非商业公益动作预览"};
@@ -23,6 +24,13 @@ for(const [side,j]of [['Left','左'],['Right','右']]){
  for(const[finger,jp]of [['Thumb','親指'],['Index','人指'],['Middle','中指'],['Ring','薬指'],['Pinky','小指']])for(let k=1;k<=3;k++)klee[side+'Hand'+finger+k]=j+jp+String.fromCharCode(0xff10+(finger==='Thumb'?k-1:k));
 }
 CHARACTER_PROFILES.klee={key:'klee',label:'可莉',asset:KLEE_SOURCE.url,format:'official-pmx-zip',source:KLEE_SOURCE,offlineAssets:KLEE_DEPENDENCIES,hip:'腰',mapping:klee,next:kleeNext,material:'toon'};
+const yuuka={...klee},yuukaNext={...kleeNext};
+for(const [side,j]of [['Left','左'],['Right','右']]){
+ Object.assign(yuuka,{[side+'UpLeg']:j+'足',[side+'Leg']:j+'ひざ',[side+'Foot']:j+'足首',[side+'ToeBase']:j+'つま先'});
+ delete yuukaNext[j+'足D'];delete yuukaNext[j+'ひざD'];delete yuukaNext[j+'足首D'];
+ Object.assign(yuukaNext,{[j+'足']:j+'ひざ',[j+'ひざ']:j+'足首',[j+'足首']:j+'つま先'});
+}
+CHARACTER_PROFILES.yuuka={key:'yuuka',label:'优香',asset:YUUKA_SOURCE.url,format:'user-pmx-zip',source:YUUKA_SOURCE,offlineAssets:YUUKA_DEPENDENCIES,hip:'腰',mapping:yuuka,next:yuukaNext,material:'toon',preserveMmdSurface:true};
 
 // Character-relative regions; vertex colors are weighted in linear RGB once per base mesh.
 CHARACTER_PROFILES.ue4.bodyColors={

@@ -57,3 +57,11 @@ footer{background:#101927;border-color:#35445b;color:#b1c0d3}footer a{color:#c7c
 
 /* Empty/error messages are compact; loading lives in the existing status header. */
 .stage-message{inset:auto 12px 10px 12px;display:block;padding:5px 8px;background:transparent;text-align:left;font-size:11px;color:#dbe7f7;pointer-events:none}.tile-message{pointer-events:none}
+
+/* File source and recovery remain usable inside the single-screen settings panel. */
+.character-import{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 8px}.character-import>a{font-size:11px;text-decoration:underline}.character-import>small{grid-column:1/-1;margin:0;overflow-wrap:anywhere}.cache-actions{display:flex;flex-direction:column;gap:5px}
+@media(max-height:850px){.inspector-page[data-inspector="view"]{gap:4px;padding:8px}.character-import>small{font-size:10px;line-height:1.3}.cache-actions{flex-direction:row;gap:4px}.cache-actions>button{flex:1;min-width:0;min-height:28px;padding:4px 3px;font-size:10px;white-space:normal}}
+
+.view-fields{display:contents}
+@media(max-height:850px){.view-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}}
+@media(max-height:700px){.inspector-page[data-inspector="view"]{gap:3px;padding:6px}.inspector-page[data-inspector="view"] hr{margin:6px 0}}

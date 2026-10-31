@@ -89,7 +89,9 @@ export class MotionRenderer{
     const generation=++this.loadGeneration;this.modelController=new AbortController();this.modelReady=false;
     this.loading=(async()=>{
       const profile=this.characterProfile,signal=this.modelController.signal;let asset;
-      if(profile.format==='official-pmx-zip'){
+      if(profile.format==='user-pmx-zip'){
+        const {loadYuukaSource}=await import('./yuuka-source.js');signal.throwIfAborted();asset=await loadYuukaSource({signal});
+      }else if(profile.format==='official-pmx-zip'){
         const {loadKleeSource}=await import('./klee-source.js');signal.throwIfAborted();asset=await loadKleeSource({signal});
       }else{
         const url=new URL(profile.asset,import.meta.url),response=await fetch(url,{signal,credentials:'same-origin'});
@@ -103,7 +105,7 @@ export class MotionRenderer{
       const replacedTextures=new Set(),retainedTextures=new Set();
       this.character.traverse(o=>{
         if(o.isBone){this.bones.set(o.name,o);const q=Q(),p=V();o.getWorldQuaternion(q);o.getWorldPosition(p);this.rests.set(o.name,{worldQ:q,worldP:p,localQ:o.quaternion.clone(),localP:o.position.clone()});}
-        if(o.isMesh){o.frustumCulled=false;const bodyColors=applyBodyColors(o,this.characterProfile);const convert=m=>{if(!m)return m;for(const texture of materialTextures(m))replacedTextures.add(texture);const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:bodyColors?0xffffff:0xd8dce2,vertexColors:!!bodyColors,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:0xffffff,map:m.map,side:THREE.DoubleSide,transparent:m.transparent,opacity:m.opacity,alphaTest:m.transparent?0.3:0,depthWrite:!m.transparent});for(const texture of materialTextures(next))retainedTextures.add(texture);if(bodyColors)next.userData.bodyColorProfile=this.characterProfile.key;m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
+        if(o.isMesh){o.frustumCulled=false;const bodyColors=applyBodyColors(o,this.characterProfile);const convert=m=>{if(!m)return m;for(const texture of materialTextures(m))replacedTextures.add(texture);const preserve=this.characterProfile.preserveMmdSurface,transparent=preserve?m.transparent||m.map?.transparent===true:m.transparent;const next=this.characterProfile.material==='standard'?new THREE.MeshStandardMaterial({color:bodyColors?0xffffff:0xd8dce2,vertexColors:!!bodyColors,roughness:.65,metalness:.08}):new THREE.MeshToonMaterial({color:preserve?m.color:0xffffff,map:m.map,side:preserve?m.side:THREE.DoubleSide,transparent,opacity:m.opacity,alphaTest:preserve?(transparent?.01:m.alphaTest):(transparent?.3:0),depthWrite:!transparent});if(preserve)next.userData.previewBaseColor=next.color.getHex();for(const texture of materialTextures(next))retainedTextures.add(texture);if(bodyColors)next.userData.bodyColorProfile=this.characterProfile.key;m.dispose();return next;};o.material=Array.isArray(o.material)?o.material.map(convert):convert(o.material);}
       });
       for(const texture of replacedTextures)if(!retainedTextures.has(texture)){texture.image?.close?.();texture.dispose();}
       if(!this.bones.has(this.hipName))throw new Error('角色缺少真实髋骨绑定。');

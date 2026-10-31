@@ -178,7 +178,7 @@ export class WorkbenchRenderer extends MotionRenderer{
       const rig=this.actorRigs.get(actor.id)||this.makeActor(actor.id);rig.group.position.set(session.recipe.layout==='world'?(session.recipe.actors.findIndex(a=>a.id===actor.id)-(session.recipe.actors.length-1)/2)*2.15:0,0,0);
       const destination=session.recipe.layout==='world'?this.scene:rig.scene;if(rig.group.parent!==destination){destination.add(rig.group);destination.add(rig.helper);}
       rig.grid.visible=this.trail;
-      const tint=actor.color||(actor.node==='A'?'#43bdd7':actor.node==='B'?'#ed8979':actor.node==='Mix'?'#dfbd67':'#c1b7d5');if(rig.tint!==tint){rig.tint=tint;for(const material of rig.ownedMaterials)if(!material.userData.bodyColorProfile)material.color.set('#ffffff').lerp(new THREE.Color(tint),.14);}
+      const tint=actor.color||(actor.node==='A'?'#43bdd7':actor.node==='B'?'#ed8979':actor.node==='Mix'?'#dfbd67':'#c1b7d5');if(rig.tint!==tint){rig.tint=tint;for(const material of rig.ownedMaterials)if(!material.userData.bodyColorProfile)material.color.set(material.userData.previewBaseColor??'#ffffff').lerp(new THREE.Color(tint),.14);}
       rig.motionRoot.position.fromArray(pose.rootP);rig.motionRoot.quaternion.fromArray(pose.rootQ);rig.poseRoot.position.fromArray(pose.residualP);rig.poseRoot.quaternion.fromArray(pose.residualQ);
       for(let i=0;i<rig.list.length;i++){rig.list[i].position.fromArray(pose.positions[i]);rig.list[i].quaternion.fromArray(pose.rotations[i]);}
       rig.root.visible=this.model;rig.helper.visible=this.skeleton;rig.group.updateMatrixWorld(true);

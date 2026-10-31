@@ -56,7 +56,7 @@ python -X utf8 tools/query_zh.py "新增别名" --limit 10
 
 ## 交付验证和改法依据
 
-先验证源码/合同，再用WAB真实浏览器走核心路径，亲看完整界面和连续动作。下载读取落盘字节，复制读实际值；截图证画面，不代Root过程/相机稳定或资源身份。一个正常例不足以覆盖取消：加“甲pending → 清理或选乙 → 甲迟到”与正常乙对照。旧浏览器自然SW更新、旧配方、离线新文档与本地服务正常退出各按对应关系核。
+先验证源码/合同，核当前用户的工具停用边界，再用当前获准的真实浏览器走核心路径，亲看完整界面和连续动作。下载读取落盘字节，复制读实际值；截图证画面，不代Root过程/相机稳定或资源身份。一个正常例不足以覆盖取消：加“甲pending → 清理或选乙 → 甲迟到”与正常乙对照。旧浏览器自然SW更新、旧配方、离线新文档与本地服务正常退出各按对应关系核。
 
 按变化选择检查：本次改模型/相机就查真实映射、固定矩阵与完整动作；只改文案不重源parser；新证据推翻方法才改路，不能因为已经投入就堆补丁。未验证的平台/型号/UE编辑器导入结果明确保未验，不用网站能播冒游戏成品。
 
@@ -77,3 +77,15 @@ UE4模型的bodyColors在character profile中声明palette与骨分支根。加�
 加载不能把整页已就绪内容遮掉：原stage状态栏报进度，空/错误提示用无挡的小状态；网络loaded、固定取景ready、实际rendered分别处理。每actor按自己真实节点叶依赖决定能否绘制，保原slot；不能因某个长片准备而全canvas清空。暂停动画时后台准备仍调度，clear/换页代次和缓存真值继续原合同，MotionSession提交前phase护栏不能删除。
 
 头部朝向按真实rest轴。UE4 head局部+X向上、-Y向前，不能沿通用头骨+Y假设重定向；profile明确headAimAxis，再把头部正脸色投影在head bind-local空间，通过原蒙皮运输。眼鼻嘴只修改原共享color，不增纹理/mesh或改骨/位置；背面不画同脸，正侧背实际图和转头过程分别核。旧颜色分支/原动作/Root不因此重做。
+
+## 用户原包角色与AI探查
+
+优香入口位于设置页“导入优香ZIP”，当前接受作者的Yuuka_Hayase1_0_rev2.zip（1.0 rev2），9,392,148字节，SHA256 f4ac2e7340a8806cfa52a8ba7e298db5bf440ac201e08dc3680a58d9282e917d。用户本人从原作者取得后，在自己的浏览器导入；原件不上传、不进本站或离线分发包，分享工作区也不携带模型。清理预览缓存后须重新导入。作者和官方规则入口在credits.txt及角色source中，不能把免费、个人使用或代码分发冒模型二配授权。
+
+CLI AI与用户共用原File输入yuukaFile；当前获准浏览器工具可将用户明确提供的真实文件交该输入，或对已获得的File调用await motionWorkbench.importCharacter(file)。不向JSON粘贴模型字节、Blob地址、本机绝对路径或凭据。原workspace v2只保存browse.character='yuuka'等稳定身份，另一浏览器第一次打开同配方仍需自己导入该原包。
+
+原报告character.expectedSource是目标身份，character.source.verifiedSha256只在完整原包校验、真实骨架和贴图加载完成后存在。优香应为174骨、40材质、37个带图材质、7个独立漫反射图片与7个原包人物图片；可莉是238骨、12个带图材质、4个独立漫反射图片与6个原包图片（另含matcap/toon）。不要把材质引用数当原图数。
+
+modelImport只描述最近一次导入动作。坏包被拒时此前有效角色可继续可看，应结合rendering.modelReady/framingReady、当前renderedActors、实际source、rendererError与当前组合cache判定；不能由modelImport.error单独推出当前画面丢失。cached与ready也不等于整库离线。真实断网新文档要核页面和实际控制Worker都断网、两端HTTPcache禁用、当前配方/source/root/解析依赖均完整。
+
+固定PMX解析代码随页面壳安装，模型原包留在原preview预算和清理epoch内；不要迁入第二缓存库。角色切换或较新导入取消旧页面采用，先前显式同身份导入可完成本机保存；清理才使旧保存与回复失效。优香保原map透明标记、diffuse/side/opacity与无图颜色，实例染色从原baseColor开始；MMD物理、IK/grant、专用枪外亲与正式接触仍未启用或验收。
