@@ -1,6 +1,6 @@
 {
   "files": 2614,
-  "bytes": 515150704,
+  "bytes": 515152244,
   "ids": 2456,
   "variants": 2492,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -62,8 +62,8 @@
     },
     {
       "path": "cache-client.js",
-      "bytes": 4420,
-      "sha256": "2fad76663956384d0175da8ab22f2d30c7842d5fd1465f139c1d1396fd3bae1b"
+      "bytes": 5039,
+      "sha256": "556368fabd373410ae6b9a39614767b57fbed92771a2bfc4d5eec4e0c4e4dd52"
     },
     {
       "path": "character.js",
@@ -253,7 +253,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6040496,
-      "sha256": "185330efa004d917080b8d9bf3c0372da714989596d767aea768175b6a7e8328"
+      "sha256": "3462453748773f9786b93a9f9b7cabf2a6f02e561762637c39061911a5ae8ed0"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12927,8 +12927,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 15021,
-      "sha256": "f78f84ad9bb9ca74e3449c43681cbdff4bd23094fca66224bbd1d489c070de65"
+      "bytes": 15775,
+      "sha256": "2e8dc7f8c64259da017dfb850f03a63cf789102a49875aecb32617241776247f"
     },
     {
       "path": "models/held-greatsword-c82f73e0df5d.glb",
@@ -12987,8 +12987,8 @@
     },
     {
       "path": "studio.js",
-      "bytes": 69740,
-      "sha256": "105143c831383f2e27b95233dabbab0d9fc8e880ba80be7fddfd425dfa3b5a88"
+      "bytes": 69768,
+      "sha256": "1947b7cf8a24fce7f431d5d4c0f909c20098b214706458d5e1a7cf57570965db"
     },
     {
       "path": "styles.css",
@@ -12997,8 +12997,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 12128,
-      "sha256": "c122874d2a343def5cc90d1ea5767d829ff889647f83cde4aa274de6cc280b94"
+      "bytes": 12267,
+      "sha256": "489bf1a7f8e3f40e00714d0e72b801ab0c4eb69cc0ad097f0e350db429be2afb"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -13076,7 +13076,7 @@
       "sha256": "e99a7911358fa79dbcb50c7e0be38a7b21649429eb698e12fccb88b9d9abeca7"
     }
   ],
-  "applicationSourceCommit": "accb18683774c7b76ab9c8a95edfae336fae3e35",
+  "applicationSourceCommit": "398e76856c012c785a6ebd21aa6c8ab5809e651e",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {

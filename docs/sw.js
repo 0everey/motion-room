@@ -1,4 +1,4 @@
-const VERSION='r19-20261101-riding-held1';
+const VERSION='r20-20261101-late-cache';
 const KLEE_URL='https://i0.hdslb.com/bfs/game-static/6c7d34e8ca3f07623f9de5ce03a0600eddfda45c.zip',KLEE_SHA256='894fb807efca259c75f663ae3c4798533d39506ea8c49d1ec1c7a1dc9e16ea4f';
 async function validOfficial(bytes){return bytes.byteLength===1235776&&Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('')===KLEE_SHA256;}
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
@@ -52,7 +52,7 @@ async function status(url,resources=[]){
   let shellReady=true;for(const path of SHELL_PATHS)if(!await shell.match(new URL(path,ROOT).href))shellReady=false;
   return {version:VERSION,localModelImport:1,epoch,enabled,url:url?new URL(url,ROOT).href:null,resourceURLs:required.map(r=>r.href),bytes:list.reduce((n,e)=>n+e.bytes,0),count:list.length,budget:BUDGET,currentCached:current,assetsKnown:required.length>0,assetsCached,shellReady,offlineReady:current&&assetsCached&&shellReady};
 }
-self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(SHELL);for(const path of SHELL_PATHS){const request=new Request(new URL(path,ROOT),{cache:'reload'}),response=await fetch(request);if(!response.ok)throw new Error(`页面资源未就绪：${path}`);await cache.put(request,response);}})()));
+self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(SHELL);let cursor=0;const copy=async()=>{while(cursor<SHELL_PATHS.length){const path=SHELL_PATHS[cursor++],request=new Request(new URL(path,ROOT),{cache:'reload'}),response=await fetch(request);if(!response.ok)throw new Error(`页面资源未就绪：${path}`);await cache.put(request,response);}};await Promise.all(Array.from({length:Math.min(4,SHELL_PATHS.length)},copy));})()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith(PREFIX+'shell:')&&key!==SHELL)await caches.delete(key);await self.clients.claim();})()));
 self.addEventListener('fetch',event=>{
   const request=event.request;if(request.method!=='GET')return;const url=canonicalURL(request.url),kind=category(url);if(!kind)return;

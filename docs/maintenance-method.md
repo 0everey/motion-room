@@ -101,6 +101,10 @@ prepare_held_items.py保真实模型几何/材质，归一化握点及轴：剑�
 
 M416的物品局部yaw为+π/2，将枪管+Z对到手掌wrist→middle的+X；不能用公共socket迁就单一武器。Rifle Aiming Idle须实际正/侧及动态核枪口、枪托、主握柄，parent关系或掌点零误差不代用途正确。同片None→M416→大剑→None的cacheTicket含heldItem/heldGeneration/装配就绪状态，离线标识需依赖集合及实际就绪共同成立。
 
+首次HTTPS安装可能慢于15秒界面提示。cache-client监听真实同源sw.js的controllerchange，在壳完整安装并接管后自动恢复可用状态；超时提示不能把后到激活永久遗失。SHELL以最多4路并发安装，仍须全部成功才激活，shellReady与实际组合依赖不放宽。用真实延迟壳请求跨15秒、无需retry自动恢复，再断网新文档证明后继；本地快装不能替慢网路径。
+
+离线精看只需要该精看的实际依赖。重开时无关main混合配方可能未缓存，失败不得把已缓存的detail强制改成未缓存wall；保原detail恢复并单独验证其真缺件。原mix自身失败仍按既有提示回墙，不用多缓存无关动作掩盖责任错误。
+
 静态道具纳入同一skinBounds与全段固定取景；插值余量只核实际驱动目标的映射骨，未映射配件旋转不扩大镜头。原图/正侧背与多个时刻检查握点、剑尖/枪托可见，不能仅parent关系或一张静态图宣布所有动作接触自然。选择器在预览主区，骨架速览选择实体时切人物模式，保存/分享仍用稳定heldItem枚举。
 
 新外源原件走具名external-riding描述，真实DAE/FBX/GLB类型、作者、许可、SHA、字节与take保留。public exporter只允许登记的10项和受限assets/riding-originals路径；原Mixamo的固定repo/commit与clips/*.fbx检查不放宽。两个道具的内容hash模型也逐项白名单。可莉继续浏览器从官方pinned ZIP直接取得，不复制其原包到发布目录。

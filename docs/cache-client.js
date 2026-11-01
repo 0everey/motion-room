@@ -1,16 +1,25 @@
 export class PreviewCache {
   constructor({onChange=()=>{},onClear=()=>{}}={}){this.onChange=onChange;this.onClear=onClear;this.resources=[];this.available=false;this.error=null;this.registration=null;this.initializing=null;this.initPending=false;this.messageHandler=null;this.currentURL=null;this.last=null;this.refreshGeneration=0;}
+  async acceptController(){
+    const worker=navigator.serviceWorker.controller;
+    if(!worker||worker.scriptURL!==new URL('./sw.js',import.meta.url).href)return false;
+    this.available=true;this.error=null;await this.refresh();return true;
+  }
   async init(){
+    if(this.available&&navigator.serviceWorker.controller)return true;
     if(this.initializing)return this.initializing;
     this.initPending=true;this.initializing=(async()=>{
       if(!('serviceWorker' in navigator)||!window.isSecureContext)throw new Error('当前浏览器未启用离线缓存，可继续在线预览。');
       if(!this.messageHandler){this.messageHandler=event=>{if(event.data?.source!=='motion-room-cache')return;if(event.data.type==='CACHE_CLEARED'){this.onClear(event.data);this.refresh(null);}if(event.data.type==='CACHE_ERROR'){this.error=event.data.error;this.onChange(this.last,this.error);}};navigator.serviceWorker.addEventListener('message',this.messageHandler);}
+      // Installation may finish after the UI's soft timeout on a slow first
+      // visit. Accept the real controller then, without requiring a retry.
+      if(!this.controllerHandler){this.controllerHandler=()=>{void this.acceptController();};navigator.serviceWorker.addEventListener('controllerchange',this.controllerHandler);}
       const scopeURL=new URL('./',import.meta.url),existing=await navigator.serviceWorker.getRegistration(scopeURL.href);
       if(existing?.active&&navigator.serviceWorker.controller){this.registration=existing;if(navigator.onLine)existing.update().catch(()=>{});}
       else this.registration=await navigator.serviceWorker.register(new URL('./sw.js',import.meta.url),{scope:scopeURL.pathname});
       await Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>setTimeout(()=>reject(new Error('离线缓存安装未完成，可继续在线预览。')),15000))]);
       if(!navigator.serviceWorker.controller)await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('离线缓存尚未接管页面，请刷新后重试。')),12000);navigator.serviceWorker.addEventListener('controllerchange',()=>{clearTimeout(timer);resolve();},{once:true});});
-      this.available=true;this.error=null;await this.refresh();return true;
+      return await this.acceptController();
     })().catch(error=>{this.error=error.message;this.onChange(this.last,this.error);return false;}).finally(()=>{this.initPending=false;});return this.initializing;
   }
   retry(){if(this.initPending)return this.initializing;this.refreshGeneration++;this.initializing=null;this.error=null;return this.init();}
