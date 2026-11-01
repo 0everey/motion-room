@@ -1,3 +1,4 @@
+import {resourceBytes,decodes,PRIORITY} from './resource-queue.js';
 import * as THREE from './vendor/three/three.module.min.js';
 import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 
@@ -12,13 +13,11 @@ export const isHeldItem=key=>Object.hasOwn(HELD_ITEMS,key);
 
 export async function loadHeldItem(key,signal){
   const item=HELD_ITEMS[key];if(!item?.asset)throw new Error('未知的手持物品。');
-  const url=new URL(item.asset,import.meta.url),response=await fetch(url,{signal,credentials:'same-origin'});
-  if(!response.ok)throw new Error(`${item.label}读取失败（HTTP ${response.status}）。`);
-  const data=await response.arrayBuffer();signal.throwIfAborted();
-  if(data.byteLength>16*1024*1024)throw new Error('手持物品超过预览资源限制。');
+  const url=new URL(item.asset,import.meta.url),bytes=await resourceBytes(url,{signal,priority:PRIORITY.target,limit:16*1024*1024});
+  const data=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);signal.throwIfAborted();
   const sha=[...new Uint8Array(await crypto.subtle.digest('SHA-256',data))].map(x=>x.toString(16).padStart(2,'0')).join('');
   if(sha!==item.sha256)throw new Error('手持物品与已登记来源版本不一致。');
-  const asset=await new GLTFLoader().parseAsync(data,url.href.slice(0,url.href.lastIndexOf('/')+1));
+  const asset=await decodes.run('held:'+url.href,async activeSignal=>{const parsed=await new GLTFLoader().parseAsync(data,url.href.slice(0,url.href.lastIndexOf('/')+1));if(activeSignal.aborted){const textures=new Set();parsed.scene.traverse(o=>{o.geometry?.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material])if(m){for(const v of Object.values(m))if(v?.isTexture)textures.add(v);m.dispose();}});for(const t of textures){t.image?.close?.();t.dispose();}activeSignal.throwIfAborted();}return parsed;},{signal,priority:PRIORITY.target});
   asset.scene.traverse(mesh=>{if(!mesh.isMesh)return;mesh.frustumCulled=false;mesh.userData.heldItem=key;mesh.geometry.computeBoundingBox();for(const material of Array.isArray(mesh.material)?mesh.material:[mesh.material])material.userData.heldItem=key;});
   return asset.scene;
 }

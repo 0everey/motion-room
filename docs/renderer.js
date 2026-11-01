@@ -1,3 +1,4 @@
+import {resourceBytes,decodes,PRIORITY} from './resource-queue.js';
 import * as THREE from './vendor/three/three.module.min.js';
 import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 import {sampleMotion} from './mvp.js';
@@ -65,7 +66,7 @@ export function buildRetargetMapping(m,bones,rests,profile=CHARACTER_PROFILES.he
 }
 
 export class MotionRenderer{
-  constructor(canvas,{onChange=()=>{},onError=()=>{}}={}){
+  constructor(canvas,{onChange=()=>{},onError=()=>{},character=DEFAULT_CHARACTER}={}){
     Object.assign(this,{canvas,onChange,onError,motion:null,modelReady:false,model:true,skeleton:false,trail:true,follow:true,yaw:0.3,pitch:0.10,zoom:1,lastTime:0,loadGeneration:0});
     this.webgl=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'low-power'});
     this.webgl.setPixelRatio(Math.min(devicePixelRatio||1,1.75));this.webgl.setClearColor(0,0);
@@ -79,7 +80,7 @@ export class MotionRenderer{
     for(const radius of [1.1,1.16]){const ring=new THREE.Mesh(new THREE.RingGeometry(radius,radius+0.004,96),new THREE.MeshBasicMaterial({color:0xb59b6c,transparent:true,opacity:0.48,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-0.008;this.floor.add(ring);}
     const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=128;const ctx=shadowCanvas.getContext('2d'),g=ctx.createRadialGradient(64,64,4,64,64,64);g.addColorStop(0,'rgba(54,46,43,.26)');g.addColorStop(1,'rgba(54,46,43,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128);
     const shadow=new THREE.Mesh(new THREE.PlaneGeometry(1.25,0.75),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=-0.006;this.floor.add(shadow);
-    this.heldItemKey='none';this.heldGeneration=0;this.heldReady=false;this.heldError=null;this.characterProfile=CHARACTER_PROFILES[DEFAULT_CHARACTER];this.hipName=this.characterProfile.hip;this.bindInput();this.resizeObserver=new ResizeObserver(()=>onChange());this.resizeObserver.observe(canvas);
+    this.heldItemKey='none';this.heldGeneration=0;this.heldReady=false;this.heldError=null;this.characterProfile=CHARACTER_PROFILES[character]||CHARACTER_PROFILES[DEFAULT_CHARACTER];this.hipName=this.characterProfile.hip;this.bindInput();this.resizeObserver=new ResizeObserver(()=>onChange());this.resizeObserver.observe(canvas);
     canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();onError(new Error('图形上下文已丢失，请刷新页面恢复。'));});
     this.loadModel();
   }
@@ -106,10 +107,9 @@ export class MotionRenderer{
       }else if(profile.format==='official-pmx-zip'){
         const {loadKleeSource}=await import('./klee-source.js');signal.throwIfAborted();asset=await loadKleeSource({signal});
       }else{
-        const url=new URL(profile.asset,import.meta.url),response=await fetch(url,{signal,credentials:'same-origin'});
-        if(!response.ok)throw new Error(`${profile.label}读取失败（HTTP ${response.status}）。`);
-        const buffer=await response.arrayBuffer();if(buffer.byteLength>64*1024*1024)throw new Error('角色数据超过加载限制。');
-        asset=await new GLTFLoader().parseAsync(buffer,url.href.slice(0,url.href.lastIndexOf('/')+1));
+        const url=new URL(profile.asset,import.meta.url),bytes=await resourceBytes(url,{signal,priority:PRIORITY.target});
+        const buffer=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+        asset=await decodes.run('model:'+url.href,async activeSignal=>{const parsed=await new GLTFLoader().parseAsync(buffer,url.href.slice(0,url.href.lastIndexOf('/')+1));if(activeSignal.aborted){disposeObject(parsed.scene);activeSignal.throwIfAborted();}return parsed;},{signal,priority:PRIORITY.target});
       }
       if(generation!==this.loadGeneration){disposeObject(asset.scene);return;}
       this.character=asset.scene;this.modelSource=asset.source||null;this.bones=new Map();this.rests=new Map();

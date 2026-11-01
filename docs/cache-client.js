@@ -1,3 +1,4 @@
+import {readResource,forgetResourceBytes,PRIORITY} from './resource-queue.js';
 export class PreviewCache {
   constructor({onChange=()=>{},onClear=()=>{}}={}){this.onChange=onChange;this.onClear=onClear;this.resources=[];this.available=false;this.error=null;this.registration=null;this.initializing=null;this.initPending=false;this.messageHandler=null;this.currentURL=null;this.last=null;this.refreshGeneration=0;}
   async acceptController(){
@@ -29,8 +30,25 @@ export class PreviewCache {
   }
   async refresh(url=this.currentURL){this.currentURL=url;const generation=++this.refreshGeneration;if(!this.available)return null;try{const result=await this.command('STATUS',{url,resources:this.resources});if(generation!==this.refreshGeneration)return this.last;this.last=result;this.error=null;this.onChange(this.last,null);return this.last;}catch(error){if(generation!==this.refreshGeneration)return this.last;this.error=error.message;this.onChange(this.last,this.error);return null;}}
   async resume(){if(this.available)await this.command('RESUME');}
-  async registerResources(urls){this.resources=[...new Set((urls||[]).filter(value=>typeof value==='string'))];if(!this.available)return;try{await this.command('CACHE_RESOURCES',{urls:this.resources,url:this.currentURL,resources:this.resources});await this.refresh();}catch(error){if(error.name==='AbortError')return;this.error=error.message;this.onChange(this.last,this.error);}}
-  async ensureCurrent(url){this.currentURL=url;if(!this.available)return;try{await this.command('CACHE_RESOURCES',{urls:[url],url,resources:this.resources});await this.refresh(url);}catch(error){if(error.name==='AbortError')return;this.error=error.message;this.onChange(this.last,this.error);}}
+  cancelPending(){this.resourceController?.abort();this.resourceController=null;this.refreshGeneration++;}
+  async registerResources(urls){
+    this.cancelPending();this.resources=[...new Set((urls||[]).filter(value=>typeof value==='string'))];if(!this.available)return;
+    const controller=this.resourceController=new AbortController(),signal=controller.signal;
+    try{
+      const status=await this.command('STATUS',{url:this.currentURL,resources:this.resources});signal.throwIfAborted();
+      if(status.pageStoreProtocol!==1)throw new Error('缓存正在更新，请关闭本站旧标签后重新打开；在线预览可继续。');
+      const all=[...new Set([...this.resources,...status.shellPaths.map(path=>new URL(path,import.meta.url).href)])],missing=await this.command('MISSING_RESOURCES',{urls:all});signal.throwIfAborted();
+      for(const url of missing.missing){
+        // Low priority jobs hold real body slots, with foreground capacity
+        // reserved by the same queue that loads motions/models/items.
+        const resource=await readResource(url,{signal,priority:PRIORITY.background,cache:true});signal.throwIfAborted();
+        const buffer=resource.bytes.buffer.slice(resource.bytes.byteOffset,resource.bytes.byteOffset+resource.bytes.byteLength);
+        try{await this.command('STORE_RESOURCE',{url,buffer,headers:resource.headers,version:missing.version,epoch:missing.epoch});}catch(error){forgetResourceBytes(url);throw error;}signal.throwIfAborted();
+      }
+      await this.refresh();
+    }catch(error){if(signal.aborted||error.name==='AbortError')return;this.error=error.message;this.onChange(this.last,this.error);}
+  }
+  async ensureCurrent(url){this.currentURL=url;if(this.available)await this.refresh(url);}
   async invalidate(url){if(this.available)await this.command('INVALIDATE',{url});}
-  async clear(){if(!this.available)throw new Error('离线缓存尚未就绪。');const result=await this.command('CLEAR_PREVIEW');this.last=result;this.currentURL=null;this.onChange(result,null);return result;}
+  async clear(){this.cancelPending();if(!this.available)throw new Error('离线缓存尚未就绪。');const result=await this.command('CLEAR_PREVIEW');this.last=result;this.currentURL=null;this.onChange(result,null);return result;}
 }

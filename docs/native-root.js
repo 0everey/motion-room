@@ -1,3 +1,4 @@
+import {resourceBytes,PRIORITY} from './resource-queue.js';
 const LIMIT=4*1024*1024;
 const number=x=>typeof x==='number'&&Number.isFinite(x);
 const hash=x=>typeof x==='string'&&/^[a-f0-9]{64}$/.test(x);
@@ -21,10 +22,8 @@ export function validateNativeRoot(data,{id,variant}){
 
 export async function fetchNativeRoot({id,variant},signal){
   if(!variant.animatorRoot||!hash(variant.animatorRootSha256))throw new Error('当前 Native 尚无已验证的实际 Animator 根轨迹。');
-  const response=await fetch(new URL(variant.animatorRoot,import.meta.url),{signal,credentials:'same-origin'});
-  if(!response.ok)throw new Error('实际 Animator 根轨迹读取失败（HTTP '+response.status+'）。');
-  const declared=Number(response.headers.get('content-length'));if(declared>LIMIT)throw new Error('实际根轨迹超过大小限制。');
-  const bytes=await response.arrayBuffer();if(bytes.byteLength>LIMIT||bytes.byteLength!==variant.animatorRootBytes)throw new Error('实际根轨迹字节数不符。');
+  const bytes=await resourceBytes(new URL(variant.animatorRoot,import.meta.url),{signal,priority:PRIORITY.target,limit:LIMIT});
+  if(bytes.byteLength!==variant.animatorRootBytes)throw new Error('实际根轨迹字节数不符。');
   const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
   if(digest!==variant.animatorRootSha256)throw new Error('实际根轨迹内容身份不一致。');
   if(signal?.aborted)throw new DOMException('已取消','AbortError');

@@ -105,6 +105,20 @@ M416的物品局部yaw为+π/2，将枪管+Z对到手掌wrist→middle的+X；�
 
 离线精看只需要该精看的实际依赖。重开时无关main混合配方可能未缓存，失败不得把已缓存的detail强制改成未缓存wall；保原detail恢复并单独验证其真缺件。原mix自身失败仍按既有提示回墙，不用多缓存无关动作掩盖责任错误。
 
+## 目录先行与当前目标优先（2026-11-01）
+
+workbench.html先加载无Three/PMX依赖的library-entry.js。data/navigation.json绑定同版本紧凑gzip检索索引与每16条一份的内容寻址详情；完整分类、别名/拼音/原件SHA检索及分页先可用，目录实际绘制后才动态接studio.js。SDK迟到或失败不移除目录，接管采用当时最新筛选/选中/分享意图；当前来源详情、路径复制和原件取用也由轻入口提供。未到的模型只标加载，不以目录卡片冒三维预览就绪。
+
+唯一维护目录仍为data/catalog.json。改目录后用python -X utf8 tools/build_catalog_navigation.py --ui web-preview更新本地派生；正式export_herta_public.py每次从已校验的公开白名单目录生成同版navigation/分片，不照抄可能过期的本地派生。不要编辑分片或改变既有动作SHA。publisher保旧内容寻址索引和详情供仍存活客户端，不把私库路径/原模型ZIP混入发布。
+
+resource-queue.js统一页面正文传输和解码调度。网络最多4个完整正文，低优先最多占3槽、后台最多1槽；新显式目标可中止较低优先在途正文并重新排队，待实际取消结束才释放槽。共享URL按所有活跃消费者的最高优先级，退出一个不误杀另一个；上次选中的提升票退出后仍有页内消费者则降为可见队列。解码最多1份；不可中止的GLTF底层解析持槽到结束，若已失去消费者则归还几何/材质/纹理，不冒取消即停止。网络原字节LRU上限16MB；各视图解码仍归原Bank192MB、main/detail各96MB，诊断memory给去重合计，不另持无界解码缓存。ready条目不会因重排重复下载。
+
+默认或保存的main混合配方在非mix视图只保存配置，进入mix才读其真实输入；detail/分享/工作区载入不被无关默认A/B阻塞。详情和配方仍逐项验证同库版本、原件、variant SHA与Native根身份，缺片/失败可重试，不放宽成占位成功。
+
+SW r21安装只建立版本缓存，不自行下载全壳或完整catalog。fetch不clone/drain用户已取消的正文；页面后台队列把完整资源交STORE_RESOURCE，按实际epoch/version与原pinned规则存储。当前前台动作先于离线壳；shellReady/currentCombination/offlineReady仍由完整真实依赖决定。旧SW自然升级，不skipWaiting；旧标签尚占用旧协议时在线可继续，须关旧标签后自然接新版离线能力。清理/换意图取消页面后台任务，旧代次不能回存。
+
+必要回归包括：SDK/旧完整目录阻塞时完整导航和真实搜索/分享先行；四个长正文已发头未结束时点第五片，观察实际network start、目标像素、低优先取消和恢复；共享A退出B继续、零消费者退出、ready不重载、清空迟到不复活；复制路径在延迟详情跨入口接管后恢复；当前组合断网新document仍可看。耗时记录注明本机/传输条件，不能宣称任意线路绝对即时。
+
 静态道具纳入同一skinBounds与全段固定取景；插值余量只核实际驱动目标的映射骨，未映射配件旋转不扩大镜头。原图/正侧背与多个时刻检查握点、剑尖/枪托可见，不能仅parent关系或一张静态图宣布所有动作接触自然。选择器在预览主区，骨架速览选择实体时切人物模式，保存/分享仍用稳定heldItem枚举。
 
 新外源原件走具名external-riding描述，真实DAE/FBX/GLB类型、作者、许可、SHA、字节与take保留。public exporter只允许登记的10项和受限assets/riding-originals路径；原Mixamo的固定repo/commit与clips/*.fbx检查不放宽。两个道具的内容hash模型也逐项白名单。可莉继续浏览器从官方pinned ZIP直接取得，不复制其原包到发布目录。

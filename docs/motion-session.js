@@ -1,3 +1,4 @@
+import {PRIORITY} from './resource-queue.js';
 import {fetchMotion} from './mvp.js';
 import {fetchNativeRoot} from './native-root.js';
 
@@ -96,6 +97,7 @@ export class MotionSession{
     const recipe=validateRecipe(input,this.catalog),ticket=++this.generation;
     this.controller?.abort();this.controller=new AbortController();const signal=this.controller.signal,needsRoot=n=>recipe.rootMode==='animator'&&n.variant==='native';this.playing=false;this.phase='loading';this.error=null;this.recipe=recipe;this.speed=recipe.speed;this.time=recipe.time;this.anchorTime=this.time;
     const prior=this.motions,priorRoots=this.roots,next=new Map(),nextRoots=new Map(),leaves=recipe.nodes.filter(n=>n.type==='clip');
+    try{await this.catalog.ensureRows?.(leaves.map(n=>n.clipId),{signal,priority:PRIORITY.target});}catch(error){if(ticket!==this.generation||error.name==='AbortError')return false;this.phase='error';this.error=error.message;this.onChange();throw error;}if(ticket!==this.generation)return false;
     if(leaves.every(n=>prior.has(this.key(n))&&(!needsRoot(n)||priorRoots.has(this.rootKey(n))))){
       for(const n of leaves)next.set(this.key(n),prior.get(this.key(n)));
       for(const n of leaves)if(needsRoot(n))nextRoots.set(this.rootKey(n),priorRoots.get(this.rootKey(n)));
@@ -107,7 +109,7 @@ export class MotionSession{
       await Promise.all(unique.map(async node=>{
         const key=this.key(node);
         const v=this.variant(node);let motion=prior.get(key);
-        if(!motion)motion=await fetchMotion(new URL(v.url,import.meta.url),signal);
+        if(!motion)motion=await fetchMotion(new URL(v.url,import.meta.url),signal,PRIORITY.target);
         if(motion.meta.id!==node.clipId||motion.meta.kind!==node.variant||!motion.rotations)throw new Error(`动作 ${node.id} 的实际身份与配方不一致。`);
         if(needsRoot(node)){const root=priorRoots.get(this.rootKey(node))||await fetchNativeRoot({id:node.clipId,variant:v},signal);nextRoots.set(this.rootKey(node),root);}
         next.set(key,motion);
@@ -140,6 +142,7 @@ export class MotionSession{
   pause(){this.clock();this.playing=false;this.anchorTime=this.time;this.onChange();}
   seek(time){if(!finite(time,0,3600))throw new Error('时间必须在 0–3600 秒内。');this.playing=false;this.time=Math.min(time,this.duration);this.anchorTime=this.time;this.onChange();}
   setSpeed(speed){if(!finite(speed,.1,4))throw new Error('速度必须在 0.1–4 倍之间。');this.clock();this.speed=speed;if(this.recipe)this.recipe.speed=speed;this.anchorTime=this.time;this.anchorNow=performance.now();this.onChange();}
+  cancelPending(){if(this.phase==='loading'){this.generation++;this.controller?.abort();this.phase='idle';this.playing=false;}}
   clear(){this.generation++;this.controller?.abort();this.motions.clear();this.roots.clear();this.playing=false;this.phase='cleared';this.error=null;this.onChange();}
   localTime(node,time,terminal=false){return playbackTime(time*node.speed+node.phase,this.motions.get(this.key(node)).duration,node.loop==='repeat',terminal);}
   actorTime(actor,time){

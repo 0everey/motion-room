@@ -1,3 +1,5 @@
+import {resourceBytes,decodes,PRIORITY} from './resource-queue.js';
+
 // MVP1 is a position stream. It is already in Y-up metres; no FK or axis conversion here.
 export const MAX_DECODED_BYTES = 64 * 1024 * 1024;
 const MAX_METADATA_BYTES = 1024 * 1024;
@@ -26,17 +28,12 @@ async function readLimited(stream, limit, signal) {
   return bytes;
 }
 
-export async function fetchMotion(url, signal) {
-  const response = await fetch(url, {signal, credentials:'same-origin'});
-  if (!response.ok) throw new Error(`预览读取失败（HTTP ${response.status}）。`);
-  const declared = Number(response.headers.get('content-length'));
-  if (declared > MAX_DECODED_BYTES) throw new Error('预览文件超过安全大小限制。');
-  let bytes;
-  if (response.body) bytes = await readLimited(response.body, MAX_DECODED_BYTES, signal);
-  else {
-    bytes = new Uint8Array(await response.arrayBuffer());
-    if (bytes.byteLength > MAX_DECODED_BYTES) throw new Error('预览文件超过安全大小限制。');
-  }
+export async function fetchMotion(url, signal, priority=PRIORITY.visible) {
+  const data=await resourceBytes(url,{signal,priority,limit:MAX_DECODED_BYTES});
+  return decodes.run('motion:'+new URL(url,import.meta.url).href,async activeSignal=>{
+  await new Promise(resolve=>setTimeout(resolve,0));
+  activeSignal.throwIfAborted();let bytes=data;
+  const signal=activeSignal;
   // Hosting may already decode Content-Encoding:gzip. Only decompress a gzip payload.
   if (bytes[0] === 0x1f && bytes[1] === 0x8b) {
     if (!globalThis.DecompressionStream) throw new Error('当前浏览器不支持 gzip 预览解压。请使用较新的浏览器。');
@@ -49,6 +46,7 @@ export async function fetchMotion(url, signal) {
   }
   if (signal?.aborted) throw new DOMException('已取消', 'AbortError');
   return parseMotion(bytes);
+  },{signal,priority});
 }
 
 export function parseMotion(input) {

@@ -1,3 +1,4 @@
+import {resourceBytes,decodes,PRIORITY} from './resource-queue.js';
 import {decodePinnedArchive,loadPmxArchive,readPinnedResponse} from './pmx-source.js';
 export {materialTextures} from './pmx-source.js';
 export const KLEE_SOURCE={
@@ -13,9 +14,8 @@ const MEMBERS=new Map(Object.entries({'可莉/':0,'可莉/Texture/':0,'可莉/Te
 const SPEC={source:KLEE_SOURCE,members:MEMBERS,flags:2048,encoding:'utf-8',total:1992844,root:'可莉/',model:'可莉/可莉2.0.pmx',textures:['可莉/Texture/mc3.png','可莉/Texture/toon.png','可莉/Texture/头发.jpg','可莉/Texture/脸.jpg','可莉/Texture/衣服.jpg','可莉/Texture/表情.png'],bones:238,materials:12,textureMaps:12,diffuseImages:4,name:'KleePreview',format:'official-pmx-zip'};
 export const decodeKleeArchive=(buffer,signal)=>decodePinnedArchive(buffer,SPEC,signal);
 export async function loadKleeSource({signal}={}){
-  signal?.throwIfAborted();const cacheControlledAtFetch=!!globalThis.navigator?.serviceWorker?.controller;let response;
-  try{response=await fetch(KLEE_SOURCE.url,{signal,credentials:'omit',referrerPolicy:'no-referrer'});}
-  catch(error){if(signal?.aborted||error.name==='AbortError')throw error;throw new Error(globalThis.navigator?.onLine===false?'当前离线，可莉原件尚未缓存或已清理。请联网重新载入。':'可莉官方原件暂时无法读取，可切回其它角色或重新载入。');}
-  const buffer=await readPinnedResponse(response,KLEE_SOURCE,signal);
-  return loadPmxArchive(buffer,SPEC,{signal,cacheControlledAtFetch});
+  signal?.throwIfAborted();const cacheControlledAtFetch=!!globalThis.navigator?.serviceWorker?.controller;
+  const url=new URL(KLEE_SOURCE.url,import.meta.url),bytes=await resourceBytes(url,{signal,priority:PRIORITY.target,limit:KLEE_SOURCE.bytes,credentials:'omit',referrerPolicy:'no-referrer'});
+  const buffer=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+  return decodes.run('pmx:'+url.href,activeSignal=>loadPmxArchive(buffer,SPEC,{signal:activeSignal,cacheControlledAtFetch}),{signal,priority:PRIORITY.target});
 }
