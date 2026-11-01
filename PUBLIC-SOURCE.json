@@ -1,6 +1,6 @@
 {
   "files": 2773,
-  "bytes": 516713661,
+  "bytes": 516715369,
   "ids": 2456,
   "variants": 2492,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -258,7 +258,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6040496,
-      "sha256": "6575b461c2181e53e8b6297cfd86a66bca182535930838693eb90bf615d3e130"
+      "sha256": "6c51c3835f459297ce1109e0e098a4ceb9884e4ab3d01ab90f6c5d41a6fcd5d9"
     },
     {
       "path": "data/catalog/details-0027f1bf288a.json.gz",
@@ -13707,18 +13707,18 @@
     },
     {
       "path": "library-browser.js",
-      "bytes": 10708,
-      "sha256": "04e33741f149efc17929df714ce21a4c46e3ba6a6f1f88063d3b155cead6914a"
+      "bytes": 11418,
+      "sha256": "f1ccee61767474f90e404c5eece38bf742c3a15e1d5a93530361116e2c586b69"
     },
     {
       "path": "library-entry.js",
-      "bytes": 11557,
-      "sha256": "9adcb8a0fc547d01d56cbb0c5c46f591195b64416f00c9f8429de6e59bcedac7"
+      "bytes": 11583,
+      "sha256": "9769a8bc663cb12909da6f4ba9973d1bf8cfb7833a9deb1dc7074d76f5a1542a"
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 18715,
-      "sha256": "0ab4792d22b0c367793f15e0f1663872a29654904adf44116abde91eb655c60e"
+      "bytes": 19109,
+      "sha256": "d3133fdb84adc5d3251b0e5217a9ce4b30fa4b6f537b482fda12a0e88a84cf57"
     },
     {
       "path": "models/held-greatsword-c82f73e0df5d.glb",
@@ -13782,8 +13782,8 @@
     },
     {
       "path": "studio.js",
-      "bytes": 71234,
-      "sha256": "63a4738a6b97ca5fbe344673a94ce9b1ffd707c1ac6ef39efa7ec4a22574b836"
+      "bytes": 71803,
+      "sha256": "1fb1a0bf73656142b0a224babe8851e9ce90995b82c20580f15c98827d360949"
     },
     {
       "path": "styles.css",
@@ -13792,8 +13792,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 11292,
-      "sha256": "9693eae61f47a41c0db700e5033875e759f3639378d99fd899b0e051a9d0d3e7"
+      "bytes": 11301,
+      "sha256": "2dfcc6295c0c8e8f528c0c9bf7c1cc4fe98002fe1a845c4fb91376f62393e440"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -13871,7 +13871,7 @@
       "sha256": "05d4d3653124d6067f5dd5b12378b33cf9a0f063a9af3b3dd4def4d34852dbf0"
     }
   ],
-  "applicationSourceCommit": "62f64157b670b50a70e53206f484cd19a663d627",
+  "applicationSourceCommit": "f33cb38c8dc225d8b7a05acd2250be70e5ba395b",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {

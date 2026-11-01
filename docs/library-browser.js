@@ -47,7 +47,15 @@ export function sourceText(row,catalog,variant){
     originalSource:source?{kind:source.kind,format:source.format,author:source.author,license:source.license,take:source.take,mixamoId:source.mixamoId,path:source.path,sha256:source.sha256,bytes:source.bytes,repository:source.repository,commit:source.commit,url:source.url,page:source.page}:null,
     currentPreview:variant?{variant:variant.key,url:new URL(variant.url,location.href).href,sha256:variant.sha256,sourceSha256Role:variant.sourceSha256Role||'original source FBX',sourceIdentities:variant.sourceIdentities||{sourceFbxSha256:variant.sourceSha256},fps:variant.fps,fpsRole:variant.fpsRole,timePolicy:variant.timePolicy,frames:variant.frames,duration:variant.duration}:null},null,2);
 }
-export async function downloadVerified(url,{sha256,bytes,filename},signal){
+let activeDownload=null;
+export const getActiveDownload=()=>activeDownload;
+export function downloadVerified(url,config,signal){
+  const href=new URL(url,import.meta.url).href;
+  if(activeDownload){if(activeDownload.url===href&&activeDownload.sha256===config.sha256&&activeDownload.bytes===config.bytes)return activeDownload.promise;return Promise.reject(new Error('当前下载尚未完成，请稍后再取其它原件。'));}
+  const task={url:href,id:config.id||null,kind:config.kind||'original',sha256:config.sha256,bytes:config.bytes,promise:null};activeDownload=task;
+  task.promise=performDownload(href,config,signal).finally(()=>{if(activeDownload===task)activeDownload=null;});return task.promise;
+}
+async function performDownload(url,{sha256,bytes,filename},signal){
   const data=await resourceBytes(url,{signal,priority:PRIORITY.target});
   if(data.byteLength>64*1024*1024||(bytes&&data.byteLength!==bytes))throw new Error('文件字节数与来源记录不一致，未保存。');
   const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',data))].map(x=>x.toString(16).padStart(2,'0')).join('');

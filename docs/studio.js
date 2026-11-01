@@ -6,7 +6,7 @@ import {MotionSession,defaultRecipe,validateRecipe,encodeRecipe,decodeRecipe} fr
 import {WorkbenchRenderer} from './workbench-renderer.js';
 import {fetchMotion} from './mvp.js';
 import {PreviewCache} from './cache-client.js';
-import {CATEGORY_COLORS,categoryColor,readyVariants,variantFor,actualDuration,searchCatalog,originalSource,sourceText,downloadVerified,MotionBank} from './library-browser.js';
+import {CATEGORY_COLORS,categoryColor,readyVariants,variantFor,actualDuration,searchCatalog,originalSource,sourceText,downloadVerified,getActiveDownload,MotionBank} from './library-browser.js';
 import {SkeletonWall,WallSession,wallColumns} from './motion-wall.js';
 import {YUUKA_SOURCE} from './yuuka-source.js';
 
@@ -293,7 +293,7 @@ async function downloadSelected(kind){
   const row=selected();if(!row||downloadState?.phase==='loading')return;await catalog.ensureRows([row.id]);const variant=selectedVariant(),original=originalSource(row,catalog);
   const config=kind==='original'?{url:original?.url,sha256:original?.sha256,bytes:original?.bytes,filename:original?.path.split('/').at(-1)}:{url:variant?new URL(variant.url,location.href).href:null,sha256:variant?.sha256,bytes:variant?.bytes,filename:variant?.url.split('/').at(-1)};
   if(!config.url)throw new Error('当前固定版本下载尚未准备完成。');downloadState={phase:'loading',kind,id:row.id};renderSelection();notice('正在读取并校验 '+config.filename+'…');
-  try{const result=await downloadVerified(config.url,config);downloadState={phase:'save-triggered',kind,id:row.id,...result};notice('已校验来源，开始保存 '+result.filename);}catch(error){downloadState={phase:'error',kind,id:row.id,error:error.message};throw error;}finally{renderSelection();}
+  try{const result=await downloadVerified(config.url,{...config,id:row.id,kind});downloadState={phase:'save-triggered',kind,id:row.id,...result};notice('已校验来源，开始保存 '+result.filename);}catch(error){downloadState={phase:'error',kind,id:row.id,error:error.message};throw error;}finally{renderSelection();}
 }
 async function copyRoot(){
   const s=activeSession(),ticket=s.generation,natives=s.recipe.nodes.filter(n=>n.type==='clip'&&n.variant==='native');if(!natives.length)throw new Error('当前精看或混合没有Native输入。');const records=[];
@@ -302,7 +302,8 @@ async function copyRoot(){
 }
 
 try{
-  catalog=await loadCatalog();const early=window.motionNavigation?.takeover();
+  catalog=await loadCatalog();const early=window.motionNavigation?.takeover(),inheritedDownload=getActiveDownload();
+  if(inheritedDownload){downloadState={phase:'loading',kind:inheritedDownload.kind,id:inheritedDownload.id};const current=downloadState;inheritedDownload.promise.then(result=>{if(downloadState===current)downloadState={phase:'save-triggered',kind:inheritedDownload.kind,id:inheritedDownload.id,...result};},error=>{if(downloadState===current)downloadState={phase:'error',kind:inheritedDownload.kind,id:inheritedDownload.id,error:error.message};}).finally(()=>{renderSelection();request();});}
   try{const saved=JSON.parse(localStorage.getItem('motion-studio-browse-v1')||'null');if(saved)state={...state,...cleanBrowse(saved),playing:state.playing,anchorNow:performance.now(),anchorTime:0};}catch{}
   if(early)state={...state,...cleanBrowse(early.browse)};
   state.density=[12,24,48,64].includes(Number(state.density))?Number(state.density):24;if(!CHARACTER_PROFILES[state.character]?.asset)state.character=DEFAULT_CHARACTER;state.favorites=state.favorites.filter(id=>catalog.clips.some(r=>r.id===id));state.basket=state.basket.filter(id=>catalog.clips.some(r=>r.id===id));if(!catalog.clips.some(r=>r.id===state.selected))state.selected=catalog.clips[0].id;

@@ -115,7 +115,9 @@ resource-queue.js统一页面正文传输和解码调度。网络最多4个完�
 
 默认或保存的main混合配方在非mix视图只保存配置，进入mix才读其真实输入；detail/分享/工作区载入不被无关默认A/B阻塞。详情和配方仍逐项验证同库版本、原件、variant SHA与Native根身份，缺片/失败可重试，不放宽成占位成功。
 
-SW r21安装只建立版本缓存，不自行下载全壳或完整catalog。fetch不clone/drain用户已取消的正文；页面后台队列把完整资源交STORE_RESOURCE，按实际epoch/version与原pinned规则存储。当前前台动作先于离线壳；shellReady/currentCombination/offlineReady仍由完整真实依赖决定。旧SW自然升级，不skipWaiting；旧标签尚占用旧协议时在线可继续，须关旧标签后自然接新版离线能力。清理/换意图取消页面后台任务，旧代次不能回存。
+SW r22安装只建立版本缓存，不自行下载全壳或完整catalog。fetch不clone/drain用户已取消的正文；页面后台队列把完整资源交STORE_RESOURCE，按实际epoch/version与原pinned规则存储。当前前台动作先于离线壳；shellReady/currentCombination/offlineReady仍由完整真实依赖决定。旧SW自然升级，不skipWaiting；旧标签尚占用旧协议时在线可继续，须关旧标签后自然接新版离线能力。清理/换意图取消页面后台任务，旧代次不能回存。
+
+原件下载保存由library-browser.js单一activeDownload持有；轻入口到studio接管时复用其真实在途promise及busy状态。网络共享之外，保存动作也只能执行一次；同URL/原SHA/字节的并发调用接同一任务，不能因两个页面阶段各持一个downloading状态而生成两个文件。完成后恢复按钮，允许用户后续再次主动下载。
 
 必要回归包括：SDK/旧完整目录阻塞时完整导航和真实搜索/分享先行；四个长正文已发头未结束时点第五片，观察实际network start、目标像素、低优先取消和恢复；共享A退出B继续、零消费者退出、ready不重载、清空迟到不复活；复制路径在延迟详情跨入口接管后恢复；当前组合断网新document仍可看。耗时记录注明本机/传输条件，不能宣称任意线路绝对即时。
 

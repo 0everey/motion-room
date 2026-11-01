@@ -1,4 +1,4 @@
-const VERSION='r21-20261101-priority';
+const VERSION='r22-20261101-priority-download';
 const KLEE_URL='https://i0.hdslb.com/bfs/game-static/6c7d34e8ca3f07623f9de5ce03a0600eddfda45c.zip',KLEE_SHA256='894fb807efca259c75f663ae3c4798533d39506ea8c49d1ec1c7a1dc9e16ea4f';
 async function validOfficial(bytes){return bytes.byteLength===1235776&&Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('')===KLEE_SHA256;}
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
