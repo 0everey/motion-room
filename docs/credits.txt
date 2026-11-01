@@ -46,3 +46,15 @@ MMD解析：Three.js r170官方MIT模块，来源及哈希见vendor/three/mmd/SO
 仅支持用户本人取得的 Yuuka_Hayase1_0_rev2.zip（1.0 rev2）在本浏览器导入、校验和预览。本站及离线分发包不包含其ZIP/PMX/纹理/转换模型，模型数据不上传；分享配方也不携带模型。
 请保留并遵守原包readme及 https://bluearchive.jp/fankit/Guidelines 的适用条件，包括非商业、个人改造及禁止改／未改二次配布等；本工具不代表原官方或授权公开分发模型。
 人物174骨、40材质、37份带图材质、7张人物纹理；不包含专用枪的外亲操作或完整MMD刚体、IK、grant运行时，不代表接触与全部动作质量通过。
+
+
+骑行人物动作与新增手持展示（2026-11-01）
+0 A.D. / Wildfire Games：上马、下马、慢行、小跑、快跑、待机六个原DAE；CC BY-SA 3.0，原件与对应动作派生沿同条款。
+来源：https://gitea.wildfiregames.com/0ad/0ad ，完整美术规则：https://gitea.wildfiregames.com/0ad/0ad/raw/branch/main/binaries/data/mods/public/art/LICENSE.txt
+TUM-VT / Sumonity-BicycleModel：自行车人物踩踏/左转/右转；CC BY 4.0。https://github.com/TUM-VT/Sumonity-BicycleModel
+LasquetiSpice：Animated Supermodel Riding Motorcycle Loop；CC BY 4.0，经Objaverse公开镜像取得原GLB。
+https://sketchfab.com/3d-models/animated-supermodel-riding-motorcycle-loop-1895cfbdddb543e68331f51f95365aa9
+骑行预览保存完整源采样与出处，目标人物采用腿链尺度及固定整段脚部参考；不绘制车马，不表示真实接触或完整MMD物理通过。摩托保存原GLB非均匀关键时间，显示点数不冒原生固定FPS。
+大剑：Greatsword，Shadow Models 3D（原GLB作者署名 danielgobr481），CC BY 4.0。https://sketchfab.com/3d-models/greatsword-e2fe8da3bed74e1c9895966730afac05
+M416：KisameBR，CC BY 4.0。https://sketchfab.com/3d-models/m416-c4af2388345b47b995cd5daa8531bde2
+两个模型经Objaverse公开镜像取得；预览派生只归一化握点、方向和长度，保原几何/材质。比例按当前角色展示，未声明真实武器米制或全动作双手IK接触。

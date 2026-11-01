@@ -1,4 +1,4 @@
-const VERSION='r17-20261031-yuuka-local1';
+const VERSION='r19-20261101-riding-held1';
 const KLEE_URL='https://i0.hdslb.com/bfs/game-static/6c7d34e8ca3f07623f9de5ce03a0600eddfda45c.zip',KLEE_SHA256='894fb807efca259c75f663ae3c4798533d39506ea8c49d1ec1c7a1dc9e16ea4f';
 async function validOfficial(bytes){return bytes.byteLength===1235776&&Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('')===KLEE_SHA256;}
 const ROOT=new URL('./',self.location.href),PREFIX=`motion-room:${ROOT.pathname}:`,SHELL=PREFIX+'shell:'+VERSION,PREVIEW=PREFIX+'preview:v1';
@@ -6,7 +6,7 @@ const YUUKA_URL=new URL('models/user-yuuka-f4ac2e7340a8.zip',ROOT).href,YUUKA_SH
 const missingYuuka='优香原包尚未导入或已清理，请在预览设置导入 Yuuka_Hayase1_0_rev2.zip。';
 async function validYuuka(bytes){return bytes.byteLength===9392148&&Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))).map(b=>b.toString(16).padStart(2,'0')).join('')===YUUKA_SHA256;}
 async function validPinned(url,bytes){return url===KLEE_URL?validOfficial(bytes):url===YUUKA_URL?validYuuka(bytes):true;}
-const SHELL_PATHS=['./','pmx-source.js','yuuka-source.js','klee-source.js','vendor/three/mmd/SOURCES.json','vendor/three/mmd/loaders/MMDLoader.js','vendor/three/mmd/loaders/TGALoader.js','vendor/three/mmd/shaders/MMDToonShader.js','vendor/three/mmd/libs/mmdparser.module.js','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','maintenance-method.md','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
+const SHELL_PATHS=['./','held-items.js','pmx-source.js','yuuka-source.js','klee-source.js','vendor/three/mmd/SOURCES.json','vendor/three/mmd/loaders/MMDLoader.js','vendor/three/mmd/loaders/TGALoader.js','vendor/three/mmd/shaders/MMDToonShader.js','vendor/three/mmd/libs/mmdparser.module.js','index.html','styles.css','app.js','mvp.js','renderer.js','character.js','cache-client.js','assets/fonts/motion-heading.ttf','data/catalog.json','credits.txt','maintenance-method.md','workbench.html','workbench.css','workbench.js','motion-session.js','workbench-renderer.js','native-root.js','vendor/three/SkeletonUtils.js','studio.js','studio.css','library-browser.js','motion-wall.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const BUDGET=192*1024*1024,MAX_FILE=64*1024*1024;
 const INSTANCE=self.crypto.randomUUID();let clearNumber=0,epoch=INSTANCE+':0',enabled=true,queue=Promise.resolve();const inflight=new Map();
 const serial=fn=>{const result=queue.then(fn,fn);queue=result.catch(()=>{});return result;};

@@ -1,0 +1,685 @@
+{
+  "schema": "motion-room.external-riding.v1",
+  "clips": [
+    {
+      "id": "riding-0ad-mount",
+      "name": "上马",
+      "english": "Horse Rider mount",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.0833330154418945,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "上马 Horse Rider mount 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-mount",
+        "path": "assets/riding-originals/6ee4a8b92c1f-mount.dae",
+        "sha256": "6ee4a8b92c1f434eb6094fe51799033f4a0bba8191b8c490afefa2921e6a191a",
+        "bytes": 1147943,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-mount-9c36ae6f4b6c.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "6ee4a8b92c1f434eb6094fe51799033f4a0bba8191b8c490afefa2921e6a191a",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "6ee4a8b92c1f434eb6094fe51799033f4a0bba8191b8c490afefa2921e6a191a",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源单次动作",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 126360,
+          "sha256": "9c36ae6f4b6cb0136fa43ebeb10166ec8c1ef57aacbf772874ec1b1a2462594d",
+          "uncompressedBytes": 168348,
+          "frames": 51,
+          "joints": 101,
+          "duration": 2.0833330154418945,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-dismount",
+      "name": "下马",
+      "english": "Horse Rider dismount",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.0833330154418945,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "下马 Horse Rider dismount 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-dismount",
+        "path": "assets/riding-originals/25aba2eb829e-dismount.dae",
+        "sha256": "25aba2eb829eea27fe7441b682aa38d787e6dc10cfe8c252909a60bc3db601eb",
+        "bytes": 1143714,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-dismount-3bbf376f5c23.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "25aba2eb829eea27fe7441b682aa38d787e6dc10cfe8c252909a60bc3db601eb",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "25aba2eb829eea27fe7441b682aa38d787e6dc10cfe8c252909a60bc3db601eb",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源单次动作",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 126769,
+          "sha256": "3bbf376f5c237044d742cc4fa1e06cce197a8a02efde449b1d866ab68a883b24",
+          "uncompressedBytes": 168348,
+          "frames": 51,
+          "joints": 101,
+          "duration": 2.0833330154418945,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-walk",
+      "name": "骑马慢行",
+      "english": "Horse Rider walk",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 1.6666669845581055,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马慢行 Horse Rider walk 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-walk",
+        "path": "assets/riding-originals/20ba7fc34803-walk_relax.dae",
+        "sha256": "20ba7fc348034996bb7a2d73efa477684be9edf87ffbf3fc5519e91b4d3b1c1f",
+        "bytes": 999566,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-walk-ca2de402592b.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "20ba7fc348034996bb7a2d73efa477684be9edf87ffbf3fc5519e91b4d3b1c1f",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "20ba7fc348034996bb7a2d73efa477684be9edf87ffbf3fc5519e91b4d3b1c1f",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 97211,
+          "sha256": "ca2de402592b9da84dc07ee73538f439b0e164cf3438b1ba4212dfc93ce5025e",
+          "uncompressedBytes": 140024,
+          "frames": 41,
+          "joints": 101,
+          "duration": 1.6666669845581055,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-trot",
+      "name": "骑马小跑",
+      "english": "Horse Rider trot",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 0.6666666666666666,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马小跑 Horse Rider trot 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-trot",
+        "path": "assets/riding-originals/6128ab4ff5d3-trot_relax.dae",
+        "sha256": "6128ab4ff5d31d96430e3d18040b41ab44e11f4a490084be48134e1ae4f58fb5",
+        "bytes": 731324,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-trot-73407bb3f0c2.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "6128ab4ff5d31d96430e3d18040b41ab44e11f4a490084be48134e1ae4f58fb5",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "6128ab4ff5d31d96430e3d18040b41ab44e11f4a490084be48134e1ae4f58fb5",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 48932,
+          "sha256": "73407bb3f0c261ed6f01d74e2065c300b15a90001af7f84bd3763d585130f2b2",
+          "uncompressedBytes": 72824,
+          "frames": 17,
+          "joints": 102,
+          "duration": 0.6666666666666666,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-gallop",
+      "name": "骑马快跑",
+      "english": "Horse Rider gallop",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 0.6666666666666666,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马快跑 Horse Rider gallop 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-gallop",
+        "path": "assets/riding-originals/a4af4ec0439a-gallop_relax.dae",
+        "sha256": "a4af4ec0439a67db51b8650f3c603d72f9c28b1bb32325d076743fd2e5c23b7d",
+        "bytes": 731654,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-gallop-7abb327a10c5.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "a4af4ec0439a67db51b8650f3c603d72f9c28b1bb32325d076743fd2e5c23b7d",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "a4af4ec0439a67db51b8650f3c603d72f9c28b1bb32325d076743fd2e5c23b7d",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 51189,
+          "sha256": "7abb327a10c5ef408341753f3aa89e49436be594c667e48047e60ce57a1f1093",
+          "uncompressedBytes": 72824,
+          "frames": 17,
+          "joints": 102,
+          "duration": 0.6666666666666666,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-idle",
+      "name": "骑马待机",
+      "english": "Horse Rider idle",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 2.0,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马待机 Horse Rider idle 骑行 骑乘 乘骑 Wildfire Games / 0 A.D.",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-idle",
+        "path": "assets/riding-originals/cd39fa15d632-idle_relax_01.dae",
+        "sha256": "cd39fa15d63298f6894e9541b967d9d61a7dc43838c71592bc697c3cb182ea6b",
+        "bytes": 1310956,
+        "format": "dae",
+        "author": "Wildfire Games / 0 A.D.",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad",
+        "take": "BipedAction"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-0ad-idle-393c3bd4369d.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "cd39fa15d63298f6894e9541b967d9d61a7dc43838c71592bc697c3cb182ea6b",
+          "sourceSha256Role": "原始.DAE人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "cd39fa15d63298f6894e9541b967d9d61a7dc43838c71592bc697c3cb182ea6b",
+            "sourceFormat": "dae",
+            "take": "BipedAction"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 84704,
+          "sha256": "393c3bd4369da0a52685597f740cec7fd81920758ff4901d0b9c9e05bbd53bca",
+          "uncompressedBytes": 164328,
+          "frames": 49,
+          "joints": 102,
+          "duration": 2.0,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-tum-padaling",
+      "name": "自行车踩踏",
+      "english": "Bicycle padaling",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 10.04,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "自行车踩踏 Bicycle padaling 骑行 骑乘 乘骑 TUM-VT / Sumonity-BicycleModel",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-tum-padaling",
+        "path": "assets/riding-originals/e0ff1ab1c702-bicyle_animated_human.fbx",
+        "sha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+        "bytes": 19620508,
+        "format": "fbx",
+        "author": "TUM-VT / Sumonity-BicycleModel",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://github.com/TUM-VT/Sumonity-BicycleModel",
+        "take": "Armature|padaling|padaling"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-tum-padaling-7a572b84ef7a.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+          "sourceSha256Role": "原始.FBX人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+            "sourceFormat": "fbx",
+            "take": "padaling"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 25.0,
+          "bytes": 57480,
+          "sha256": "7a572b84ef7ae5ef85997518da5a02d716401a83c37e14c9c75ae998addfc675",
+          "uncompressedBytes": 388076,
+          "frames": 252,
+          "joints": 53,
+          "duration": 10.04,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-tum-steerleft",
+      "name": "自行车左转",
+      "english": "Bicycle steerleft",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 10.04,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "自行车左转 Bicycle steerleft 骑行 骑乘 乘骑 TUM-VT / Sumonity-BicycleModel",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-tum-steerleft",
+        "path": "assets/riding-originals/e0ff1ab1c702-bicyle_animated_human.fbx",
+        "sha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+        "bytes": 19620508,
+        "format": "fbx",
+        "author": "TUM-VT / Sumonity-BicycleModel",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://github.com/TUM-VT/Sumonity-BicycleModel",
+        "take": "Armature|steerleft|steerleft"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-tum-steerleft-b257242d821a.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+          "sourceSha256Role": "原始.FBX人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+            "sourceFormat": "fbx",
+            "take": "steerleft"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 25.0,
+          "bytes": 271006,
+          "sha256": "b257242d821ac6ddfd4e99542036f72f3cc38ddb773f0e0c80d283aebcf61734",
+          "uncompressedBytes": 388076,
+          "frames": 252,
+          "joints": 53,
+          "duration": 10.04,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-tum-steerright",
+      "name": "自行车右转",
+      "english": "Bicycle steerright",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 10.04,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "自行车右转 Bicycle steerright 骑行 骑乘 乘骑 TUM-VT / Sumonity-BicycleModel",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-tum-steerright",
+        "path": "assets/riding-originals/e0ff1ab1c702-bicyle_animated_human.fbx",
+        "sha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+        "bytes": 19620508,
+        "format": "fbx",
+        "author": "TUM-VT / Sumonity-BicycleModel",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://github.com/TUM-VT/Sumonity-BicycleModel",
+        "take": "Armature|steerright|steerright"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-tum-steerright-48c64c016f9a.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+          "sourceSha256Role": "原始.FBX人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345",
+            "sourceFormat": "fbx",
+            "take": "steerright"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 25.0,
+          "bytes": 271244,
+          "sha256": "48c64c016f9a06ec7441ac1828ed9c270493d0dabc2989078934ec482a2a71df",
+          "uncompressedBytes": 388080,
+          "frames": 252,
+          "joints": 53,
+          "duration": 10.04,
+          "timePolicy": "原导入场景帧率及完整原帧，保留真实末端时间",
+          "fpsRole": "source-frame-rate",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-motorcycle-loop",
+      "name": "摩托车骑行",
+      "english": "Motorcycle Riding Loop",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "摩托车人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 3.6083333492279053,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "摩托车骑行 Motorcycle Riding Loop 骑行 骑乘 乘骑 LasquetiSpice",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-motorcycle-loop",
+        "path": "assets/riding-originals/233c4a81e9a3-motorcycle-riding-loop.glb",
+        "sha256": "233c4a81e9a34dcd4fa45bd36e505c0a90f7e39073648ac4f5e1941ca8592ca7",
+        "bytes": 6156792,
+        "format": "glb",
+        "author": "LasquetiSpice",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://sketchfab.com/3d-models/animated-supermodel-riding-motorcycle-loop-1895cfbdddb543e68331f51f95365aa9",
+        "take": "Animation_GLTF_created_0"
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原人物骑行动作",
+          "url": "data/clips/source-riding-motorcycle-loop-6cfe6876c957.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "233c4a81e9a34dcd4fa45bd36e505c0a90f7e39073648ac4f5e1941ca8592ca7",
+          "sourceSha256Role": "原始.GLB人物骑行资源",
+          "sourceIdentities": {
+            "sourceAssetSha256": "233c4a81e9a34dcd4fa45bd36e505c0a90f7e39073648ac4f5e1941ca8592ca7",
+            "sourceFormat": "glb",
+            "take": "Animation_GLTF_created_0"
+          },
+          "rootPolicy": "原数据保完整世界P/Q；人物显示按真实腿链尺度与整段固定脚部基准归一化，不代表车马接触验收",
+          "coordinatePolicy": "原生导入后Blender Z-up米 → [x,z,-y]一次转换；真实世界P/Q",
+          "loopPolicy": "来源动作循环标记；未承诺首尾接触完美",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 99054,
+          "sha256": "6cfe6876c957a026eea013b6ea871e2113a4c7f48cedd31adafd39eb42a328b0",
+          "uncompressedBytes": 351120,
+          "frames": 175,
+          "joints": 68,
+          "duration": 3.6083333492279053,
+          "timePolicy": "原GLB全部真实通道key时间并集；源无固有固定帧率",
+          "fpsRole": "import-timebase",
+          "producer": {
+            "name": "prepare_riding_preview.py",
+            "sha256": "1b4058c99c51f712b702656f5bd9918bc29d5edd639163239b750b8ab9ba0986"
+          }
+        }
+      ]
+    }
+  ]
+}

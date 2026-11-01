@@ -1,0 +1,46 @@
+[
+  {
+    "key": "greatsword",
+    "file": "held-greatsword-c82f73e0df5d.glb",
+    "bytes": 510140,
+    "sha256": "c82f73e0df5d9de2d67abdbe5ca9e5bfef029769a3b6daf45cd32b7caec709dc",
+    "sourceSha256": "a7594c80adb5d5e97ed12df9e097c59001a6ddb19b9460e7800b05da3c5bec45",
+    "sourcePage": "https://sketchfab.com/3d-models/greatsword-e2fe8da3bed74e1c9895966730afac05",
+    "author": "Shadow Models 3D",
+    "license": "CC BY 4.0",
+    "originalGripBlender": [
+      -0.52,
+      0,
+      0.6
+    ],
+    "originalLongestDimension": 2.072333812713623,
+    "canonicalAxes": "blade +Y",
+    "normalizedLongestDimension": 1,
+    "meshes": 2,
+    "vertices": 1450,
+    "materials": 2,
+    "status": "prepared-awaiting-live-character-grip-review"
+  },
+  {
+    "key": "m416",
+    "file": "held-m416-1fffac6602a7.glb",
+    "bytes": 2753708,
+    "sha256": "1fffac6602a701ab899e31183a147f05ae657ae52106390ea77286c67c970637",
+    "sourceSha256": "3402ee4e1e690b50766c37da7e0b8f8f5a620761cb867630085779a05167f09e",
+    "sourcePage": "https://sketchfab.com/3d-models/m416-c4af2388345b47b995cd5daa8531bde2",
+    "author": "KisameBR",
+    "license": "CC BY 4.0",
+    "originalGripBlender": [
+      -0.005,
+      0.46,
+      -0.4
+    ],
+    "originalLongestDimension": 3.888772487640381,
+    "canonicalAxes": "barrel +Z, up +Y",
+    "normalizedLongestDimension": 1,
+    "meshes": 5,
+    "vertices": 31781,
+    "materials": 5,
+    "status": "prepared-awaiting-live-character-grip-review"
+  }
+]

@@ -1,4 +1,4 @@
-export const CATEGORY_COLORS={'01':'#2989b3','02':'#d78336','03':'#d65768','04':'#8b67bd','05':'#516cbb','06':'#aa63a6','07':'#3d9e99','08':'#b96558','09':'#73933d','10':'#cf718b','11':'#9a70c5','12':'#3c9a78','13':'#748494'};
+export const CATEGORY_COLORS={'01':'#2989b3','02':'#d78336','03':'#d65768','04':'#8b67bd','05':'#516cbb','06':'#aa63a6','07':'#3d9e99','08':'#b96558','09':'#73933d','10':'#cf718b','11':'#9a70c5','12':'#3c9a78','13':'#748494','14':'#35bda3','seated':'#c99b62'};
 export const categoryColor=row=>CATEGORY_COLORS[row?.categoryCode]||'#748494';
 export const readyVariants=row=>(row?.variants||[]).filter(v=>v.hasRotations===true);
 export const variantFor=(row,kind='source')=>readyVariants(row).find(v=>v.key===kind)||readyVariants(row).find(v=>v.key==='source')||readyVariants(row)[0];
@@ -10,7 +10,7 @@ export function searchCatalog(catalog,state){
   const tokens=query.split(/\s+/).filter(Boolean);
   const matches=(hay,token)=>hay.includes(token)||(token==='步枪'&&/rifle|步枪/.test(hay))||(token==='装弹'&&/reload|换弹|装弹/.test(hay));
   let rows=catalog.clips.filter(row=>{
-    if(state.category&&state.category!=='all'&&row.categoryCode!==state.category)return false;
+    if(state.category&&state.category!=='all'&&row.categoryCode!==state.category&&!row.collections?.includes(state.category))return false;
     if(state.subcategory&&state.subcategory!=='all'&&row.subcategory!==state.subcategory)return false;
     if(state.weapon&&state.weapon!=='all'&&row.weapon!==state.weapon)return false;
     if(inPlace!=='all'&&row.inPlace!==(inPlace==='yes'))return false;
@@ -32,6 +32,7 @@ export function searchCatalog(catalog,state){
 }
 export function originalSource(row,catalog){
   const item=row.originalSource,release=catalog.library?.originalSources;
+  if(item?.kind==='external-riding'){if(item.id!==row.id||!row.id.startsWith('riding-')||!/^assets\/riding-originals\/[a-f0-9]{12}-[A-Za-z0-9_.-]+\.(dae|fbx|glb)$/.test(item.path)||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isInteger(item.bytes)||item.bytes<=0)return null;return {...item,url:new URL(item.path,import.meta.url).href,page:item.sourcePage,repository:null,commit:null};}
   if(!item||!release||!/^[a-f0-9]{40}$/.test(release.commit)||!/^0everey\/[A-Za-z0-9_.-]+$/.test(release.repository))return null;
   if(!/^clips\/.+\.fbx$/i.test(item.path)||item.path.split('/').includes('..')||!/^[a-f0-9]{64}$/.test(item.sha256))return null;
   const encoded=item.path.split('/').map(encodeURIComponent).join('/');
@@ -42,8 +43,8 @@ export function originalSource(row,catalog){
 export function sourceText(row,catalog,variant){
   const source=originalSource(row,catalog);
   return JSON.stringify({schema:'motion-source-reference.v1',id:row.id,name:row.name,english:row.english,
-    originalSource:source?{mixamoId:source.mixamoId,path:source.path,sha256:source.sha256,bytes:source.bytes,repository:source.repository,commit:source.commit,url:source.url,page:source.page}:null,
-    currentPreview:variant?{variant:variant.key,url:new URL(variant.url,location.href).href,sha256:variant.sha256,sourceSha256Role:variant.sourceSha256Role||'original source FBX',sourceIdentities:variant.sourceIdentities||{sourceFbxSha256:variant.sourceSha256},fps:variant.fps,frames:variant.frames,duration:variant.duration}:null},null,2);
+    originalSource:source?{kind:source.kind,format:source.format,author:source.author,license:source.license,take:source.take,mixamoId:source.mixamoId,path:source.path,sha256:source.sha256,bytes:source.bytes,repository:source.repository,commit:source.commit,url:source.url,page:source.page}:null,
+    currentPreview:variant?{variant:variant.key,url:new URL(variant.url,location.href).href,sha256:variant.sha256,sourceSha256Role:variant.sourceSha256Role||'original source FBX',sourceIdentities:variant.sourceIdentities||{sourceFbxSha256:variant.sourceSha256},fps:variant.fps,fpsRole:variant.fpsRole,timePolicy:variant.timePolicy,frames:variant.frames,duration:variant.duration}:null},null,2);
 }
 export async function downloadVerified(url,{sha256,bytes,filename},signal){
   const response=await fetch(url,{signal,credentials:'omit'});

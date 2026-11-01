@@ -65,3 +65,8 @@ footer{background:#101927;border-color:#35445b;color:#b1c0d3}footer a{color:#c7c
 .view-fields{display:contents}
 @media(max-height:850px){.view-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}}
 @media(max-height:700px){.inspector-page[data-inspector="view"]{gap:3px;padding:6px}.inspector-page[data-inspector="view"] hr{margin:6px 0}}
+
+/* First-class character and held-item choices share the existing stage. */
+.stage-toolbar{flex-wrap:wrap;row-gap:8px}.preview-pickers{display:flex;align-items:center;gap:12px;flex:1 0 100%;padding-top:7px;border-top:1px solid rgba(157,187,223,.16)}.preview-pickers label{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:12px;color:#b7cbe1}.preview-pickers select{height:32px;min-width:110px;max-width:185px}.held-status{margin-left:auto;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#83cbb8}@media(max-width:600px){.preview-pickers{gap:8px;flex-wrap:wrap}.preview-pickers label{flex:1;min-width:0}.preview-pickers select{min-width:0;width:100%;max-width:none}.held-status{width:100%;max-width:none;margin:0;min-height:15px}.stage-toolbar .stage-tools{flex-wrap:wrap;justify-content:flex-start}}
+
+.center{grid-template-rows:auto minmax(0,1fr) 44px 38px}.stage-toolbar{min-height:92px}@media(max-width:600px){.center{grid-template-rows:auto minmax(0,1fr) 38px 32px}.stage-toolbar{min-height:122px}}

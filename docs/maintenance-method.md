@@ -89,3 +89,20 @@ CLI AI与用户共用原File输入yuukaFile；当前获准浏览器工具可将�
 modelImport只描述最近一次导入动作。坏包被拒时此前有效角色可继续可看，应结合rendering.modelReady/framingReady、当前renderedActors、实际source、rendererError与当前组合cache判定；不能由modelImport.error单独推出当前画面丢失。cached与ready也不等于整库离线。真实断网新文档要核页面和实际控制Worker都断网、两端HTTPcache禁用、当前配方/source/root/解析依赖均完整。
 
 固定PMX解析代码随页面壳安装，模型原包留在原preview预算和清理epoch内；不要迁入第二缓存库。角色切换或较新导入取消旧页面采用，先前显式同身份导入可完成本机保存；清理才使旧保存与回复失效。优香保原map透明标记、diffuse/side/opacity与无图颜色，实例染色从原baseColor开始；MMD物理、IK/grant、专用枪外亲与正式接触仍未启用或验收。
+
+
+## 骑行、乘坐集合与实体手持
+
+原Mixamo主索引与2446原件保持。网页新增10个外来骑行take，存真实MVP2原P/Q/rest/时间、原始骨名及已核语义别名；data/riding-catalog.json是明确登记，data/collections.json保乘坐集合及来源判据。乘坐是跨原类别集合，不重复计成新增动作。data/catalog.json整合后为2456个不同ID，分类里有骑行10与乘坐127。
+
+用真实不同骨架逐家族适配，不按一马样外推自行车/摩托。prepare_riding_preview.py复用原pack与原parser，保原源文件SHA、take与时基；摩托保存原GLB关键时间并集，24仅导入换算时基。人物显示只对该三家族采用实际腿链与固定整段脚部参考，避免沿用Mixamo绝对髋高假设；原MVP世界P/Q不因此重写，也不逐帧贴地。未认证车马接触。
+
+prepare_held_items.py保真实模型几何/材质，归一化握点及轴：剑刃+Y、枪管+Z。held-items.js是源身份/比例与目标语义手掌装配入口；角色原手骨rest决定局部socket，完整逆骨矩阵补偿可莉PMX尺度。renderer独占模板和异步代次，actor共享几何/纹理、各自材料与骨架；换物、换角色或清理时先移除实例再归还模板。不要给模型贴文字代真实物品，也不要每帧新解析GLB。
+
+M416的物品局部yaw为+π/2，将枪管+Z对到手掌wrist→middle的+X；不能用公共socket迁就单一武器。Rifle Aiming Idle须实际正/侧及动态核枪口、枪托、主握柄，parent关系或掌点零误差不代用途正确。同片None→M416→大剑→None的cacheTicket含heldItem/heldGeneration/装配就绪状态，离线标识需依赖集合及实际就绪共同成立。
+
+静态道具纳入同一skinBounds与全段固定取景；插值余量只核实际驱动目标的映射骨，未映射配件旋转不扩大镜头。原图/正侧背与多个时刻检查握点、剑尖/枪托可见，不能仅parent关系或一张静态图宣布所有动作接触自然。选择器在预览主区，骨架速览选择实体时切人物模式，保存/分享仍用稳定heldItem枚举。
+
+新外源原件走具名external-riding描述，真实DAE/FBX/GLB类型、作者、许可、SHA、字节与take保留。public exporter只允许登记的10项和受限assets/riding-originals路径；原Mixamo的固定repo/commit与clips/*.fbx检查不放宽。两个道具的内容hash模型也逐项白名单。可莉继续浏览器从官方pinned ZIP直接取得，不复制其原包到发布目录。
+
+adopt_website_features.py把已核骑行/道具产物接到作者目录，不重烤2446；修改算法用新候选输出，保旧receipt和失败。refresh_preview_metadata.py对原Mixamo精确ID集合刷新，同时严格核旁路骑行登记/原件/变体并保其元数据和乘坐集合计数。公开与旧内容hash回收仍走原publisher，别直接改docs。依当前选择核SW/道具/角色/动作依赖与真实断网消费者；完整包离线和仅缓存当前内容分开声明。

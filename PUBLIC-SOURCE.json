@@ -1,24 +1,64 @@
 {
-  "files": 2590,
-  "bytes": 478695470,
-  "ids": 2446,
-  "variants": 2482,
+  "files": 2614,
+  "bytes": 515150704,
+  "ids": 2456,
+  "variants": 2492,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
   "fileIdentities": [
     {
       "path": "app.js",
-      "bytes": 34662,
-      "sha256": "1ae85c007c54865c003c930819f16b5bd38ee83eb6bc5bd9804bf532fec7b565"
+      "bytes": 34365,
+      "sha256": "79505a2712503b643f2378d0537732e70b6f6dfc754fab05456fa942f2df3f82"
     },
     {
       "path": "assets/fonts/OFL.txt",
-      "bytes": 4301,
-      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+      "bytes": 4393,
+      "sha256": "88f117575237307bdd86a17ef15e21790fc9a662fe4dfb103ca1ca077f0d9982"
     },
     {
       "path": "assets/fonts/motion-heading.ttf",
       "bytes": 297732,
       "sha256": "7dde8c2003e3dafb8268ed798b96a5c449ac6a69810d654d1f29883058b77ffb"
+    },
+    {
+      "path": "assets/riding-originals/20ba7fc34803-walk_relax.dae",
+      "bytes": 999566,
+      "sha256": "20ba7fc348034996bb7a2d73efa477684be9edf87ffbf3fc5519e91b4d3b1c1f"
+    },
+    {
+      "path": "assets/riding-originals/233c4a81e9a3-motorcycle-riding-loop.glb",
+      "bytes": 6156792,
+      "sha256": "233c4a81e9a34dcd4fa45bd36e505c0a90f7e39073648ac4f5e1941ca8592ca7"
+    },
+    {
+      "path": "assets/riding-originals/25aba2eb829e-dismount.dae",
+      "bytes": 1143714,
+      "sha256": "25aba2eb829eea27fe7441b682aa38d787e6dc10cfe8c252909a60bc3db601eb"
+    },
+    {
+      "path": "assets/riding-originals/6128ab4ff5d3-trot_relax.dae",
+      "bytes": 731324,
+      "sha256": "6128ab4ff5d31d96430e3d18040b41ab44e11f4a490084be48134e1ae4f58fb5"
+    },
+    {
+      "path": "assets/riding-originals/6ee4a8b92c1f-mount.dae",
+      "bytes": 1147943,
+      "sha256": "6ee4a8b92c1f434eb6094fe51799033f4a0bba8191b8c490afefa2921e6a191a"
+    },
+    {
+      "path": "assets/riding-originals/a4af4ec0439a-gallop_relax.dae",
+      "bytes": 731654,
+      "sha256": "a4af4ec0439a67db51b8650f3c603d72f9c28b1bb32325d076743fd2e5c23b7d"
+    },
+    {
+      "path": "assets/riding-originals/cd39fa15d632-idle_relax_01.dae",
+      "bytes": 1310956,
+      "sha256": "cd39fa15d63298f6894e9541b967d9d61a7dc43838c71592bc697c3cb182ea6b"
+    },
+    {
+      "path": "assets/riding-originals/e0ff1ab1c702-bicyle_animated_human.fbx",
+      "bytes": 19620508,
+      "sha256": "e0ff1ab1c702c418b728d67333a3a4a9c6cddb581dec4f773f3c47508b1f5345"
     },
     {
       "path": "cache-client.js",
@@ -32,8 +72,8 @@
     },
     {
       "path": "credits.txt",
-      "bytes": 3177,
-      "sha256": "94f762142c05b189909329f06e82866e4e32bae854edc0e2e1189f35330ce8f0"
+      "bytes": 4642,
+      "sha256": "39191b903bc4ea978ee0d3a53c1284cc2c8383df18112a922a1cf953dcd4e4ee"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -212,8 +252,8 @@
     },
     {
       "path": "data/catalog.json",
-      "bytes": 5978059,
-      "sha256": "f50a1e3c34d9fd18a890c7380d313b076df0481681331012654ab424aff81b97"
+      "bytes": 6040496,
+      "sha256": "185330efa004d917080b8d9bf3c0372da714989596d767aea768175b6a7e8328"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -12626,6 +12666,71 @@
       "sha256": "5363d30fb82b7c7a5c324da75f87dbb3983632c904f07275007d685ecbfe71e0"
     },
     {
+      "path": "data/clips/source-riding-0ad-dismount-3bbf376f5c23.mvp.gz",
+      "bytes": 126769,
+      "sha256": "3bbf376f5c237044d742cc4fa1e06cce197a8a02efde449b1d866ab68a883b24"
+    },
+    {
+      "path": "data/clips/source-riding-0ad-gallop-7abb327a10c5.mvp.gz",
+      "bytes": 51189,
+      "sha256": "7abb327a10c5ef408341753f3aa89e49436be594c667e48047e60ce57a1f1093"
+    },
+    {
+      "path": "data/clips/source-riding-0ad-idle-393c3bd4369d.mvp.gz",
+      "bytes": 84704,
+      "sha256": "393c3bd4369da0a52685597f740cec7fd81920758ff4901d0b9c9e05bbd53bca"
+    },
+    {
+      "path": "data/clips/source-riding-0ad-mount-9c36ae6f4b6c.mvp.gz",
+      "bytes": 126360,
+      "sha256": "9c36ae6f4b6cb0136fa43ebeb10166ec8c1ef57aacbf772874ec1b1a2462594d"
+    },
+    {
+      "path": "data/clips/source-riding-0ad-trot-73407bb3f0c2.mvp.gz",
+      "bytes": 48932,
+      "sha256": "73407bb3f0c261ed6f01d74e2065c300b15a90001af7f84bd3763d585130f2b2"
+    },
+    {
+      "path": "data/clips/source-riding-0ad-walk-ca2de402592b.mvp.gz",
+      "bytes": 97211,
+      "sha256": "ca2de402592b9da84dc07ee73538f439b0e164cf3438b1ba4212dfc93ce5025e"
+    },
+    {
+      "path": "data/clips/source-riding-motorcycle-loop-6cfe6876c957.mvp.gz",
+      "bytes": 99054,
+      "sha256": "6cfe6876c957a026eea013b6ea871e2113a4c7f48cedd31adafd39eb42a328b0"
+    },
+    {
+      "path": "data/clips/source-riding-tum-padaling-7a572b84ef7a.mvp.gz",
+      "bytes": 57480,
+      "sha256": "7a572b84ef7ae5ef85997518da5a02d716401a83c37e14c9c75ae998addfc675"
+    },
+    {
+      "path": "data/clips/source-riding-tum-steerleft-b257242d821a.mvp.gz",
+      "bytes": 271006,
+      "sha256": "b257242d821ac6ddfd4e99542036f72f3cc38ddb773f0e0c80d283aebcf61734"
+    },
+    {
+      "path": "data/clips/source-riding-tum-steerright-48c64c016f9a.mvp.gz",
+      "bytes": 271244,
+      "sha256": "48c64c016f9a06ec7441ac1828ed9c270493d0dabc2989078934ec482a2a71df"
+    },
+    {
+      "path": "data/collections.json",
+      "bytes": 4646,
+      "sha256": "83b26880e268d92bcecac0b72ae94ae5708d75c708582dcfa42b505ac48401eb"
+    },
+    {
+      "path": "data/held-items.json",
+      "bytes": 1518,
+      "sha256": "b9b58465053f21eadd5776cd0e884ca0cfd1f3ce4b817f7d01cbfe0528676514"
+    },
+    {
+      "path": "data/riding-catalog.json",
+      "bytes": 27301,
+      "sha256": "8cf6beaea5fd3e33e3027d43f043007c503c903c4e9793a7f081aa845c3928a0"
+    },
+    {
       "path": "data/roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-23af6fff192b.json",
       "bytes": 134610,
       "sha256": "23af6fff192befa28b9f43a9d35de1c10be79fe9d7d8edbcd053b8ceeae1cc50"
@@ -12801,24 +12906,39 @@
       "sha256": "697e4211e84e77ae6edfd5bfab222e918924a52c5d4775ebca1aef22639b763e"
     },
     {
+      "path": "held-items.js",
+      "bytes": 5709,
+      "sha256": "271712c8ede2caae449d11559fe86c69ef1e005544b355c02bf954eb6fad4b56"
+    },
+    {
       "path": "index.html",
-      "bytes": 440,
-      "sha256": "67b427fe108d8ef285741019184ecf8f02f9ad410f6df761f1bb9a396d93f795"
+      "bytes": 439,
+      "sha256": "6c7d7ac6accc646fcd6e94afd0374ac560f438b76af42def30c845d571c87e6f"
     },
     {
       "path": "klee-source.js",
-      "bytes": 2533,
-      "sha256": "9a82d8a604e561abc9e31109d419c1dd482fbd7a0c4a5296465d68c63e219748"
+      "bytes": 2512,
+      "sha256": "9e56d7cac0a1ae36458be7d4fdef5355a6818049e82d31da4664fbefbda2fc17"
     },
     {
       "path": "library-browser.js",
-      "bytes": 9113,
-      "sha256": "5a7d08740dd2f3db3262ec01195e79fc5e70d157be277e97c342fc3794ec5ee8"
+      "bytes": 9821,
+      "sha256": "acf15099c634ada9675e50d8e84ef7b0eaa27a81b54f12ddb17398712e25c473"
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 11874,
-      "sha256": "4a35250401bdd0dfa0964d537bc19cbaa25ccd52577feee7c20b9df1e7061785"
+      "bytes": 15021,
+      "sha256": "f78f84ad9bb9ca74e3449c43681cbdff4bd23094fca66224bbd1d489c070de65"
+    },
+    {
+      "path": "models/held-greatsword-c82f73e0df5d.glb",
+      "bytes": 510140,
+      "sha256": "c82f73e0df5d9de2d67abdbe5ca9e5bfef029769a3b6daf45cd32b7caec709dc"
+    },
+    {
+      "path": "models/held-m416-1fffac6602a7.glb",
+      "bytes": 2753708,
+      "sha256": "1fffac6602a701ab899e31183a147f05ae657ae52106390ea77286c67c970637"
     },
     {
       "path": "models/herta-7c88eda67cb9.glb",
@@ -12832,8 +12952,8 @@
     },
     {
       "path": "motion-session.js",
-      "bytes": 21587,
-      "sha256": "48ad096362d5a6843ccd71c170c3e185db8a2200c61f55401a0aaa7a03ede6dc"
+      "bytes": 21336,
+      "sha256": "c15b069ef4055dffdf27cd8fb334ae5f6988d615b9f85b7f25b8aac9eb40de38"
     },
     {
       "path": "motion-wall.js",
@@ -12852,33 +12972,33 @@
     },
     {
       "path": "pmx-source.js",
-      "bytes": 8329,
-      "sha256": "737f32d6e0432da6aa9435c7feed2428d5ddd5a2310f28dec1175c694e4614e2"
+      "bytes": 8240,
+      "sha256": "2c23fdbcdeef091d89022f40821647a977b93bd2d71752c1946495911ccd0a98"
     },
     {
       "path": "renderer.js",
-      "bytes": 20293,
-      "sha256": "4d9a9c75fe8e61e30335e0de8979efea0ea1e7d3953f322f0585b861cbcd69c8"
+      "bytes": 22499,
+      "sha256": "5ffde2e16b729b20bce6a89b0fdc8295865814b5f9949f31f8a9715cda27d69c"
     },
     {
       "path": "studio.css",
-      "bytes": 36180,
-      "sha256": "fbca8665522d3e67a500e479e09f4230897507271aa0c9f8ce62b6bbc21210af"
+      "bytes": 37253,
+      "sha256": "a3d224b90d47475f667397d0d4b3d2e2d9c3b9f0b79b22a117634ffc81d7f207"
     },
     {
       "path": "studio.js",
-      "bytes": 67560,
-      "sha256": "7694b1fb8ec4bc94d07f4625b2c04796412b8e2292d5b294041cf05d885ddaa1"
+      "bytes": 69740,
+      "sha256": "105143c831383f2e27b95233dabbab0d9fc8e880ba80be7fddfd425dfa3b5a88"
     },
     {
       "path": "styles.css",
-      "bytes": 24525,
-      "sha256": "9178f63fc063caa0a153dc8d930b648a4ba9dcec45c60793e3d702aa8efe5e33"
+      "bytes": 24508,
+      "sha256": "43d1309488847095e3e0f4a421b419187197d866afaf9e505f7446561720d94f"
     },
     {
       "path": "sw.js",
-      "bytes": 12112,
-      "sha256": "e19b80c20003ecd894d92734dfa6178d7225587455163b0d71a51853cb452efb"
+      "bytes": 12128,
+      "sha256": "c122874d2a343def5cc90d1ea5767d829ff889647f83cde4aa274de6cc280b94"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -12892,18 +13012,18 @@
     },
     {
       "path": "vendor/three/LICENSE",
-      "bytes": 1081,
-      "sha256": "4c40a1ef62450b857c3b2aaf294936304cd552d965fbcd9d32d4c5bcf4ba4454"
+      "bytes": 1102,
+      "sha256": "f57eb9202058667d12aebd854fe8a86d6feaeab51078180df5615bfdbd5cff05"
     },
     {
       "path": "vendor/three/SkeletonUtils.js",
-      "bytes": 9346,
-      "sha256": "bd9f787ba88d6c3f28acef04e4b9fd43ba050c38a7ce9a34551357d7a91daa35"
+      "bytes": 8903,
+      "sha256": "dec1842699024dea647e24668c660e77f5f39e0d2d4707dba426009b9c0fd8fd"
     },
     {
       "path": "vendor/three/mmd/SOURCES.json",
-      "bytes": 1276,
-      "sha256": "8670b4c25501d246bb1656303e4bc2a376042dbf029675469f5be2b40f795572"
+      "bytes": 1246,
+      "sha256": "e443791c1a2740482251f63ed9b4987f2b906ed78828796abd34cefc60721a28"
     },
     {
       "path": "vendor/three/mmd/libs/mmdparser.module.js",
@@ -12932,18 +13052,18 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 27508,
-      "sha256": "d330fb152828d5cc588aa784fc67be8d72525558968b534034b97070f75bdb66"
+      "bytes": 30732,
+      "sha256": "98d6d92f5d23ea7d00910292d0ec3e5a3f86ca53d2eaa92f31310b2e4cd545f4"
     },
     {
       "path": "workbench.css",
-      "bytes": 11500,
-      "sha256": "3a49e1c41280eda177a03d40ad80fed4858483730501984887781523c2fe3ce2"
+      "bytes": 11494,
+      "sha256": "51284c95904a8487821e95d8aa491641271fa83cd721dbee71b6b2ae26a0c517"
     },
     {
       "path": "workbench.html",
-      "bytes": 14089,
-      "sha256": "8982109442b7f3d28a24e310de631b797f4f73a3352c76640a9fe663132c981b"
+      "bytes": 14487,
+      "sha256": "66f097cb603b49b5a5011a02087d5f8ac31326282dc1b0144937146c63dda0ad"
     },
     {
       "path": "workbench.js",
@@ -12952,11 +13072,11 @@
     },
     {
       "path": "yuuka-source.js",
-      "bytes": 2979,
-      "sha256": "2746d0d33dacd083e4d566bd09380aa147f79fb658812546ea9710bbc714ace2"
+      "bytes": 2973,
+      "sha256": "e99a7911358fa79dbcb50c7e0be38a7b21649429eb698e12fccb88b9d9abeca7"
     }
   ],
-  "applicationSourceCommit": "d8cbc078df381585c12a4f6882ba8696d86976f7",
+  "applicationSourceCommit": "accb18683774c7b76ab9c8a95edfae336fae3e35",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -13140,5 +13260,5 @@
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
     }
   ],
-  "totalPublishedApplicationFiles": 2625
+  "totalPublishedApplicationFiles": 2649
 }

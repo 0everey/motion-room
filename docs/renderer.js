@@ -3,6 +3,7 @@ import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 import {sampleMotion} from './mvp.js';
 import {MODEL_ASSET,CHARACTER_PROFILES,DEFAULT_CHARACTER} from './character.js';
 import {materialTextures} from './klee-source.js';
+import {HELD_ITEMS,isHeldItem,loadHeldItem,mountHeldItem} from './held-items.js';
 
 const ASSETS=[MODEL_ASSET,'character.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const Q=()=>new THREE.Quaternion(),V=()=>new THREE.Vector3();
@@ -78,11 +79,22 @@ export class MotionRenderer{
     for(const radius of [1.1,1.16]){const ring=new THREE.Mesh(new THREE.RingGeometry(radius,radius+0.004,96),new THREE.MeshBasicMaterial({color:0xb59b6c,transparent:true,opacity:0.48,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-0.008;this.floor.add(ring);}
     const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=128;const ctx=shadowCanvas.getContext('2d'),g=ctx.createRadialGradient(64,64,4,64,64,64);g.addColorStop(0,'rgba(54,46,43,.26)');g.addColorStop(1,'rgba(54,46,43,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128);
     const shadow=new THREE.Mesh(new THREE.PlaneGeometry(1.25,0.75),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=-0.006;this.floor.add(shadow);
-    this.characterProfile=CHARACTER_PROFILES[DEFAULT_CHARACTER];this.hipName=this.characterProfile.hip;this.bindInput();this.resizeObserver=new ResizeObserver(()=>onChange());this.resizeObserver.observe(canvas);
+    this.heldItemKey='none';this.heldGeneration=0;this.heldReady=false;this.heldError=null;this.characterProfile=CHARACTER_PROFILES[DEFAULT_CHARACTER];this.hipName=this.characterProfile.hip;this.bindInput();this.resizeObserver=new ResizeObserver(()=>onChange());this.resizeObserver.observe(canvas);
     canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();onError(new Error('图形上下文已丢失，请刷新页面恢复。'));});
     this.loadModel();
   }
-  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1),...(this.characterProfile.offlineAssets||[])];}
+  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1),'held-items.js',...(this.characterProfile.offlineAssets||[]),...(HELD_ITEMS[this.heldItemKey]?.asset?[HELD_ITEMS[this.heldItemKey].asset]:[])];}
+  unmountHeldItem(){this.attachedHeld?.removeFromParent();this.attachedHeld=null;this.heldReady=false;}
+  mountCurrentHeldItem(){if(!this.modelReady||!this.character||!this.heldTemplate||this.heldItemKey==='none')return false;this.dropActors?.();this.unmountHeldItem();this.attachedHeld=mountHeldItem(this.character,this.bones,this.rests,this.characterProfile,this.heldItemKey,this.heldTemplate);this.heldReady=true;this.onChange();return true;}
+  async setHeldItem(key){
+    if(!isHeldItem(key))throw new Error('未知的手持物品。');
+    if(key===this.heldItemKey&&(this.heldLoading||this.heldTemplate||key==='none'))return this.heldLoading||true;
+    this.heldItemKey=key;const generation=++this.heldGeneration;this.heldController?.abort();this.dropActors?.();this.unmountHeldItem();
+    if(this.heldTemplate)disposeObject(this.heldTemplate);this.heldTemplate=null;this.heldError=null;
+    if(key==='none'){this.heldLoading=null;this.onChange();return true;}
+    const controller=new AbortController();this.heldController=controller;
+    this.heldLoading=(async()=>{let template;try{template=await loadHeldItem(key,controller.signal);if(generation!==this.heldGeneration||controller.signal.aborted){disposeObject(template);return false;}this.heldTemplate=template;this.mountCurrentHeldItem();this.onChange();return true;}catch(error){if(error.name!=='AbortError'&&generation===this.heldGeneration){this.heldError=error.message;this.onError(error);}return false;}finally{if(generation===this.heldGeneration){this.heldLoading=null;this.onChange();}}})();return this.heldLoading;
+  }
   async setCharacter(key){const profile=CHARACTER_PROFILES[key];if(!profile?.asset)throw new Error('该预览模型尚未准备完成。');if(profile===this.characterProfile&&this.modelReady)return true;this.clearPreviewResources();this.characterProfile=profile;this.hipName=profile.hip;await this.loadModel();return this.modelReady&&this.characterProfile===profile;}
   async loadModel(){
     if(this.loading)return this.loading;
@@ -112,12 +124,13 @@ export class MotionRenderer{
       this.scene.add(this.character);this.character.updateMatrixWorld(true);
       this.helper=new THREE.SkeletonHelper(this.character);this.helper.visible=this.skeleton;this.scene.add(this.helper);
       this.modelReady=true;this.modelStats={bones:this.bones.size,meshes:0,vertices:0};this.character.traverse(o=>{if(o.isMesh){this.modelStats.meshes++;this.modelStats.vertices+=o.geometry.attributes.position.count;}});
-      if(this.motion)this.configureRetarget();this.onChange();
+      if(this.motion)this.configureRetarget();if(this.heldItemKey!=='none'){if(this.heldTemplate)this.mountCurrentHeldItem();else if(!this.heldLoading)this.setHeldItem(this.heldItemKey);}this.onChange();
     })().catch(error=>{if(error.name!=='AbortError'&&generation===this.loadGeneration)this.onError(error);}).finally(()=>{if(generation===this.loadGeneration)this.loading=null;});
     return this.loading;
   }
   clearPreviewResources(){
     this.loadGeneration++;this.modelController?.abort();this.loading=null;this.modelReady=false;this.motion=null;this.mapping=[];
+    this.heldGeneration++;this.heldController?.abort();this.heldLoading=null;this.unmountHeldItem();if(this.heldTemplate)disposeObject(this.heldTemplate);this.heldTemplate=null;this.heldError=null;
     if(this.character){this.scene.remove(this.character);disposeObject(this.character);this.character=null;}
     if(this.helper){this.scene.remove(this.helper);this.helper.geometry.dispose();this.helper.material.dispose();this.helper=null;}
     if(this.trailLine){this.scene.remove(this.trailLine);disposeObject(this.trailLine);this.trailLine=null;}
