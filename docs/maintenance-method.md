@@ -93,7 +93,7 @@ modelImport只描述最近一次导入动作。坏包被拒时此前有效角色
 
 ## 骑行、乘坐集合与实体手持
 
-原Mixamo主索引与2446原件保持。网页新增10个外来骑行take，存真实MVP2原P/Q/rest/时间、原始骨名及已核语义别名；data/riding-catalog.json是明确登记，data/collections.json保乘坐集合及来源判据。乘坐是跨原类别集合，不重复计成新增动作。data/catalog.json整合后为2456个不同ID，分类里有骑行10与乘坐127。
+原Mixamo主索引与2446原件保持。首波新增10个外来骑行take，存真实MVP2原P/Q/rest/时间、原始骨名及已核语义别名；data/riding-catalog.json是明确登记，data/collections.json保乘坐集合及来源判据。乘坐是跨原类别集合，不重复计成新增动作。首波整合为2456个不同ID、骑行10/乘坐127，此为历史基线，当前实际计数以catalog及本轮小节为准。
 
 用真实不同骨架逐家族适配，不按一马样外推自行车/摩托。prepare_riding_preview.py复用原pack与原parser，保原源文件SHA、take与时基；摩托保存原GLB关键时间并集，24仅导入换算时基。人物显示只对该三家族采用实际腿链与固定整段脚部参考，避免沿用Mixamo绝对髋高假设；原MVP世界P/Q不因此重写，也不逐帧贴地。未认证车马接触。
 
@@ -121,8 +121,25 @@ SW r22安装只建立版本缓存，不自行下载全壳或完整catalog。fetc
 
 必要回归包括：SDK/旧完整目录阻塞时完整导航和真实搜索/分享先行；四个长正文已发头未结束时点第五片，观察实际network start、目标像素、低优先取消和恢复；共享A退出B继续、零消费者退出、ready不重载、清空迟到不复活；复制路径在延迟详情跨入口接管后恢复；当前组合断网新document仍可看。耗时记录注明本机/传输条件，不能宣称任意线路绝对即时。
 
-静态道具纳入同一skinBounds与全段固定取景；插值余量只核实际驱动目标的映射骨，未映射配件旋转不扩大镜头。原图/正侧背与多个时刻检查握点、剑尖/枪托可见，不能仅parent关系或一张静态图宣布所有动作接触自然。选择器在预览主区，骨架速览选择实体时切人物模式，保存/分享仍用稳定heldItem枚举。
+静态道具纳入同一skinBounds与全段固定取景；插值余量只核实际驱动目标的映射骨，未映射配件旋转不扩大镜头。原图/正侧背与多个时刻检查握点、剑尖/枪托可见，不能仅parent关系或一张静态图宣布所有动作接触自然。选择器在预览主区；当前骨架与人体/角色共用同一目标骨链，骨架显示也保留实体持有，不自动切人物。保存/分享仍用稳定heldItem和style/character枚举。
 
-新外源原件走具名external-riding描述，真实DAE/FBX/GLB类型、作者、许可、SHA、字节与take保留。public exporter只允许登记的10项和受限assets/riding-originals路径；原Mixamo的固定repo/commit与clips/*.fbx检查不放宽。两个道具的内容hash模型也逐项白名单。可莉继续浏览器从官方pinned ZIP直接取得，不复制其原包到发布目录。
+新外源原件走具名external-riding描述，真实DAE/FBX/GLB类型、作者、许可、SHA、字节与take保留。public exporter只允许明确登记的外源动作集合和受限assets/riding-originals路径；原Mixamo的固定repo/commit与clips/*.fbx检查不放宽。两个道具的内容hash模型也逐项白名单。可莉继续浏览器从官方pinned ZIP直接取得，不复制其原包到发布目录。
 
 adopt_website_features.py把已核骑行/道具产物接到作者目录，不重烤2446；修改算法用新候选输出，保旧receipt和失败。refresh_preview_metadata.py对原Mixamo精确ID集合刷新，同时严格核旁路骑行登记/原件/变体并保其元数据和乘坐集合计数。公开与旧内容hash回收仍走原publisher，别直接改docs。依当前选择核SW/道具/角色/动作依赖与真实断网消费者；完整包离线和仅缓存当前内容分开声明。
+
+
+## 五项在线展示与资源扩充（2026-11-01 本轮）
+
+当前主展示包含骨架、人体、可莉、大黑塔、兽人战士。原“优香必须远端实装”的需求已由用户明确修订为“没有的话找个其他模型顶，也可以试试兽人”；优香仍为明确个人导入选项，不冒在线源。可莉从原官方pinned ZIP直接客户端获取，大黑塔仍用原已入库GLB。新的Orc为Callan McEntee原作/CC BY4.0，真实取得渠道、原SHA、改动、生成器与新GLB身份在data/character-sources.json；原3个身体纹理/83身体关节/蒙皮保留，仅移除矛和原烘焙阴影、统一米制身高和地面。prepare_orc_preview.py接受明确原文件与新输出目录；原件保存在作者assets/character-sources但不进入公开投影。不要再试图把原优香零授权模型镜像，或把兽人标作优香。
+
+主选择characterSelect将skeleton映射为style=skeleton、character=ue4，人体为style=character、character=ue4，其它沿真实profile。旧workspace/style/character API兼容。骨架直接复用WorkbenchRenderer真实UE4 actor骨链/持有，隐藏实例body材料而不隐藏骨骼根；template不污染。已实际确认无skin权重的7个UE4 ik辅助骨仅从SkeletonHelper.bones及drawRange中排除，原bones/solver/skin保持；防止俯卧持枪时画出悬空辅助折线。
+
+剑的物品独立握点以真实闭拳原件修正：palmFraction1.08/palmDepth-.24，用腕至中指根长度归一化；原.52腕掌中点会穿手背靠腕。完整逆手骨矩阵保UE4 .01及Klee .08尺度。枪保持独立+90°yaw和原pistol-grip基准；不要为修剑扭全角色或枪轴。数学parent/零残差不是实际掌指接触证明，需正/顶/侧近景、整刀取景与多个时刻。仍未自动生成任意不兼容动作的双手IK/物理手型。
+
+新增CYENS数据源来自Zenodo10668611及其DataCite注册CC BY4.0。采用03TT/05RB/08TT/10TT四份完整人体骨链原BVH，每份保完整记录作下载；网页明确选原录制第60秒起约45秒原帧预览，不冒无缝loop或完整长录制已全页采样。11RB/9TT缺必要末端链，不采；CMU重复Motorcycle校准姿势不算骑行动作。Quaternius UAL1 Standard为原作者官方CC0免费包，Driving进入骑行/乘坐，Sitting四个真实独立take进入日常09与乘坐，非骑马/踩踏。GLB使用所选take的实际key时间并集，导入fps不冒原生固定帧率。
+
+prepare_transport_preview.py从data/transport-build.json具名原件可原位重建（source相对该manifest目录）；原件SHA、字节、frameTime、take、节选范围和完整原时长保留。adopt_transport_previews.py仅增量采用已审核9项，保护此前全部2456个原件/variant身份；旧adopt_website_features.py是首波bootstrap，遇后续外源先拒绝避免覆盖新登记。元数据刷新、导航派生和严格公开白名单沿原工具，不手改分片，不把MVP2派生叫原FBX。
+
+目录/预览继续沿library-entry→studio异步接管、四正文优先队列和有界解码内存。GLB在真实解析前核profile SHA；当前角色和持有的离线真值包含实际模型及道具依赖，骨架不能免除held ready。切换/None/清理/迟到不能回挂旧件或污染模板；发布前验匿名新document下真实五项、当前组合离线重开，以及新增原件下载的真实字节/SHA。
+
+本轮最后按用户‘加到30左右’再增量采用15个0 A.D.独立骑马take，当前2480个不同ID、2516变体、骑行30/乘坐132。prepare_extra_riding_preview.py只读人体transform/matrix通道的float4x4 OUTPUT与实际INPUT时基，排除bbone/IK自定义属性，减去各自非零原时段起点，保原首/中/末真实姿态。data/extra-riding-build.json可从已保原件重建；adopt_transport_previews.py --kind extra-riding增量采用15项，保护先前2465身份。原件与对应派生均沿0 A.D. CC BY-SA 3.0，保Wildfire署名/来源/修改说明。

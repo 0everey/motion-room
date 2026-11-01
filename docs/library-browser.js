@@ -33,7 +33,7 @@ export function searchCatalog(catalog,state){
 }
 export function originalSource(row,catalog){
   const item=row.originalSource,release=catalog.library?.originalSources;
-  if(item?.kind==='external-riding'){if(item.id!==row.id||!row.id.startsWith('riding-')||!/^assets\/riding-originals\/[a-f0-9]{12}-[A-Za-z0-9_.-]+\.(dae|fbx|glb)$/.test(item.path)||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isInteger(item.bytes)||item.bytes<=0)return null;return {...item,url:new URL(item.path,import.meta.url).href,page:item.sourcePage,repository:null,commit:null};}
+  if(item?.kind==='external-riding'){if(item.id!==row.id||!row.id.startsWith('riding-')||!/^assets\/riding-originals\/[a-f0-9]{12}-[A-Za-z0-9_.-]+\.(dae|fbx|glb|bvh)$/.test(item.path)||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isInteger(item.bytes)||item.bytes<=0)return null;return {...item,url:new URL(item.path,import.meta.url).href,page:item.sourcePage,repository:null,commit:null};}
   if(!item||!release||!/^[a-f0-9]{40}$/.test(release.commit)||!/^0everey\/[A-Za-z0-9_.-]+$/.test(release.repository))return null;
   if(!/^clips\/.+\.fbx$/i.test(item.path)||item.path.split('/').includes('..')||!/^[a-f0-9]{64}$/.test(item.sha256))return null;
   const encoded=item.path.split('/').map(encodeURIComponent).join('/');
@@ -44,7 +44,7 @@ export function originalSource(row,catalog){
 export function sourceText(row,catalog,variant){
   const source=originalSource(row,catalog);
   return JSON.stringify({schema:'motion-source-reference.v1',id:row.id,name:row.name,english:row.english,
-    originalSource:source?{kind:source.kind,format:source.format,author:source.author,license:source.license,take:source.take,mixamoId:source.mixamoId,path:source.path,sha256:source.sha256,bytes:source.bytes,repository:source.repository,commit:source.commit,url:source.url,page:source.page}:null,
+    originalSource:source?{kind:source.kind,format:source.format,author:source.author,license:source.license,take:source.take,sourceDuration:source.sourceDuration,previewStartSeconds:source.previewStartSeconds,mixamoId:source.mixamoId,path:source.path,sha256:source.sha256,bytes:source.bytes,repository:source.repository,commit:source.commit,url:source.url,page:source.page}:null,
     currentPreview:variant?{variant:variant.key,url:new URL(variant.url,location.href).href,sha256:variant.sha256,sourceSha256Role:variant.sourceSha256Role||'original source FBX',sourceIdentities:variant.sourceIdentities||{sourceFbxSha256:variant.sourceSha256},fps:variant.fps,fpsRole:variant.fpsRole,timePolicy:variant.timePolicy,frames:variant.frames,duration:variant.duration}:null},null,2);
 }
 let activeDownload=null;

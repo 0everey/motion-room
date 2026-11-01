@@ -1,0 +1,44 @@
+{
+  "schema": "motion-room.characters.v1",
+  "characters": [
+    {
+      "schema": "motion-room.character-preview.v1",
+      "key": "orc",
+      "label": "兽人战士",
+      "file": "orc-warrior-98b40fe43e5e.glb",
+      "sha256": "98b40fe43e5ef6c6c55740ad6b52c1a0ab7d40a7b3610692b6f069ca0ca6714b",
+      "bytes": 1730928,
+      "sourceSha256": "b8ee8d95695aa74dc868cf7ab41fc487aa82590b65ea238c0da41bb906627b2b",
+      "sourceBytes": 3264736,
+      "sourcePage": "https://sketchfab.com/3d-models/orc-warrior-21eaa407bf164cdea21135a1d1b2b8f3",
+      "author": "Callan McEntee",
+      "license": "CC BY 4.0",
+      "changes": [
+        "remove source spear and baked ground shadow",
+        "clear source animation; original body/weights/83 bones preserved",
+        "uniform metre scale and ground centering"
+      ],
+      "removedMeshes": [
+        "Spear_lambert5_0",
+        "pCylinder1_lambert6_0"
+      ],
+      "heightMetres": 1.9,
+      "scale": 0.07586461517160721,
+      "sourceBoundsBlender": {
+        "min": [
+          -10.464207649230957,
+          -4.043488502502441,
+          -0.2242041826248169
+        ],
+        "max": [
+          9.613504409790039,
+          2.8734939098358154,
+          24.820409774780273
+        ]
+      },
+      "bodyBones": 83,
+      "bodyMeshes": 3,
+      "producerSha256": "f064e628c217f02dec6e11a14921921801a0c23c91bce5d6f0ebe81f135984b8"
+    }
+  ]
+}

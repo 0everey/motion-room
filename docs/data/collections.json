@@ -10,7 +10,27 @@
     "riding-tum-padaling",
     "riding-tum-steerleft",
     "riding-tum-steerright",
-    "riding-motorcycle-loop"
+    "riding-motorcycle-loop",
+    "riding-quaternius-driving",
+    "riding-cyens-08-tt",
+    "riding-cyens-05-rb",
+    "riding-cyens-10-tt",
+    "riding-cyens-03-tt",
+    "riding-0ad-extra-archer-attack-ranged-back",
+    "riding-0ad-extra-archer-attack-ranged-hip",
+    "riding-0ad-extra-archer-attack-ranged-hip-right",
+    "riding-0ad-extra-archer-gallop-ready",
+    "riding-0ad-extra-crossbowman-attack-ranged-back",
+    "riding-0ad-extra-generic-attack-melee-01",
+    "riding-0ad-extra-generic-attack-melee-02",
+    "riding-0ad-extra-generic-attack-melee-03",
+    "riding-0ad-extra-generic-walk-relax-shield",
+    "riding-0ad-extra-javelin-attack-ranged-01",
+    "riding-0ad-extra-javelin-attack-ranged-02",
+    "riding-0ad-extra-spearman-attack-melee-2h-01",
+    "riding-0ad-extra-spearman-attack-melee-2h-02",
+    "riding-0ad-extra-spearman-attack-melee-2h-03",
+    "riding-0ad-extra-spearman-trot-2h-ready"
   ],
   "seated": [
     "c9c8ba11_Kicking_Out",
@@ -139,7 +159,12 @@
     "b81a8d54_Male_Sitting_Pose_3",
     "dac70582_Male_Sitting_Pose_9",
     "f2bdf1e8_Male_Sitting_Pose_6",
-    "fec5edc4_Male_Sitting_Pose_12"
+    "fec5edc4_Male_Sitting_Pose_12",
+    "riding-quaternius-driving",
+    "riding-quaternius-sit-enter",
+    "riding-quaternius-sit-exit",
+    "riding-quaternius-sit-idle",
+    "riding-quaternius-sit-talk"
   ],
   "basis": "原动作名称与原描述，坐姿/坐下起身/乘客与驾驶；排除健身仰卧起坐和高尔夫drive"
 }

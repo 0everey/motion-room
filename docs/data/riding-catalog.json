@@ -680,6 +680,1700 @@
           }
         }
       ]
+    },
+    {
+      "id": "riding-quaternius-driving",
+      "name": "驾车循环",
+      "english": "Quaternius Driving_Loop",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "驾驶人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 1.6666666269302368,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding",
+        "seated"
+      ],
+      "searchText": "驾车循环 Quaternius Driving_Loop Quaternius 驾车 驾驶 乘坐",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-quaternius-driving",
+        "path": "assets/riding-originals/69591853d817-UAL1_Standard.glb",
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+        "bytes": 7618436,
+        "format": "glb",
+        "author": "Quaternius",
+        "license": "CC0 1.0",
+        "sourcePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+        "take": "Driving_Loop",
+        "sourceDuration": 1.6666666269302368,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始人物动作",
+          "url": "data/clips/source-riding-quaternius-driving-08cae302b213.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+          "sourceIdentities": {
+            "sourceAssetSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+            "sourceFormat": "glb",
+            "take": "Driving_Loop",
+            "previewStartSeconds": 0,
+            "sourceDuration": 1.6666666269302368
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "所选GLB实际take全部通道key时间并集，保留原非均匀时间",
+          "loopPolicy": "原循环动作",
+          "status": "ready",
+          "fps": 24.0,
+          "fpsRole": "import-timebase",
+          "bytes": 57102,
+          "sha256": "08cae302b213c669aa9133d9639a9f6ca265da3ccbfcfb80510ab78ad4d97a0b",
+          "uncompressedBytes": 108360,
+          "frames": 51,
+          "joints": 65,
+          "duration": 1.6666666269302368,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-quaternius-sit-enter",
+      "name": "落座",
+      "english": "Quaternius Sitting_Enter",
+      "category": "日常操作与交互",
+      "categoryCode": "09",
+      "subcategory": "坐姿人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.2999999523162842,
+      "postures": [
+        "坐姿"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "seated"
+      ],
+      "searchText": "落座 Quaternius Sitting_Enter Quaternius 乘坐 坐姿",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-quaternius-sit-enter",
+        "path": "assets/riding-originals/69591853d817-UAL1_Standard.glb",
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+        "bytes": 7618436,
+        "format": "glb",
+        "author": "Quaternius",
+        "license": "CC0 1.0",
+        "sourcePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+        "take": "Sitting_Enter",
+        "sourceDuration": 1.2999999523162842,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始人物动作",
+          "url": "data/clips/source-riding-quaternius-sit-enter-8518096df0cf.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+          "sourceIdentities": {
+            "sourceAssetSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+            "sourceFormat": "glb",
+            "take": "Sitting_Enter",
+            "previewStartSeconds": 0,
+            "sourceDuration": 1.2999999523162842
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "所选GLB实际take全部通道key时间并集，保留原非均匀时间",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 24.0,
+          "fpsRole": "import-timebase",
+          "bytes": 71239,
+          "sha256": "8518096df0cf87eef70698e463ab4e60540ed24675a09f2c4c779bb725da08db",
+          "uncompressedBytes": 88300,
+          "frames": 40,
+          "joints": 65,
+          "duration": 1.2999999523162842,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-quaternius-sit-exit",
+      "name": "离座起身",
+      "english": "Quaternius Sitting_Exit",
+      "category": "日常操作与交互",
+      "categoryCode": "09",
+      "subcategory": "坐姿人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.0333333015441895,
+      "postures": [
+        "坐姿"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "seated"
+      ],
+      "searchText": "离座起身 Quaternius Sitting_Exit Quaternius 乘坐 坐姿",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-quaternius-sit-exit",
+        "path": "assets/riding-originals/69591853d817-UAL1_Standard.glb",
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+        "bytes": 7618436,
+        "format": "glb",
+        "author": "Quaternius",
+        "license": "CC0 1.0",
+        "sourcePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+        "take": "Sitting_Exit",
+        "sourceDuration": 1.0333333015441895,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始人物动作",
+          "url": "data/clips/source-riding-quaternius-sit-exit-927e98850d95.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+          "sourceIdentities": {
+            "sourceAssetSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+            "sourceFormat": "glb",
+            "take": "Sitting_Exit",
+            "previewStartSeconds": 0,
+            "sourceDuration": 1.0333333015441895
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "所选GLB实际take全部通道key时间并集，保留原非均匀时间",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 24.0,
+          "fpsRole": "import-timebase",
+          "bytes": 58963,
+          "sha256": "927e98850d953e4ae36107ed9d014b6b57591d01578972aff250a4ace3f6d03a",
+          "uncompressedBytes": 73704,
+          "frames": 32,
+          "joints": 65,
+          "duration": 1.0333333015441895,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-quaternius-sit-idle",
+      "name": "坐姿待机",
+      "english": "Quaternius Sitting_Idle_Loop",
+      "category": "日常操作与交互",
+      "categoryCode": "09",
+      "subcategory": "坐姿人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 1.6666666269302368,
+      "postures": [
+        "坐姿"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "seated"
+      ],
+      "searchText": "坐姿待机 Quaternius Sitting_Idle_Loop Quaternius 乘坐 坐姿",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-quaternius-sit-idle",
+        "path": "assets/riding-originals/69591853d817-UAL1_Standard.glb",
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+        "bytes": 7618436,
+        "format": "glb",
+        "author": "Quaternius",
+        "license": "CC0 1.0",
+        "sourcePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+        "take": "Sitting_Idle_Loop",
+        "sourceDuration": 1.6666666269302368,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始人物动作",
+          "url": "data/clips/source-riding-quaternius-sit-idle-bec215a51f15.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+          "sourceIdentities": {
+            "sourceAssetSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+            "sourceFormat": "glb",
+            "take": "Sitting_Idle_Loop",
+            "previewStartSeconds": 0,
+            "sourceDuration": 1.6666666269302368
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "所选GLB实际take全部通道key时间并集，保留原非均匀时间",
+          "loopPolicy": "原循环动作",
+          "status": "ready",
+          "fps": 24.0,
+          "fpsRole": "import-timebase",
+          "bytes": 69189,
+          "sha256": "bec215a51f1577d31d245bf05682ab03c2ae39b19d97f14473839828523ab711",
+          "uncompressedBytes": 108368,
+          "frames": 51,
+          "joints": 65,
+          "duration": 1.6666666269302368,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-quaternius-sit-talk",
+      "name": "坐姿交谈",
+      "english": "Quaternius Sitting_Talking_Loop",
+      "category": "日常操作与交互",
+      "categoryCode": "09",
+      "subcategory": "坐姿人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 2.933333396911621,
+      "postures": [
+        "坐姿"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "seated"
+      ],
+      "searchText": "坐姿交谈 Quaternius Sitting_Talking_Loop Quaternius 乘坐 坐姿",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-quaternius-sit-talk",
+        "path": "assets/riding-originals/69591853d817-UAL1_Standard.glb",
+        "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+        "bytes": 7618436,
+        "format": "glb",
+        "author": "Quaternius",
+        "license": "CC0 1.0",
+        "sourcePage": "https://quaternius.com/packs/universalanimationlibrary.html",
+        "take": "Sitting_Talking_Loop",
+        "sourceDuration": 2.933333396911621,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始人物动作",
+          "url": "data/clips/source-riding-quaternius-sit-talk-15987d0df425.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+          "sourceIdentities": {
+            "sourceAssetSha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+            "sourceFormat": "glb",
+            "take": "Sitting_Talking_Loop",
+            "previewStartSeconds": 0,
+            "sourceDuration": 2.933333396911621
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "所选GLB实际take全部通道key时间并集，保留原非均匀时间",
+          "loopPolicy": "原循环动作",
+          "status": "ready",
+          "fps": 24.0,
+          "fpsRole": "import-timebase",
+          "bytes": 130934,
+          "sha256": "15987d0df425cd8b5107bb487a4a565d3aec310612d9b400299e24c929f1f0f4",
+          "uncompressedBytes": 177680,
+          "frames": 89,
+          "joints": 65,
+          "duration": 2.933333396911621,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-cyens-08-tt",
+      "name": "铁三骑手 08 · 踩踏节选",
+      "english": "CYENS cyclist 08 TT pedaling excerpt",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 44.9583693,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "明确原录制节选"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "铁三骑手 08 · 踩踏节选 CYENS cyclist 08 TT pedaling excerpt CYENS Centre of Excellence / University of Cyprus 骑行 骑乘 踩踏",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-cyens-08-tt",
+        "path": "assets/riding-originals/8b8ae8f16737-8_TT_M30_20230818_AS.bvh",
+        "sha256": "8b8ae8f167378e6f9183a78f1dc7b6f0d0001f8f3d9836e9993f7d6ce55c7efa",
+        "bytes": 45127693,
+        "format": "bvh",
+        "author": "CYENS Centre of Excellence / University of Cyprus",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://zenodo.org/records/10668611",
+        "take": "8_TT_M30_20230818_AS",
+        "sourceDuration": 627.7921689,
+        "previewStartSeconds": 60.000048
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始动作节选",
+          "url": "data/clips/source-riding-cyens-08-tt-236799af39ad.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "8b8ae8f167378e6f9183a78f1dc7b6f0d0001f8f3d9836e9993f7d6ce55c7efa",
+          "sourceIdentities": {
+            "sourceAssetSha256": "8b8ae8f167378e6f9183a78f1dc7b6f0d0001f8f3d9836e9993f7d6ce55c7efa",
+            "sourceFormat": "bvh",
+            "take": "8_TT_M30_20230818_AS",
+            "previewStartSeconds": 60.000048,
+            "sourceDuration": 627.7921689
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "完整原BVH中的明确连续节选，保留原帧时间；下载为完整原录制",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 23.999980800015358,
+          "fpsRole": "source-frame-rate",
+          "bytes": 1435922,
+          "sha256": "236799af39ad847afebc6aead02b49c0533a58a85c83097ac9603d45e175cfd1",
+          "uncompressedBytes": 1589364,
+          "frames": 1080,
+          "joints": 52,
+          "duration": 44.9583693,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          },
+          "restrictions": "预览原录制第60.000–104.958秒；下载完整原BVH（627.792秒），不是无缝循环。"
+        }
+      ]
+    },
+    {
+      "id": "riding-cyens-05-rb",
+      "name": "公路骑手 05 · 踩踏节选",
+      "english": "CYENS cyclist 05 RB pedaling excerpt",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 44.9583693,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "明确原录制节选"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "公路骑手 05 · 踩踏节选 CYENS cyclist 05 RB pedaling excerpt CYENS Centre of Excellence / University of Cyprus 骑行 骑乘 踩踏",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-cyens-05-rb",
+        "path": "assets/riding-originals/9e65bce11fe7-5_RB_M33_20230810_AK.bvh",
+        "sha256": "9e65bce11fe7e137f0de002b911855d77a3e773c25d2a51b155d891b192664a7",
+        "bytes": 51860267,
+        "format": "bvh",
+        "author": "CYENS Centre of Excellence / University of Cyprus",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://zenodo.org/records/10668611",
+        "take": "5_RB_M33_20230810_AK",
+        "sourceDuration": 719.9589093000001,
+        "previewStartSeconds": 60.000048
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始动作节选",
+          "url": "data/clips/source-riding-cyens-05-rb-57cd03d4ff66.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "9e65bce11fe7e137f0de002b911855d77a3e773c25d2a51b155d891b192664a7",
+          "sourceIdentities": {
+            "sourceAssetSha256": "9e65bce11fe7e137f0de002b911855d77a3e773c25d2a51b155d891b192664a7",
+            "sourceFormat": "bvh",
+            "take": "5_RB_M33_20230810_AK",
+            "previewStartSeconds": 60.000048,
+            "sourceDuration": 719.9589093000001
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "完整原BVH中的明确连续节选，保留原帧时间；下载为完整原录制",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 23.999980800015358,
+          "fpsRole": "source-frame-rate",
+          "bytes": 1455499,
+          "sha256": "57cd03d4ff66f309e249237491aeb23e35226000c6b0970cabd92dd9f55d9a00",
+          "uncompressedBytes": 1589440,
+          "frames": 1080,
+          "joints": 52,
+          "duration": 44.9583693,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          },
+          "restrictions": "预览原录制第60.000–104.958秒；下载完整原BVH（719.959秒），不是无缝循环。"
+        }
+      ]
+    },
+    {
+      "id": "riding-cyens-10-tt",
+      "name": "铁三骑手 10 · 踩踏节选",
+      "english": "CYENS cyclist 10 TT pedaling excerpt",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 44.9583693,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "明确原录制节选"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "铁三骑手 10 · 踩踏节选 CYENS cyclist 10 TT pedaling excerpt CYENS Centre of Excellence / University of Cyprus 骑行 骑乘 踩踏",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-cyens-10-tt",
+        "path": "assets/riding-originals/45ab86c389eb-10_TT_M45_20230818_MK.bvh",
+        "sha256": "45ab86c389eba3a9dd5f6d27e5b4804c15177cafa57e9ccb55c83269932f9c76",
+        "bytes": 52355741,
+        "format": "bvh",
+        "author": "CYENS Centre of Excellence / University of Cyprus",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://zenodo.org/records/10668611",
+        "take": "10_TT_M45_20230818_MK",
+        "sourceDuration": 587.3338032,
+        "previewStartSeconds": 60.000048
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始动作节选",
+          "url": "data/clips/source-riding-cyens-10-tt-49f96fbc6a77.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "45ab86c389eba3a9dd5f6d27e5b4804c15177cafa57e9ccb55c83269932f9c76",
+          "sourceIdentities": {
+            "sourceAssetSha256": "45ab86c389eba3a9dd5f6d27e5b4804c15177cafa57e9ccb55c83269932f9c76",
+            "sourceFormat": "bvh",
+            "take": "10_TT_M45_20230818_MK",
+            "previewStartSeconds": 60.000048,
+            "sourceDuration": 587.3338032
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "完整原BVH中的明确连续节选，保留原帧时间；下载为完整原录制",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 23.999980800015358,
+          "fpsRole": "source-frame-rate",
+          "bytes": 1702610,
+          "sha256": "49f96fbc6a7760c0c13143950a1624a30e2368a36317000cbe30a63cb1aa00f9",
+          "uncompressedBytes": 1893152,
+          "frames": 1080,
+          "joints": 62,
+          "duration": 44.9583693,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          },
+          "restrictions": "预览原录制第60.000–104.958秒；下载完整原BVH（587.334秒），不是无缝循环。"
+        }
+      ]
+    },
+    {
+      "id": "riding-cyens-03-tt",
+      "name": "铁三骑手 03 · 踩踏节选",
+      "english": "CYENS cyclist 03 TT pedaling excerpt",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "自行车人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 44.9583693,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "明确原录制节选"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "铁三骑手 03 · 踩踏节选 CYENS cyclist 03 TT pedaling excerpt CYENS Centre of Excellence / University of Cyprus 骑行 骑乘 踩踏",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-cyens-03-tt",
+        "path": "assets/riding-originals/a4c1596c2a14-3_TT_M40_20230808_JP.bvh",
+        "sha256": "a4c1596c2a146649e834a6614e0f7205d50bca7efc7a357a8dd1f5601e574aa2",
+        "bytes": 56461642,
+        "format": "bvh",
+        "author": "CYENS Centre of Excellence / University of Cyprus",
+        "license": "CC BY 4.0",
+        "sourcePage": "https://zenodo.org/records/10668611",
+        "take": "3_TT_M40_20230808_JP",
+        "sourceDuration": 781.8339588,
+        "previewStartSeconds": 60.000048
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始动作节选",
+          "url": "data/clips/source-riding-cyens-03-tt-e3f84ccf5d2f.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "a4c1596c2a146649e834a6614e0f7205d50bca7efc7a357a8dd1f5601e574aa2",
+          "sourceIdentities": {
+            "sourceAssetSha256": "a4c1596c2a146649e834a6614e0f7205d50bca7efc7a357a8dd1f5601e574aa2",
+            "sourceFormat": "bvh",
+            "take": "3_TT_M40_20230808_JP",
+            "previewStartSeconds": 60.000048,
+            "sourceDuration": 781.8339588
+          },
+          "rootPolicy": "原人物世界P/Q；移除水平起点；非载具接触解算",
+          "coordinatePolicy": "Blender实际世界矩阵→[x,z,-y]；BVH以厘米导入为米",
+          "timePolicy": "完整原BVH中的明确连续节选，保留原帧时间；下载为完整原录制",
+          "loopPolicy": "原单次/录制片段",
+          "status": "ready",
+          "fps": 23.999980800015358,
+          "fpsRole": "source-frame-rate",
+          "bytes": 1453306,
+          "sha256": "e3f84ccf5d2f2371ee5e172e63a90de0dbc5973b32951713a68776215a269d45",
+          "uncompressedBytes": 1588180,
+          "frames": 1080,
+          "joints": 52,
+          "duration": 44.9583693,
+          "producer": {
+            "name": "prepare_transport_preview.py",
+            "sha256": "af5e57be467bfcee975fe55964c7ec0a5f1819992c6e3fd2f11d8b55f10e27f4"
+          },
+          "restrictions": "预览原录制第60.000–104.958秒；下载完整原BVH（781.834秒），不是无缝循环。"
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-archer-attack-ranged-back",
+      "name": "骑马弓箭背后取箭射击",
+      "english": "Mounted Archer Shot (Back Quiver)",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.5,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马弓箭背后取箭射击 Mounted Archer Shot (Back Quiver) Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-archer-attack-ranged-back",
+        "path": "assets/riding-originals/f1a73377adeb-archer-attack-ranged-back.dae",
+        "sha256": "f1a73377adebbc354f3018e29beb05e6a3e07a0f623ca6a0fd176cbd553f18e8",
+        "bytes": 1537835,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/archer/attack_ranged_back.dae",
+        "take": "archer-attack-ranged-back.dae",
+        "sourceDuration": 2.5,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-archer-attack-ranged-back-a6009ca01577.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "f1a73377adebbc354f3018e29beb05e6a3e07a0f623ca6a0fd176cbd553f18e8",
+          "sourceIdentities": {
+            "sourceAssetSha256": "f1a73377adebbc354f3018e29beb05e6a3e07a0f623ca6a0fd176cbd553f18e8",
+            "sourceFormat": "dae",
+            "take": "archer-attack-ranged-back.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 185255,
+          "sha256": "a6009ca0157743b3a0d3e46590650016a940c1e7cd394301a2fa867f13876b33",
+          "uncompressedBytes": 241652,
+          "frames": 76,
+          "joints": 102,
+          "duration": 2.5,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-archer-attack-ranged-hip",
+      "name": "骑马弓箭腰侧取箭射击",
+      "english": "Mounted Archer Shot (Hip Quiver)",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.5,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马弓箭腰侧取箭射击 Mounted Archer Shot (Hip Quiver) Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-archer-attack-ranged-hip",
+        "path": "assets/riding-originals/26d4c9b11b46-cavalry__archer__attack_ranged_hip.dae",
+        "sha256": "26d4c9b11b4655ddc1f276bd31312d9ab454aa80d07d728e07dd269476045bcf",
+        "bytes": 1537148,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/archer/attack_ranged_hip.dae",
+        "take": "cavalry__archer__attack_ranged_hip.dae",
+        "sourceDuration": 2.5,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-archer-attack-ranged-hip-96cf31df6616.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "26d4c9b11b4655ddc1f276bd31312d9ab454aa80d07d728e07dd269476045bcf",
+          "sourceIdentities": {
+            "sourceAssetSha256": "26d4c9b11b4655ddc1f276bd31312d9ab454aa80d07d728e07dd269476045bcf",
+            "sourceFormat": "dae",
+            "take": "cavalry__archer__attack_ranged_hip.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 185347,
+          "sha256": "96cf31df66167d7576b54a14e0fa1a93760949a4153296833d9d1765f4728025",
+          "uncompressedBytes": 241660,
+          "frames": 76,
+          "joints": 102,
+          "duration": 2.5,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-archer-attack-ranged-hip-right",
+      "name": "骑马弓箭右髋取箭射击",
+      "english": "Mounted Archer Shot (Right Hip Quiver)",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 3.125,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马弓箭右髋取箭射击 Mounted Archer Shot (Right Hip Quiver) Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-archer-attack-ranged-hip-right",
+        "path": "assets/riding-originals/37179729d2c5-cavalry__archer__attack_ranged_hip_right.dae",
+        "sha256": "37179729d2c5bd126fc0264ada2d8d5fe992158c1cc7992f5e9d8bfa5a0fd42a",
+        "bytes": 1578301,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/archer/attack_ranged_hip_right.dae",
+        "take": "cavalry__archer__attack_ranged_hip_right.dae",
+        "sourceDuration": 3.125,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-archer-attack-ranged-hip-right-455e341ee2f3.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "37179729d2c5bd126fc0264ada2d8d5fe992158c1cc7992f5e9d8bfa5a0fd42a",
+          "sourceIdentities": {
+            "sourceAssetSha256": "37179729d2c5bd126fc0264ada2d8d5fe992158c1cc7992f5e9d8bfa5a0fd42a",
+            "sourceFormat": "dae",
+            "take": "cavalry__archer__attack_ranged_hip_right.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 176437,
+          "sha256": "455e341ee2f3b8bead62e4d53b79a95bc595f9f892aaa35969385942806ea931",
+          "uncompressedBytes": 241676,
+          "frames": 76,
+          "joints": 102,
+          "duration": 3.125,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-archer-gallop-ready",
+      "name": "骑马持弓备战疾驰",
+      "english": "Mounted Archer Gallop Ready",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 0.6666667,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马持弓备战疾驰 Mounted Archer Gallop Ready Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-archer-gallop-ready",
+        "path": "assets/riding-originals/903f691c63c2-cavalry__archer__gallop_ready.dae",
+        "sha256": "903f691c63c2b3117d7c006467b6b8479d7596dd6cbd0465ec75abd1e943d6d4",
+        "bytes": 731953,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/archer/gallop_ready.dae",
+        "take": "cavalry__archer__gallop_ready.dae",
+        "sourceDuration": 0.6666667,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-archer-gallop-ready-17189b077299.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "903f691c63c2b3117d7c006467b6b8479d7596dd6cbd0465ec75abd1e943d6d4",
+          "sourceIdentities": {
+            "sourceAssetSha256": "903f691c63c2b3117d7c006467b6b8479d7596dd6cbd0465ec75abd1e943d6d4",
+            "sourceFormat": "dae",
+            "take": "cavalry__archer__gallop_ready.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "行进原循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 60415,
+          "sha256": "17189b077299916a50817659c476dc59ccf2233f7a402e26843a753eeb44fefd",
+          "uncompressedBytes": 84356,
+          "frames": 21,
+          "joints": 102,
+          "duration": 0.6666667,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-crossbowman-attack-ranged-back",
+      "name": "骑马弩背后装填射击",
+      "english": "Mounted Crossbow Shot (Back Load)",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 3.333333,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马弩背后装填射击 Mounted Crossbow Shot (Back Load) Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-crossbowman-attack-ranged-back",
+        "path": "assets/riding-originals/42faf89e2421-cavalry__crossbowman__attack_ranged_back.dae",
+        "sha256": "42faf89e2421b8723b1be1532a558fc7aedaf69e9282efc176b85d8a0a52d673",
+        "bytes": 1969073,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/crossbowman/attack_ranged_back.dae",
+        "take": "cavalry__crossbowman__attack_ranged_back.dae",
+        "sourceDuration": 3.333333,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-crossbowman-attack-ranged-back-b80f61977bb6.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "42faf89e2421b8723b1be1532a558fc7aedaf69e9282efc176b85d8a0a52d673",
+          "sourceIdentities": {
+            "sourceAssetSha256": "42faf89e2421b8723b1be1532a558fc7aedaf69e9282efc176b85d8a0a52d673",
+            "sourceFormat": "dae",
+            "take": "cavalry__crossbowman__attack_ranged_back.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 235282,
+          "sha256": "b80f61977bb6756fc0b84ec165471ec9894473f6858f8f83cf3d679fd883b84e",
+          "uncompressedBytes": 313180,
+          "frames": 101,
+          "joints": 102,
+          "duration": 3.333333,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-generic-attack-melee-01",
+      "name": "骑马单手近战一",
+      "english": "Mounted Melee Attack 1",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.333333,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马单手近战一 Mounted Melee Attack 1 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-generic-attack-melee-01",
+        "path": "assets/riding-originals/581b6b26da69-cavalry__generic__attack_melee_01.dae",
+        "sha256": "581b6b26da69a93158651ee1b1f9e80be079fbff8ad0f90e2e86b7fc0aecf395",
+        "bytes": 1020514,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/generic/attack_melee_01.dae",
+        "take": "cavalry__generic__attack_melee_01.dae",
+        "sourceDuration": 1.333333,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-generic-attack-melee-01-b15396b1669c.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "581b6b26da69a93158651ee1b1f9e80be079fbff8ad0f90e2e86b7fc0aecf395",
+          "sourceIdentities": {
+            "sourceAssetSha256": "581b6b26da69a93158651ee1b1f9e80be079fbff8ad0f90e2e86b7fc0aecf395",
+            "sourceFormat": "dae",
+            "take": "cavalry__generic__attack_melee_01.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 90092,
+          "sha256": "b15396b1669ce983528c786b9f230cb7038eaeb85f6255c1b1fb420e8e8b876e",
+          "uncompressedBytes": 141564,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.333333,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-generic-attack-melee-02",
+      "name": "骑马单手近战二",
+      "english": "Mounted Melee Attack 2",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.3333339999999998,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马单手近战二 Mounted Melee Attack 2 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-generic-attack-melee-02",
+        "path": "assets/riding-originals/acc874681ae4-cavalry__generic__attack_melee_02.dae",
+        "sha256": "acc874681ae47fbf6d25cc613f336586d1db49c34292c66e98a5f9e47ee73665",
+        "bytes": 1021505,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/generic/attack_melee_02.dae",
+        "take": "cavalry__generic__attack_melee_02.dae",
+        "sourceDuration": 1.3333339999999998,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-generic-attack-melee-02-86f65a50b5a2.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "acc874681ae47fbf6d25cc613f336586d1db49c34292c66e98a5f9e47ee73665",
+          "sourceIdentities": {
+            "sourceAssetSha256": "acc874681ae47fbf6d25cc613f336586d1db49c34292c66e98a5f9e47ee73665",
+            "sourceFormat": "dae",
+            "take": "cavalry__generic__attack_melee_02.dae",
+            "sourceTimeStart": 1.333333
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 89345,
+          "sha256": "86f65a50b5a2789493b563aeed7cc45d7cd2ef5c01dc636379201701103aad2b",
+          "uncompressedBytes": 141580,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.3333339999999998,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-generic-attack-melee-03",
+      "name": "骑马单手近战三",
+      "english": "Mounted Melee Attack 3",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.333333,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马单手近战三 Mounted Melee Attack 3 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-generic-attack-melee-03",
+        "path": "assets/riding-originals/39932f8c8f6f-cavalry__generic__attack_melee_03.dae",
+        "sha256": "39932f8c8f6ff4b85bdc970ad63cd608740d4918f2fd45b34b2dd2f5c7146c52",
+        "bytes": 1020920,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/generic/attack_melee_03.dae",
+        "take": "cavalry__generic__attack_melee_03.dae",
+        "sourceDuration": 1.333333,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-generic-attack-melee-03-155cec993c18.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "39932f8c8f6ff4b85bdc970ad63cd608740d4918f2fd45b34b2dd2f5c7146c52",
+          "sourceIdentities": {
+            "sourceAssetSha256": "39932f8c8f6ff4b85bdc970ad63cd608740d4918f2fd45b34b2dd2f5c7146c52",
+            "sourceFormat": "dae",
+            "take": "cavalry__generic__attack_melee_03.dae",
+            "sourceTimeStart": 2.666667
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 89792,
+          "sha256": "155cec993c18aa7854b80f342dde01d43f277cf167aaed07731332280b0b8310",
+          "uncompressedBytes": 141568,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.333333,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-generic-walk-relax-shield",
+      "name": "骑马持盾行进",
+      "english": "Mounted Shield Walk",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 1.666667,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马持盾行进 Mounted Shield Walk Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-generic-walk-relax-shield",
+        "path": "assets/riding-originals/6455e81afbce-cavalry__generic__walk_relax_shield.dae",
+        "sha256": "6455e81afbce53d3e17a1260891adef22beb3f91b5ce33e704d3326fb1c9216c",
+        "bytes": 999214,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/generic/walk_relax_shield.dae",
+        "take": "cavalry__generic__walk_relax_shield.dae",
+        "sourceDuration": 1.666667,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-generic-walk-relax-shield-345e95be20b3.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "6455e81afbce53d3e17a1260891adef22beb3f91b5ce33e704d3326fb1c9216c",
+          "sourceIdentities": {
+            "sourceAssetSha256": "6455e81afbce53d3e17a1260891adef22beb3f91b5ce33e704d3326fb1c9216c",
+            "sourceFormat": "dae",
+            "take": "cavalry__generic__walk_relax_shield.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "行进原循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 97705,
+          "sha256": "345e95be20b369a94c414479ea8144f7ce7f971d2600ae1a04f6234bce2f193a",
+          "uncompressedBytes": 140132,
+          "frames": 41,
+          "joints": 101,
+          "duration": 1.666667,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-javelin-attack-ranged-01",
+      "name": "骑马标枪投掷一",
+      "english": "Mounted Javelin Throw 1",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.0,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马标枪投掷一 Mounted Javelin Throw 1 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-javelin-attack-ranged-01",
+        "path": "assets/riding-originals/6603334a4f80-cavalry__javelin__attack_ranged_01.dae",
+        "sha256": "6603334a4f80080aa64122f5ed5112fb9464a75806daf274ef4096d67b34b09d",
+        "bytes": 1999098,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/javelin/attack_ranged_01.dae",
+        "take": "cavalry__javelin__attack_ranged_01.dae",
+        "sourceDuration": 2.0,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-javelin-attack-ranged-01-c993c4b655ce.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "6603334a4f80080aa64122f5ed5112fb9464a75806daf274ef4096d67b34b09d",
+          "sourceIdentities": {
+            "sourceAssetSha256": "6603334a4f80080aa64122f5ed5112fb9464a75806daf274ef4096d67b34b09d",
+            "sourceFormat": "dae",
+            "take": "cavalry__javelin__attack_ranged_01.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 157367,
+          "sha256": "c993c4b655cec3508910dce45d85e748b417f5c6532682d7226d4c22f31c43ba",
+          "uncompressedBytes": 198760,
+          "frames": 61,
+          "joints": 102,
+          "duration": 2.0,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-javelin-attack-ranged-02",
+      "name": "骑马标枪投掷二",
+      "english": "Mounted Javelin Throw 2",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 2.0,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马标枪投掷二 Mounted Javelin Throw 2 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-javelin-attack-ranged-02",
+        "path": "assets/riding-originals/9d9413fdad78-cavalry__javelin__attack_ranged_02.dae",
+        "sha256": "9d9413fdad78c36e9212e72f387ac798b77e34ccee8b100205fa91d516ae502e",
+        "bytes": 2000066,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/javelin/attack_ranged_02.dae",
+        "take": "cavalry__javelin__attack_ranged_02.dae",
+        "sourceDuration": 2.0,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-javelin-attack-ranged-02-1bd575872df5.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "9d9413fdad78c36e9212e72f387ac798b77e34ccee8b100205fa91d516ae502e",
+          "sourceIdentities": {
+            "sourceAssetSha256": "9d9413fdad78c36e9212e72f387ac798b77e34ccee8b100205fa91d516ae502e",
+            "sourceFormat": "dae",
+            "take": "cavalry__javelin__attack_ranged_02.dae",
+            "sourceTimeStart": 2.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 157786,
+          "sha256": "1bd575872df5165d71cfa4e5f769b7173b471f665f9f086d7b10f5647f5f83cb",
+          "uncompressedBytes": 198760,
+          "frames": 61,
+          "joints": 102,
+          "duration": 2.0,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-spearman-attack-melee-2h-01",
+      "name": "骑马双手长矛攻击一",
+      "english": "Mounted Two-Hand Spear Attack 1",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.333333,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马双手长矛攻击一 Mounted Two-Hand Spear Attack 1 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-spearman-attack-melee-2h-01",
+        "path": "assets/riding-originals/64cdc447b0ab-cavalry__spearman__attack_melee_2h_01.dae",
+        "sha256": "64cdc447b0abd507ff1b2a5cd1acc0402fc8eff0646c056f5eb9f8b2f9436efa",
+        "bytes": 1070275,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/spearman/attack_melee_2h_01.dae",
+        "take": "cavalry__spearman__attack_melee_2h_01.dae",
+        "sourceDuration": 1.333333,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-spearman-attack-melee-2h-01-d00fba013ac5.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "64cdc447b0abd507ff1b2a5cd1acc0402fc8eff0646c056f5eb9f8b2f9436efa",
+          "sourceIdentities": {
+            "sourceAssetSha256": "64cdc447b0abd507ff1b2a5cd1acc0402fc8eff0646c056f5eb9f8b2f9436efa",
+            "sourceFormat": "dae",
+            "take": "cavalry__spearman__attack_melee_2h_01.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 89160,
+          "sha256": "d00fba013ac5a344d8468da426f3030ab74792f6c7a2f1c7b640f83d1441e55a",
+          "uncompressedBytes": 141572,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.333333,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-spearman-attack-melee-2h-02",
+      "name": "骑马双手长矛攻击二",
+      "english": "Mounted Two-Hand Spear Attack 2",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.3333339999999998,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马双手长矛攻击二 Mounted Two-Hand Spear Attack 2 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-spearman-attack-melee-2h-02",
+        "path": "assets/riding-originals/00f7344a6317-cavalry__spearman__attack_melee_2h_02.dae",
+        "sha256": "00f7344a6317fd3f692eb127f18ed2e8522956010ade6904f168b96ae705ca38",
+        "bytes": 1068851,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/spearman/attack_melee_2h_02.dae",
+        "take": "cavalry__spearman__attack_melee_2h_02.dae",
+        "sourceDuration": 1.3333339999999998,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-spearman-attack-melee-2h-02-aeea31293244.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "00f7344a6317fd3f692eb127f18ed2e8522956010ade6904f168b96ae705ca38",
+          "sourceIdentities": {
+            "sourceAssetSha256": "00f7344a6317fd3f692eb127f18ed2e8522956010ade6904f168b96ae705ca38",
+            "sourceFormat": "dae",
+            "take": "cavalry__spearman__attack_melee_2h_02.dae",
+            "sourceTimeStart": 1.333333
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 89126,
+          "sha256": "aeea31293244415765a2b0766f643b458dfce749c9fccc2bca7dee3165570e07",
+          "uncompressedBytes": 141588,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.3333339999999998,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-spearman-attack-melee-2h-03",
+      "name": "骑马双手长矛攻击三",
+      "english": "Mounted Two-Hand Spear Attack 3",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": false,
+      "inPlace": false,
+      "duration": 1.333333,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马双手长矛攻击三 Mounted Two-Hand Spear Attack 3 Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-spearman-attack-melee-2h-03",
+        "path": "assets/riding-originals/a106779dc4ea-cavalry__spearman__attack_melee_2h_03.dae",
+        "sha256": "a106779dc4ea4919452ef13b048c7c984b11e5ed41e78622fb23fb2f9a5d5565",
+        "bytes": 1068572,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/spearman/attack_melee_2h_03.dae",
+        "take": "cavalry__spearman__attack_melee_2h_03.dae",
+        "sourceDuration": 1.333333,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-spearman-attack-melee-2h-03-ff573bb119dd.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "a106779dc4ea4919452ef13b048c7c984b11e5ed41e78622fb23fb2f9a5d5565",
+          "sourceIdentities": {
+            "sourceAssetSha256": "a106779dc4ea4919452ef13b048c7c984b11e5ed41e78622fb23fb2f9a5d5565",
+            "sourceFormat": "dae",
+            "take": "cavalry__spearman__attack_melee_2h_03.dae",
+            "sourceTimeStart": 2.666667
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "原单次动作；不声明无缝循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 89191,
+          "sha256": "ff573bb119dd68c51f2514c2208553b1f8705f6d3c54b25cff934e75c30e4b94",
+          "uncompressedBytes": 141576,
+          "frames": 41,
+          "joints": 102,
+          "duration": 1.333333,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
+    },
+    {
+      "id": "riding-0ad-extra-spearman-trot-2h-ready",
+      "name": "骑马双手持矛备战小跑",
+      "english": "Mounted Two-Hand Spear Trot Ready",
+      "category": "骑行",
+      "categoryCode": "14",
+      "subcategory": "骑马人物",
+      "weapon": "无",
+      "loop": true,
+      "inPlace": false,
+      "duration": 0.6666667,
+      "postures": [
+        "骑乘"
+      ],
+      "directions": [],
+      "phases": [
+        "完整原动作"
+      ],
+      "collections": [
+        "riding"
+      ],
+      "searchText": "骑马双手持矛备战小跑 Mounted Two-Hand Spear Trot Ready Wildfire Games 骑行 骑马 mounted cavalry",
+      "originalSource": {
+        "kind": "external-riding",
+        "id": "riding-0ad-extra-spearman-trot-2h-ready",
+        "path": "assets/riding-originals/5d31d15a5a94-cavalry__spearman__trot_2h_ready.dae",
+        "sha256": "5d31d15a5a94e89f1c05eb7d1596addb4dcad9b4d510f470d8c3216166305f33",
+        "bytes": 764560,
+        "format": "dae",
+        "author": "Wildfire Games",
+        "license": "CC BY-SA 3.0",
+        "sourcePage": "https://gitea.wildfiregames.com/0ad/0ad/src/branch/main/binaries/data/mods/public/art/animation/biped/rider/cavalry/spearman/trot_2h_ready.dae",
+        "take": "cavalry__spearman__trot_2h_ready.dae",
+        "sourceDuration": 0.6666667,
+        "previewStartSeconds": 0
+      },
+      "variants": [
+        {
+          "key": "source",
+          "label": "原始骑乘人物动作",
+          "url": "data/clips/source-riding-0ad-extra-spearman-trot-2h-ready-663be83664f4.mvp.gz",
+          "hasRotations": true,
+          "format": "MVP2",
+          "sourceSha256": "5d31d15a5a94e89f1c05eb7d1596addb4dcad9b4d510f470d8c3216166305f33",
+          "sourceIdentities": {
+            "sourceAssetSha256": "5d31d15a5a94e89f1c05eb7d1596addb4dcad9b4d510f470d8c3216166305f33",
+            "sourceFormat": "dae",
+            "take": "cavalry__spearman__trot_2h_ready.dae",
+            "sourceTimeStart": 0.0
+          },
+          "rootPolicy": "原骑马人物世界姿态；仅移除水平起点；非车马接触解算",
+          "coordinatePolicy": "实际Blender骨世界矩阵→[x,z,-y]一次转米制Y-up",
+          "timePolicy": "原Collada实际人体矩阵sampler INPUT/accessor(stride/offset/count)的key时间并集；保原片段起点并归零；导入fps只换算Blender时间",
+          "fpsRole": "import-timebase",
+          "loopPolicy": "行进原循环",
+          "status": "ready",
+          "fps": 24.0,
+          "bytes": 45039,
+          "sha256": "663be83664f465554fa37c46ecc3d0c07017d9120ef311509d5df5c84a21a3ad",
+          "uncompressedBytes": 84364,
+          "frames": 21,
+          "joints": 102,
+          "duration": 0.6666667,
+          "producer": {
+            "name": "prepare_extra_riding_preview.py",
+            "sha256": "ac8e37b421b5506621f45feb22972c41d78c6e7bf23bd04c512f8a02005f0977"
+          }
+        }
+      ]
     }
   ]
 }

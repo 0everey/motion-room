@@ -58,3 +58,17 @@ https://sketchfab.com/3d-models/animated-supermodel-riding-motorcycle-loop-1895c
 大剑：Greatsword，Shadow Models 3D（原GLB作者署名 danielgobr481），CC BY 4.0。https://sketchfab.com/3d-models/greatsword-e2fe8da3bed74e1c9895966730afac05
 M416：KisameBR，CC BY 4.0。https://sketchfab.com/3d-models/m416-c4af2388345b47b995cd5daa8531bde2
 两个模型经Objaverse公开镜像取得；预览派生只归一化握点、方向和长度，保原几何/材质。比例按当前角色展示，未声明真实武器米制或全动作双手IK接触。
+
+
+在线替代角色与追加骑行动作（2026-11-01）
+Orc Warrior：Callan McEntee，CC BY 4.0。
+原作者：https://sketchfab.com/3d-models/orc-warrior-21eaa407bf164cdea21135a1d1b2b8f3
+实际原件取得：Objaverse公开镜像。预览派生移除原矛及烘焙地面阴影，保原身体纹理/蒙皮/83身体关节，归一化到1.9米及地面；准确原件/预览SHA及改动见data/character-sources.json。兽人按真实名称展示，不是优香原模型。
+CYENS Centre of Excellence / University of Cyprus：Cycling Mocap Dataset，CC BY 4.0，DOI10.5281/zenodo.10668611。
+https://zenodo.org/records/10668611
+网页踩踏预览为原始长录制中明确约45秒节选；完整原BVH保持原字节下载，不将重复切片或校准姿势冒独立动作。出处/原时长/节选范围逐项在来源描述及MVP2中。
+Quaternius：Universal Animation Library [Standard]，CC0 1.0（实际原包License.txt）。
+https://quaternius.com/packs/universalanimationlibrary.html
+实际免费原包：https://quaternius.itch.io/universal-animation-library
+采用Driving_Loop及Sitting_Enter/Exit/Idle_Loop/Talking_Loop五个真实take；所有角色仍仅人物重定向，不含载具接触物理。
+本轮再增15个0 A.D.骑马人物独立动作（骑射、投掷、单手/双手近战与持械行进），骑行合计30。新增原件/人物MVP2派生均沿CC BY-SA 3.0，署名Wildfire Games并逐项保官方来源与改动说明；预览去水平起点、保真实人体矩阵key时段归零，不含马/弓矛道具与正式载具接触。

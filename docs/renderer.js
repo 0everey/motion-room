@@ -10,6 +10,14 @@ const ASSETS=[MODEL_ASSET,'character.js','vendor/three/three.module.min.js','ven
 const Q=()=>new THREE.Quaternion(),V=()=>new THREE.Vector3();
 const safeName=name=>name?.replace(/\s/g,'_');
 export function disposeSkeletons(root){const skeletons=new Set();root?.traverse(o=>{if(o.isSkinnedMesh&&o.skeleton)skeletons.add(o.skeleton);});for(const skeleton of skeletons)skeleton.dispose();}
+export function createSkeletonHelper(root,profile){
+  const helper=new THREE.SkeletonHelper(root),excluded=new Set(profile.hiddenSkeletonBones||[]);
+  if(excluded.size){
+    helper.bones=helper.bones.filter(b=>!excluded.has(b.name));
+    helper.geometry.setDrawRange(0,helper.bones.filter(b=>b.parent?.isBone).length*2);
+  }
+  return helper;
+}
 function disposeObject(root){if(!root)return;disposeSkeletons(root);const textures=new Set();root.traverse(o=>{o.geometry?.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material]))if(m){for(const texture of materialTextures(m))textures.add(texture);m.dispose();}});for(const t of textures){t.image?.close?.();t.dispose();}}
 
 // The base geometry owns one color buffer. Cloned actors share it like positions/skin weights.
@@ -109,7 +117,10 @@ export class MotionRenderer{
       }else{
         const url=new URL(profile.asset,import.meta.url),bytes=await resourceBytes(url,{signal,priority:PRIORITY.target});
         const buffer=bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength);
+        const sha=[...new Uint8Array(await crypto.subtle.digest('SHA-256',buffer))].map(x=>x.toString(16).padStart(2,'0')).join('');
+        signal.throwIfAborted();if(sha!==profile.sha256)throw new Error('角色模型与已登记版本不一致。');
         asset=await decodes.run('model:'+url.href,async activeSignal=>{const parsed=await new GLTFLoader().parseAsync(buffer,url.href.slice(0,url.href.lastIndexOf('/')+1));if(activeSignal.aborted){disposeObject(parsed.scene);activeSignal.throwIfAborted();}return parsed;},{signal,priority:PRIORITY.target});
+        asset.source={type:'repository-glb',verifiedSha256:sha,bytes:buffer.byteLength,...(profile.source||{})};
       }
       if(generation!==this.loadGeneration){disposeObject(asset.scene);return;}
       this.character=asset.scene;this.modelSource=asset.source||null;this.bones=new Map();this.rests=new Map();
@@ -122,7 +133,7 @@ export class MotionRenderer{
       for(const texture of replacedTextures)if(!retainedTextures.has(texture)){texture.image?.close?.();texture.dispose();}
       if(!this.bones.has(this.hipName))throw new Error('角色缺少真实髋骨绑定。');
       this.scene.add(this.character);this.character.updateMatrixWorld(true);
-      this.helper=new THREE.SkeletonHelper(this.character);this.helper.visible=this.skeleton;this.scene.add(this.helper);
+      this.helper=createSkeletonHelper(this.character,this.characterProfile);this.helper.visible=this.skeleton;this.scene.add(this.helper);
       this.modelReady=true;this.modelStats={bones:this.bones.size,meshes:0,vertices:0};this.character.traverse(o=>{if(o.isMesh){this.modelStats.meshes++;this.modelStats.vertices+=o.geometry.attributes.position.count;}});
       if(this.motion)this.configureRetarget();if(this.heldItemKey!=='none'){if(this.heldTemplate)this.mountCurrentHeldItem();else if(!this.heldLoading)this.setHeldItem(this.heldItemKey);}this.onChange();
     })().catch(error=>{if(error.name!=='AbortError'&&generation===this.loadGeneration)this.onError(error);}).finally(()=>{if(generation===this.loadGeneration)this.loading=null;});

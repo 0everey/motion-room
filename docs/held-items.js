@@ -4,7 +4,7 @@ import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 
 export const HELD_ITEMS=Object.freeze({
   none:{key:'none',label:'无手持物品'},
-  greatsword:{key:'greatsword',label:'单手大剑',asset:'models/held-greatsword-c82f73e0df5d.glb',sha256:'c82f73e0df5d9de2d67abdbe5ca9e5bfef029769a3b6daf45cd32b7caec709dc',lengthRatio:.76,turn:0,author:'Shadow Models 3D',license:'CC BY 4.0',source:'https://sketchfab.com/3d-models/greatsword-e2fe8da3bed74e1c9895966730afac05'},
+  greatsword:{key:'greatsword',label:'单手大剑',asset:'models/held-greatsword-c82f73e0df5d.glb',sha256:'c82f73e0df5d9de2d67abdbe5ca9e5bfef029769a3b6daf45cd32b7caec709dc',lengthRatio:.76,turn:0,palmFraction:1.08,palmDepth:-.24,author:'Shadow Models 3D',license:'CC BY 4.0',source:'https://sketchfab.com/3d-models/greatsword-e2fe8da3bed74e1c9895966730afac05'},
   m416:{key:'m416',label:'M416',asset:'models/held-m416-1fffac6602a7.glb',sha256:'1fffac6602a701ab899e31183a147f05ae657ae52106390ea77286c67c970637',lengthRatio:.51,turn:Math.PI/2,author:'KisameBR',license:'CC BY 4.0',source:'https://sketchfab.com/3d-models/m416-c4af2388345b47b995cd5daa8531bde2'}
 });
 // The rifle's canonical barrel is +Z. In the palm rest frame its shooting
@@ -37,10 +37,13 @@ export function mountHeldItem(character,bones,rests,profile,key,template){
   if(!Number.isFinite(up.length())||up.lengthSq()<.9)throw new Error('手掌坐标基准退化。');
   const normal=new THREE.Vector3().crossVectors(fingers,up).normalize(),basis=new THREE.Matrix4().makeBasis(fingers,up,normal),orientation=new THREE.Quaternion().setFromRotationMatrix(basis);
   orientation.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),item.turn));
-  const anchor=wrist.clone().lerp(middle,.52),height=new THREE.Box3().setFromObject(character).getSize(new THREE.Vector3()).y,length=height*item.lengthRatio;
+  // The sword grip sits inside the curled fingers, beyond the wrist/palm midpoint.
+  // Keep this item calibration separate from the rifle's pistol-grip profile.
+  const palmLength=wrist.distanceTo(middle),fraction=item.palmFraction??.52,depth=item.palmDepth??0;
+  const anchor=wrist.clone().lerp(middle,fraction).addScaledVector(normal,palmLength*depth),height=new THREE.Box3().setFromObject(character).getSize(new THREE.Vector3()).y,length=height*item.lengthRatio;
   if(!Number.isFinite(length)||length<=0)throw new Error('角色的实际展示尺度无效。');
   const desired=new THREE.Matrix4().compose(anchor,orientation,new THREE.Vector3(length,length,length));
-  const group=new THREE.Group();group.name='Handheld_'+key;group.userData.heldItem=key;group.userData.heldGrip=true;group.userData.handName=hand.name;group.userData.normalizedLength=length;
+  const group=new THREE.Group();group.name='Handheld_'+key;group.userData.heldItem=key;group.userData.heldGrip=true;group.userData.handName=hand.name;group.userData.normalizedLength=length;group.userData.gripReference={fraction,depth,palmLength};
   group.matrixAutoUpdate=false;group.matrix.copy(hand.matrixWorld.clone().invert().multiply(desired));group.add(template.clone(true));hand.add(group);character.updateMatrixWorld(true);
   return group;
 }
@@ -49,5 +52,5 @@ export function heldObject(root){let found=null;root?.traverse(o=>{if(o.userData
 export function heldDiagnostics(root,bones,profile){
   const item=heldObject(root);if(!item)return null;
   const hand=bones.get(profile.mapping.RightHand.replace(/\s/g,'_'));
-  const left=bones.get(profile.mapping.LeftHand.replace(/\s/g,'_')),middle=bones.get(profile.mapping.RightHandMiddle1.replace(/\s/g,'_')),grip=item.getWorldPosition(new THREE.Vector3()),forward=new THREE.Vector3(0,0,1).transformDirection(item.matrixWorld),support=left?left.getWorldPosition(new THREE.Vector3()).sub(grip).normalize():null,palm=hand&&middle?hand.getWorldPosition(new THREE.Vector3()).lerp(middle.getWorldPosition(new THREE.Vector3()),.52):null;return {key:item.userData.heldItem,hand:hand?.name,parentMatchesHand:item.parent===hand,leftHandWorld:left?.getWorldPosition(new THREE.Vector3()).toArray(),handMatrix:hand?.matrixWorld.toArray(),palmWorld:palm?.toArray(),gripToPalm:palm?grip.distanceTo(palm):null,forwardWorld:forward.toArray(),forwardSupportDot:support?forward.dot(support):null,gripWorld:item.getWorldPosition(new THREE.Vector3()).toArray(),handWorld:hand?.getWorldPosition(new THREE.Vector3()).toArray(),worldMatrix:item.matrixWorld.toArray(),length:item.userData.normalizedLength};
+  const left=bones.get(profile.mapping.LeftHand.replace(/\s/g,'_')),middle=bones.get(profile.mapping.RightHandMiddle1.replace(/\s/g,'_')),grip=item.getWorldPosition(new THREE.Vector3()),forward=new THREE.Vector3(0,0,1).transformDirection(item.matrixWorld),support=left?left.getWorldPosition(new THREE.Vector3()).sub(grip).normalize():null,palm=hand&&middle?hand.getWorldPosition(new THREE.Vector3()).lerp(middle.getWorldPosition(new THREE.Vector3()),.52):null;return {key:item.userData.heldItem,gripReference:item.userData.gripReference,bladeWorld:new THREE.Vector3(0,1,0).transformDirection(item.matrixWorld).toArray(),hand:hand?.name,parentMatchesHand:item.parent===hand,leftHandWorld:left?.getWorldPosition(new THREE.Vector3()).toArray(),handMatrix:hand?.matrixWorld.toArray(),palmWorld:palm?.toArray(),gripToPalm:palm?grip.distanceTo(palm):null,forwardWorld:forward.toArray(),forwardSupportDot:support?forward.dot(support):null,gripWorld:item.getWorldPosition(new THREE.Vector3()).toArray(),handWorld:hand?.getWorldPosition(new THREE.Vector3()).toArray(),worldMatrix:item.matrixWorld.toArray(),length:item.userData.normalizedLength};
 }
