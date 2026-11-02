@@ -1,6 +1,6 @@
 {
-  "files": 2823,
-  "bytes": 759695552,
+  "files": 2838,
+  "bytes": 760765471,
   "ids": 2480,
   "variants": 2516,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -177,8 +177,8 @@
     },
     {
       "path": "credits.txt",
-      "bytes": 6828,
-      "sha256": "598289dcb0a1ba6c326597056570d9badcd1b624c35cd622cc0d21ec6f77795d"
+      "bytes": 6751,
+      "sha256": "a2978b177ca9260380fb65e14eb5880526dc158ae098da8d59438d514c376310"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -358,7 +358,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6093475,
-      "sha256": "4274e423eca385fbdcc0afc8ad154b9be654ba2f96a50a1e4a5ce07483488eb5"
+      "sha256": "0b04d26edafc9f723e0c39666fc067aea1dd5dadcb749c7e4ddaf7ce615e479d"
     },
     {
       "path": "data/catalog/details-03c4750b972f.json.gz",
@@ -1139,6 +1139,11 @@
       "path": "data/catalog/navigation-1ec49a51fbb2.json.gz",
       "bytes": 549320,
       "sha256": "1ec49a51fbb2b9a0d1446b8fe3b8dab792a46a28148750321f191f0647869c52"
+    },
+    {
+      "path": "data/catalog/navigation-989d6e4bda51.json.gz",
+      "bytes": 29862,
+      "sha256": "989d6e4bda51df2ee044e57f4f0344c90bbbe724760b6637a1c88fa68eb88c58"
     },
     {
       "path": "data/character-sources.json",
@@ -13947,8 +13952,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 26482,
-      "sha256": "b11730ecf60a4574e1fc39403fa852062e9b7c877aaf4f1539269d1903b5455b"
+      "bytes": 28202,
+      "sha256": "a93b58c91395d546ca7bcbad976af17c68844929e318c8abfd0b265bd4852025"
     },
     {
       "path": "models/held-greatsword-c82f73e0df5d.glb",
@@ -14021,6 +14026,76 @@
       "sha256": "20e2f78a6ae799305e25a258c09fab82dc4ec0639536e21c0e9ce212cb256731"
     },
     {
+      "path": "runtime-build.json",
+      "bytes": 10926,
+      "sha256": "078341ebcf339e92ed8c4189e7480520867b8ee4c819d6873852abf13b351dcc"
+    },
+    {
+      "path": "runtime-chunk-3PY7URGQ.js",
+      "bytes": 207210,
+      "sha256": "351ea7b3b51865eaaa60102488d4c13f478e43d3110e94d22b3057b9d12be88f"
+    },
+    {
+      "path": "runtime-chunk-4KMRWNCV.js",
+      "bytes": 7226,
+      "sha256": "ab86e73d10effd7ecc9c1bb0a43c47f887e78c32ad998b7ea41fb35a91e232b2"
+    },
+    {
+      "path": "runtime-chunk-6GC743SO.js",
+      "bytes": 298,
+      "sha256": "8124cc7c84cf345fedaa062dc7adb9a77f08026214de90bdfeb528e1ca7f9cd6"
+    },
+    {
+      "path": "runtime-chunk-AHQDBX4J.js",
+      "bytes": 253,
+      "sha256": "63e8c23bae0b868697638021ec9a9d1a61f1dbd9e7d766a843adcf0683dd2f9c"
+    },
+    {
+      "path": "runtime-chunk-AKQ6ITRA.js",
+      "bytes": 569145,
+      "sha256": "4302d91cfe15a37e4a4c1b6604ae6af0d74334320dba380f8a67f4a2192d5edf"
+    },
+    {
+      "path": "runtime-chunk-BVA775A4.js",
+      "bytes": 162894,
+      "sha256": "5b3579593f70a9cc5a4614a2dd940e360d49fa174e82320c94ce8bb11133244a"
+    },
+    {
+      "path": "runtime-chunk-I5VFTHXP.js",
+      "bytes": 2443,
+      "sha256": "30dda6553c6f2986ea690d5aa3244e9af9eaa494ffcd4bd00b09b16bc2cb0099"
+    },
+    {
+      "path": "runtime-chunk-MBA5QNKB.js",
+      "bytes": 13254,
+      "sha256": "bbc6286247adb17063f982ae098aa5ed2c1a809bac28b7aaf19e7514ecc750a1"
+    },
+    {
+      "path": "runtime-chunk-QETBCUR3.js",
+      "bytes": 3356,
+      "sha256": "184480afd8054896c4e3af459c38b5109c5ad7f103eb331beec95bea4123f9b8"
+    },
+    {
+      "path": "runtime-chunk-U4ANP327.js",
+      "bytes": 5392,
+      "sha256": "15e8b66da9df590e045f9f7f4228ee21587b4108a417696b715b8ebe216eec58"
+    },
+    {
+      "path": "runtime-config.js",
+      "bytes": 256,
+      "sha256": "c301c86a958e4f0dd4596ad3abf11286c2ca89a3b889b9e4d7ed3a3c35362035"
+    },
+    {
+      "path": "runtime-library-entry-YJKNLZFY.js",
+      "bytes": 11047,
+      "sha256": "0c2ea0d365b04100043ec83f367ace21a336cd0b8141f332ea08c6f9c1b5b034"
+    },
+    {
+      "path": "runtime-style-02779c1b5063.css",
+      "bytes": 38070,
+      "sha256": "02779c1b5063ed862c524ad91201cf39c45f1f5892feefd9c054b007d74c886d"
+    },
+    {
       "path": "studio.css",
       "bytes": 38070,
       "sha256": "02779c1b5063ed862c524ad91201cf39c45f1f5892feefd9c054b007d74c886d"
@@ -14037,8 +14112,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 11285,
-      "sha256": "62bafa3efab9a6dc61ea831dd3e688f02c65033ae44db62870bcbe087c9ab09a"
+      "bytes": 16913,
+      "sha256": "238880fb4dbac20039392f6c0913bb9dc7232204985be1ec35432564b01f7beb"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -14107,8 +14182,8 @@
     },
     {
       "path": "workbench.html",
-      "bytes": 14724,
-      "sha256": "4d83b496d67a16954ebde87ad24466a59683a259280b378915c2ffe6d4acd7df"
+      "bytes": 15740,
+      "sha256": "67b7572e641788e867ee3b8ac9993e58bbb2b1ec051dd566eacb8cf97f930c3c"
     },
     {
       "path": "workbench.js",
@@ -14121,7 +14196,7 @@
       "sha256": "78713856860d7fd3cb13f30c3947068a91a835d46e95b052ee2198923d6af09d"
     }
   ],
-  "applicationSourceCommit": "a1a94b4a3994c466afb031d52d283053dfa527b8",
+  "applicationSourceCommit": "8c9e843e9c8cef17041c235658685aefcf8ffa96",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -15080,5 +15155,5 @@
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
     }
   ],
-  "totalPublishedApplicationFiles": 3013
+  "totalPublishedApplicationFiles": 3028
 }

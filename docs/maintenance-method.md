@@ -157,3 +157,12 @@ environmentSelect、studio cleanBrowse和library-entry使用同一个校验key�
 浅底骨架用实际helper颜色buffer的深色端点，类别小字加浅chip/深字；不改真实骨链或原body材料。手机第三选择器可换行。新增两个scene模块与Room模块须同时在显式公开FILES和r25离线壳；场景没有外部HDR/新贴图下载。只改元数据/呈现不重烤2480ID/2516变体、30骑行或原件。
 
 必要验证包括：BodyBlock原条件和两个时刻、真实receiver开关/恢复与隔离截影反例，整剑/低姿M416/骨架、compare/world/12格/五展示、同帧和持续播放切场景、筛选重置/API批量写入、本机/工作区/纯配方/旧字段/冲突恢复、SDK前最新意图、390实际控件、重复切换资源plateau与Stage释放/重建。记录首次准备与warm draw不同成本，先分开首次后台缓存填充再核场景零模型/动作重取；图片名以报告实际environment为准。原测试无效总shadow开关、误点隐藏菜单等失败保留，不据此修改产品规避测试。公开source/publisher仍为唯一发布链，线上另核actual SHA/消费者。
+
+
+## 加载 P0 的构建、缓存和验证
+
+作者仍唯一维护 `web-preview`，运行 `npm ci --ignore-scripts` 安装锁定的esbuild0.28.2，再沿原 `tools/export_herta_public.py` / `tools/publish_motion_pages.py` 导出及发布。构建器每次按真实源/vendor/HTML/CSS/目录/工具/配置生成root同目录哈希ESM，HTML的applicationBuild绑定不可变目录manifest、当前/可选壳和版本，生成runtime-build.json记录身份。不要手改runtime哈希产物，也不要改冻结的公开r25 raw JS/CSS；后者是a1a94b4的旧页兼容快照，当前代码只在作者源修改。发布器保旧内容哈希资源供已开页面消费。
+
+完成正文且身份正确后，资源可按项复用/持久保存；pending与active都须有实际字节上界。完整组合offlineReady仍须所有当前依赖齐，不能因为某项已保存就宣称整页可离线。清理代次必须贯穿SHA、STORE和相同URL的新任务；shell需验实际字节所属版，不只信消息version。原件fresh/no-store必须在页面池和SW真实fetch入口都绕预览缓存。
+
+性能分别记录目录可操作、当前首实体、完整当前12、准确查询/分类、partial重开、正常暖与禁HTTPcache、真实新页/返回/精看、旧r25更新与断网新doc；当前frame的clipId必须等于当前tile IDs，至少两rAF并亲看真实截图。前后同条件三轮取中位，公网与受控不混算；慢样本、未完和错误夹具保留。不再以单一小动作、HTTP200、canvas存在或warm draw替代完整加载体验。加载事故与各执行/审查责任记在作者仓库 `docs/incidents/2026-11-02-loading-p0.md`，实际新证据接原记录，不改写旧准停。
