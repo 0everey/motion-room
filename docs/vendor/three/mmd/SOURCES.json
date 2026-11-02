@@ -1,5 +1,5 @@
 {
-  "version": "Three r170, unchanged official MIT modules",
+  "version": "Three r170 official MIT source identities; runtime adaptations listed separately",
   "license": "../LICENSE",
   "files": [
     {
@@ -25,6 +25,16 @@
       "source": "https://raw.githubusercontent.com/mrdoob/three.js/r170/examples/jsm/libs/mmdparser.module.js",
       "bytes": 158598,
       "sha256": "77562d8a91949633814a6ce1f4060dcb95b1a672e8549f41e6524eb6f1c30c68"
+    }
+  ],
+  "runtimeAdaptations": [
+    {
+      "path": "vendor/three/mmd/loaders/MMDLoader.js",
+      "originalSha256": "ea805ba7f189b335572be9604d132371d76a1295b7f2bbceffe481986cea4839",
+      "authorSourceSha256": "c2b79aac1f0430e307ef8b56e1f982e3a03bd979371e0daa5b70a49ebdefae50",
+      "bytes": 52868,
+      "change": "Reuse unchanged RGBA ImageData only within one synchronous texture.readyCallbacks burst; retain per-material UV/threshold decisions; no cross-model pixel cache.",
+      "distribution": "Content-addressed runtime bundle is built from current author source; legacy public raw JS remains the frozen r25 official snapshot."
     }
   ]
 }

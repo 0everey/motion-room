@@ -41,6 +41,7 @@ Three.js 0.170.0：MIT，见 vendor/three/LICENSE。
 官方活动：https://ys.biligame.com/pjdkx/
 可莉仅接原姿态/根/混合预览；未启用原MMD刚体、IK或grant运行时，不代表接触及全部动作质量验收。
 MMD解析：Three.js r170官方MIT模块，来源及哈希见vendor/three/mmd/SOURCES.json；许可证见vendor/three/LICENSE。
+当前作者运行时对MMDLoader作局部性能适配：仅在一次同步贴图回调批次复用原RGBA读回，保每材质原透明判定；原官方身份与适配身份在SOURCES.json分别记录。
 
 优香（早瀬ユウカ）：ゼーロ / zero3d 制作的 Blue Archive 二次创作模型，版权归原权利人。原作者：https://booth.pm/ja/items/3658411
 仅支持用户本人取得的 Yuuka_Hayase1_0_rev2.zip（1.0 rev2）在本浏览器导入、校验和预览。本站及离线分发包不包含其ZIP/PMX/纹理/转换模型，模型数据不上传；分享配方也不携带模型。

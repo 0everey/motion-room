@@ -1,6 +1,6 @@
 {
   "files": 2838,
-  "bytes": 760765471,
+  "bytes": 760775575,
   "ids": 2480,
   "variants": 2516,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -177,8 +177,8 @@
     },
     {
       "path": "credits.txt",
-      "bytes": 6751,
-      "sha256": "a2978b177ca9260380fb65e14eb5880526dc158ae098da8d59438d514c376310"
+      "bytes": 6957,
+      "sha256": "646530c1e5e9fcc45f722be397cc3f0d5c13ce68f80a20d1948d64a8d955ce6e"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -358,7 +358,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6093475,
-      "sha256": "0b04d26edafc9f723e0c39666fc067aea1dd5dadcb749c7e4ddaf7ce615e479d"
+      "sha256": "cc228bbf36f63b1d76a17d184d9e121a99a19750ba0f5bc11f0720380ccc76db"
     },
     {
       "path": "data/catalog/details-03c4750b972f.json.gz",
@@ -13952,8 +13952,8 @@
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 28202,
-      "sha256": "a93b58c91395d546ca7bcbad976af17c68844929e318c8abfd0b265bd4852025"
+      "bytes": 33614,
+      "sha256": "e7c33472dbb6534b9bcbafd5ea58627e794471ac4218cb1c941e340a0fa446c8"
     },
     {
       "path": "models/held-greatsword-c82f73e0df5d.glb",
@@ -14027,13 +14027,8 @@
     },
     {
       "path": "runtime-build.json",
-      "bytes": 10926,
-      "sha256": "078341ebcf339e92ed8c4189e7480520867b8ee4c819d6873852abf13b351dcc"
-    },
-    {
-      "path": "runtime-chunk-3PY7URGQ.js",
-      "bytes": 207210,
-      "sha256": "351ea7b3b51865eaaa60102488d4c13f478e43d3110e94d22b3057b9d12be88f"
+      "bytes": 11446,
+      "sha256": "5a2434ed3cf717104088cac55de1205a4d2b6957d1f34d0745962336071c2662"
     },
     {
       "path": "runtime-chunk-4KMRWNCV.js",
@@ -14041,14 +14036,9 @@
       "sha256": "ab86e73d10effd7ecc9c1bb0a43c47f887e78c32ad998b7ea41fb35a91e232b2"
     },
     {
-      "path": "runtime-chunk-6GC743SO.js",
-      "bytes": 298,
-      "sha256": "8124cc7c84cf345fedaa062dc7adb9a77f08026214de90bdfeb528e1ca7f9cd6"
-    },
-    {
-      "path": "runtime-chunk-AHQDBX4J.js",
+      "path": "runtime-chunk-5KKG72AU.js",
       "bytes": 253,
-      "sha256": "63e8c23bae0b868697638021ec9a9d1a61f1dbd9e7d766a843adcf0683dd2f9c"
+      "sha256": "2b232b31ef93989a0c3cd5bc3fbd1f266f60f1e8984168f7f251778a8584bf2a"
     },
     {
       "path": "runtime-chunk-AKQ6ITRA.js",
@@ -14056,29 +14046,39 @@
       "sha256": "4302d91cfe15a37e4a4c1b6604ae6af0d74334320dba380f8a67f4a2192d5edf"
     },
     {
-      "path": "runtime-chunk-BVA775A4.js",
-      "bytes": 162894,
-      "sha256": "5b3579593f70a9cc5a4614a2dd940e360d49fa174e82320c94ce8bb11133244a"
-    },
-    {
-      "path": "runtime-chunk-I5VFTHXP.js",
-      "bytes": 2443,
-      "sha256": "30dda6553c6f2986ea690d5aa3244e9af9eaa494ffcd4bd00b09b16bc2cb0099"
-    },
-    {
-      "path": "runtime-chunk-MBA5QNKB.js",
-      "bytes": 13254,
-      "sha256": "bbc6286247adb17063f982ae098aa5ed2c1a809bac28b7aaf19e7514ecc750a1"
-    },
-    {
-      "path": "runtime-chunk-QETBCUR3.js",
-      "bytes": 3356,
-      "sha256": "184480afd8054896c4e3af459c38b5109c5ad7f103eb331beec95bea4123f9b8"
-    },
-    {
-      "path": "runtime-chunk-U4ANP327.js",
+      "path": "runtime-chunk-BGHMTQPR.js",
       "bytes": 5392,
-      "sha256": "15e8b66da9df590e045f9f7f4228ee21587b4108a417696b715b8ebe216eec58"
+      "sha256": "134d270ef9d0502c35a6241d336bf5e6c0fe0be41ef0bf23972d76be217ee985"
+    },
+    {
+      "path": "runtime-chunk-MA5YJN4K.js",
+      "bytes": 13481,
+      "sha256": "59c919abfc66ae530f0dbc7ca4a581948e1f1f00328a3aec0e95443d3cb7b3ea"
+    },
+    {
+      "path": "runtime-chunk-P5N46UGS.js",
+      "bytes": 298,
+      "sha256": "b8910705802488f8acdda105808211b32603c76ff064113a6d2948ce34c61c26"
+    },
+    {
+      "path": "runtime-chunk-QVUTSI52.js",
+      "bytes": 2443,
+      "sha256": "b5fa9ac09d3c5fa0d003ac24dc0ceb34b3c771903d872777a671778eb1665c54"
+    },
+    {
+      "path": "runtime-chunk-TMGDVKOT.js",
+      "bytes": 208537,
+      "sha256": "2448c8573d908afe16b9b6b41ac531511285b8964a8bf2f791ba26e7a6a22d5f"
+    },
+    {
+      "path": "runtime-chunk-VHOLYRHG.js",
+      "bytes": 3356,
+      "sha256": "7373627327e1ebbde2bf374a10117f17026dc4585806398493a792c799f54a1f"
+    },
+    {
+      "path": "runtime-chunk-XWUPSPEX.js",
+      "bytes": 162964,
+      "sha256": "6e19daa8593bb35def74abef4857f6dfdb513bded6fa6249dc0f86e0d495c4f2"
     },
     {
       "path": "runtime-config.js",
@@ -14086,9 +14086,9 @@
       "sha256": "c301c86a958e4f0dd4596ad3abf11286c2ca89a3b889b9e4d7ed3a3c35362035"
     },
     {
-      "path": "runtime-library-entry-YJKNLZFY.js",
-      "bytes": 11047,
-      "sha256": "0c2ea0d365b04100043ec83f367ace21a336cd0b8141f332ea08c6f9c1b5b034"
+      "path": "runtime-library-entry-B6YAD4U2.js",
+      "bytes": 11802,
+      "sha256": "4ec411fbe60a6d5338dc89048616aa1c7ae51123cf21d3d7eaa77a03a7499e98"
     },
     {
       "path": "runtime-style-02779c1b5063.css",
@@ -14112,8 +14112,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 16913,
-      "sha256": "238880fb4dbac20039392f6c0913bb9dc7232204985be1ec35432564b01f7beb"
+      "bytes": 16919,
+      "sha256": "67a2ac635d1afbc3eb9483ca3f57466106449a2d2fa26db150f924762675c867"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -14142,8 +14142,8 @@
     },
     {
       "path": "vendor/three/mmd/SOURCES.json",
-      "bytes": 1246,
-      "sha256": "e443791c1a2740482251f63ed9b4987f2b906ed78828796abd34cefc60721a28"
+      "bytes": 1929,
+      "sha256": "b898248256e8898d74da067ddcf05e2e6f44bc84e605fd2c72a522e61fbc498b"
     },
     {
       "path": "vendor/three/mmd/libs/mmdparser.module.js",
@@ -14182,8 +14182,8 @@
     },
     {
       "path": "workbench.html",
-      "bytes": 15740,
-      "sha256": "67b7572e641788e867ee3b8ac9993e58bbb2b1ec051dd566eacb8cf97f930c3c"
+      "bytes": 16638,
+      "sha256": "10f22288dcc9f5bb55c5f935b76a90f33cce940e8e9fdacd3bfc46a2ef11754f"
     },
     {
       "path": "workbench.js",
@@ -14196,7 +14196,7 @@
       "sha256": "78713856860d7fd3cb13f30c3947068a91a835d46e95b052ee2198923d6af09d"
     }
   ],
-  "applicationSourceCommit": "8c9e843e9c8cef17041c235658685aefcf8ffa96",
+  "applicationSourceCommit": "685765da82d1c6fd6fb4fad91e1ed6807d9601c5",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -15153,7 +15153,52 @@
       "path": "data/roots/native-c9ceacc6_Standing_Draw_Arrow-dfdce829053f.json",
       "bytes": 38095,
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
+    },
+    {
+      "path": "runtime-chunk-3PY7URGQ.js",
+      "bytes": 207210,
+      "sha256": "351ea7b3b51865eaaa60102488d4c13f478e43d3110e94d22b3057b9d12be88f"
+    },
+    {
+      "path": "runtime-chunk-6GC743SO.js",
+      "bytes": 298,
+      "sha256": "8124cc7c84cf345fedaa062dc7adb9a77f08026214de90bdfeb528e1ca7f9cd6"
+    },
+    {
+      "path": "runtime-chunk-AHQDBX4J.js",
+      "bytes": 253,
+      "sha256": "63e8c23bae0b868697638021ec9a9d1a61f1dbd9e7d766a843adcf0683dd2f9c"
+    },
+    {
+      "path": "runtime-chunk-BVA775A4.js",
+      "bytes": 162894,
+      "sha256": "5b3579593f70a9cc5a4614a2dd940e360d49fa174e82320c94ce8bb11133244a"
+    },
+    {
+      "path": "runtime-chunk-I5VFTHXP.js",
+      "bytes": 2443,
+      "sha256": "30dda6553c6f2986ea690d5aa3244e9af9eaa494ffcd4bd00b09b16bc2cb0099"
+    },
+    {
+      "path": "runtime-chunk-MBA5QNKB.js",
+      "bytes": 13254,
+      "sha256": "bbc6286247adb17063f982ae098aa5ed2c1a809bac28b7aaf19e7514ecc750a1"
+    },
+    {
+      "path": "runtime-chunk-QETBCUR3.js",
+      "bytes": 3356,
+      "sha256": "184480afd8054896c4e3af459c38b5109c5ad7f103eb331beec95bea4123f9b8"
+    },
+    {
+      "path": "runtime-chunk-U4ANP327.js",
+      "bytes": 5392,
+      "sha256": "15e8b66da9df590e045f9f7f4228ee21587b4108a417696b715b8ebe216eec58"
+    },
+    {
+      "path": "runtime-library-entry-YJKNLZFY.js",
+      "bytes": 11047,
+      "sha256": "0c2ea0d365b04100043ec83f367ace21a336cd0b8141f332ea08c6f9c1b5b034"
     }
   ],
-  "totalPublishedApplicationFiles": 3028
+  "totalPublishedApplicationFiles": 3037
 }
