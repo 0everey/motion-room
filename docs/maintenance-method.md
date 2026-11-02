@@ -143,3 +143,17 @@ prepare_transport_preview.py从data/transport-build.json具名原件可原位重
 目录/预览继续沿library-entry→studio异步接管、四正文优先队列和有界解码内存。GLB在真实解析前核profile SHA；当前角色和持有的离线真值包含实际模型及道具依赖，骨架不能免除held ready。切换/None/清理/迟到不能回挂旧件或污染模板；发布前验匿名新document下真实五项、当前组合离线重开，以及新增原件下载的真实字节/SHA。
 
 本轮最后按用户‘加到30左右’再增量采用15个0 A.D.独立骑马take，当前2480个不同ID、2516变体、骑行30/乘坐132。prepare_extra_riding_preview.py只读人体transform/matrix通道的float4x4 OUTPUT与实际INPUT时基，排除bbone/IK自定义属性，减去各自非零原时段起点，保原首/中/末真实姿态。data/extra-riding-build.json可从已保原件重建；adopt_transport_previews.py --kind extra-riding增量采用15项，保护先前2465身份。原件与对应派生均沿0 A.D. CC BY-SA 3.0，保Wildfire署名/来源/修改说明。
+
+## 预览环境（2026-11-02）
+
+主舞台“场景”可选Mixamo灰棚（mixamo，默认）、深色网格（dark）、暖光展台（studio）、日光地面（daylight）。灰棚取自官方匿名Body Block实际预览的灰远景/浅灰尺度格/方向塑形/随形影组织，参数为本站校准，未复制Adobe代码、角色或场景资产；其余是本地原创程序化备选。场景不会改原MVP、骨架/持物矩阵或全片人物镜头，不承担通用接触物理/IK。
+
+preview-environments.js为无Three依赖的稳定key/中文标签及参数；preview-stage.js由每个renderer持有一个Stage根、灯与target、地面/网格/展台、一张方向shadow map与一次本地Room/PMREM反射。compare每格render前重绑到当前rig.scene，world绑总Scene，不再克隆旧灯/每rig网格或强制隐藏旧floor。地面不参与人物bounds，影相机从完整人物/持物范围与其地面方向投影联合得到；body材料隐藏时不投幽灵人体，实持物仍投影。小格256/中视口512/大详情1024，尺寸切换先退旧map；Room/generator的临时资源生成后释放，Stage.dispose归还其共享资源。RoomEnvironment来自Three r170/MIT，仅改相对import并保来源，禁止改用不匹配版本的包。
+
+environmentSelect、studio cleanBrowse和library-entry使用同一个校验key。工作区browse.environment为全局权威，纯配方用view.environment；旧缺字段默认mixamo。保存时两者写一致值；晚到SDK采用轻入口的最新选择。setEnvironment只同步呈现/persistent/request，保持时间/播放/镜头；syncFilters沿syncEnvironment统一同步控件/dataset/renderer，clearFilters明确保留environment。该同依赖场景key不入cacheTicket，避免打断首次后台填缓存；模型/持物/动作仍沿原资源票。
+
+纯配方/详情首次启动不要求预加载动作墙；返回墙的共同modeChanged入口在下一microtask检查仍为当前wall意图、bank为empty/cleared且有当前页后补读。filterRows已经启动加载或页已ready时不重复；不在filterRows内递归模式切换，过期意图不复活旧页。
+
+浅底骨架用实际helper颜色buffer的深色端点，类别小字加浅chip/深字；不改真实骨链或原body材料。手机第三选择器可换行。新增两个scene模块与Room模块须同时在显式公开FILES和r25离线壳；场景没有外部HDR/新贴图下载。只改元数据/呈现不重烤2480ID/2516变体、30骑行或原件。
+
+必要验证包括：BodyBlock原条件和两个时刻、真实receiver开关/恢复与隔离截影反例，整剑/低姿M416/骨架、compare/world/12格/五展示、同帧和持续播放切场景、筛选重置/API批量写入、本机/工作区/纯配方/旧字段/冲突恢复、SDK前最新意图、390实际控件、重复切换资源plateau与Stage释放/重建。记录首次准备与warm draw不同成本，先分开首次后台缓存填充再核场景零模型/动作重取；图片名以报告实际environment为准。原测试无效总shadow开关、误点隐藏菜单等失败保留，不据此修改产品规避测试。公开source/publisher仍为唯一发布链，线上另核actual SHA/消费者。

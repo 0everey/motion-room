@@ -1,6 +1,6 @@
 {
-  "files": 2820,
-  "bytes": 759679587,
+  "files": 2823,
+  "bytes": 759695552,
   "ids": 2480,
   "variants": 2516,
   "sourceCommit": "e53d165e0207f71467a5bc429260e42b6581cc10",
@@ -177,8 +177,8 @@
     },
     {
       "path": "credits.txt",
-      "bytes": 6148,
-      "sha256": "70c6d6406a52ab1bcebfef3f7630718ba3ae02d2e1f04306f2729c8c5844107e"
+      "bytes": 6828,
+      "sha256": "598289dcb0a1ba6c326597056570d9badcd1b624c35cd622cc0d21ec6f77795d"
     },
     {
       "path": "data/animator-roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-3be6caf3d6f2.json",
@@ -358,7 +358,7 @@
     {
       "path": "data/catalog.json",
       "bytes": 6093475,
-      "sha256": "950958d1111fe5b5b9d483980f7006737de578e47dd6af0d14b6fe6d29aae576"
+      "sha256": "4274e423eca385fbdcc0afc8ad154b9be654ba2f96a50a1e4a5ce07483488eb5"
     },
     {
       "path": "data/catalog/details-03c4750b972f.json.gz",
@@ -1142,8 +1142,8 @@
     },
     {
       "path": "data/character-sources.json",
-      "bytes": 1440,
-      "sha256": "27706b1d1771f63a65fd5a9fc66073b5878e13afd64197de61f098af694847f7"
+      "bytes": 1397,
+      "sha256": "b75a39f5223e35c41cff41f83472d62775c48f860668d736a508ec420b966665"
     },
     {
       "path": "data/clips/cloud-c9cc0768_Standing_To_Crouched-d8233f489d4c.mvp.gz",
@@ -13727,8 +13727,8 @@
     },
     {
       "path": "data/collections.json",
-      "bytes": 5726,
-      "sha256": "37e33eceda338571651f266acb83ea1bedcd0cea66f5b2fcfda4996b67620d0f"
+      "bytes": 5557,
+      "sha256": "6572cf88a20b4dbdec3feaa88fd94dc3dd6eb76bbd67032761e34ed9ba35a98f"
     },
     {
       "path": "data/held-items.json",
@@ -13742,8 +13742,8 @@
     },
     {
       "path": "data/riding-catalog.json",
-      "bytes": 99015,
-      "sha256": "52a50bb4132085d31493364e76b43fddd1680aba22eaf956159ea9fbab0226eb"
+      "bytes": 96637,
+      "sha256": "0633af43d3925b51b4aa46839d245107f3fd0be1714f43d5654cbb78d30771da"
     },
     {
       "path": "data/roots/native-0ac7eaa4_Unarmed_Grab_Torch_From_Floor-23af6fff192b.json",
@@ -13932,8 +13932,8 @@
     },
     {
       "path": "klee-source.js",
-      "bytes": 2492,
-      "sha256": "fc728d7a61ace4e6c6e0ef27da313743dd533e8007719e667c4985db9afb0557"
+      "bytes": 2471,
+      "sha256": "1ded1c0b17828cfd2dadd825001e9f3dde741f5f506ae1cc5687daef21da3214"
     },
     {
       "path": "library-browser.js",
@@ -13942,13 +13942,13 @@
     },
     {
       "path": "library-entry.js",
-      "bytes": 11845,
-      "sha256": "a86140d124b3c8247a43a7e5eb81e120b1eadf57f7a3434fa7af945c2f4a6357"
+      "bytes": 12772,
+      "sha256": "705bdf374361a43066d0d1ae71d0bfa1baa2028fe69a6b5f0315d08e142f4488"
     },
     {
       "path": "maintenance-method.md",
-      "bytes": 23257,
-      "sha256": "ef05854e46c22db39a8b1145919a0a81852f43466e69b64f05dafea7ee641619"
+      "bytes": 26482,
+      "sha256": "b11730ecf60a4574e1fc39403fa852062e9b7c877aaf4f1539269d1903b5455b"
     },
     {
       "path": "models/held-greatsword-c82f73e0df5d.glb",
@@ -13977,8 +13977,8 @@
     },
     {
       "path": "motion-session.js",
-      "bytes": 22076,
-      "sha256": "faaeeae0387be04a4cac613447ba88433bf5f1d0baed4b866fc788e3c030ae8b"
+      "bytes": 21939,
+      "sha256": "450c978338cb1a77276971b10f85b6653a2f1b61952fd800c55a1e374da8dd8a"
     },
     {
       "path": "motion-wall.js",
@@ -13987,13 +13987,13 @@
     },
     {
       "path": "mvp.js",
-      "bytes": 8055,
-      "sha256": "85a88759a266014d1f745cf1ce83b711bd4296e36c641bcb5ec33e4047c70be4"
+      "bytes": 7931,
+      "sha256": "d47c0c476aae462a6378f58d4196886b836a4922b12ed57ec52fe6355bc0ef3e"
     },
     {
       "path": "native-root.js",
-      "bytes": 5180,
-      "sha256": "115b621f49d0725da7389a65a6713d007b0e37eeeefe6a38da8cd8d489927b2d"
+      "bytes": 5137,
+      "sha256": "6c774251b150f3faf038d68e2e193b2d538a8727f3d6fa4de5c68d2745b5a2ef"
     },
     {
       "path": "pmx-source.js",
@@ -14001,9 +14001,19 @@
       "sha256": "2c23fdbcdeef091d89022f40821647a977b93bd2d71752c1946495911ccd0a98"
     },
     {
+      "path": "preview-environments.js",
+      "bytes": 1563,
+      "sha256": "ddca8eefd82b1068d59d9557142fc63674f7950530c81b66a0853f166c6f0ab0"
+    },
+    {
+      "path": "preview-stage.js",
+      "bytes": 6545,
+      "sha256": "a02573c863e970d07ccb0e1df3eda50f89c57b055e7aabc67a78fd06cc8eba27"
+    },
+    {
       "path": "renderer.js",
-      "bytes": 23423,
-      "sha256": "f8f3b8f3b446986a173c3c41f621caf6d2ebdf9d910b1a702130428d562e3a4c"
+      "bytes": 22365,
+      "sha256": "be0ef76ec9a9dd95cec580bec168d83c6e46eaa1c07c0f7072e597333ebbf1bc"
     },
     {
       "path": "resource-queue.js",
@@ -14012,13 +14022,13 @@
     },
     {
       "path": "studio.css",
-      "bytes": 37181,
-      "sha256": "27ee4f4f7c4dda4e6b0959864258bc62723da0d7d0a3396755c3d2744fbd5349"
+      "bytes": 38070,
+      "sha256": "02779c1b5063ed862c524ad91201cf39c45f1f5892feefd9c054b007d74c886d"
     },
     {
       "path": "studio.js",
-      "bytes": 71347,
-      "sha256": "7a0c62385ef5583564902e388b8e79106e53574745f6d47edd3ec333249488ad"
+      "bytes": 73129,
+      "sha256": "fd4d625f90793a49e07decd06065f698b332ca06e802fa4a9204c4331445b571"
     },
     {
       "path": "styles.css",
@@ -14027,8 +14037,8 @@
     },
     {
       "path": "sw.js",
-      "bytes": 11205,
-      "sha256": "6272ed35cfbcefacd552a368368ea85f368a4d076e975a30c02b89a137350585"
+      "bytes": 11285,
+      "sha256": "62bafa3efab9a6dc61ea831dd3e688f02c65033ae44db62870bcbe087c9ab09a"
     },
     {
       "path": "vendor/three/BufferGeometryUtils.js",
@@ -14044,6 +14054,11 @@
       "path": "vendor/three/LICENSE",
       "bytes": 1102,
       "sha256": "f57eb9202058667d12aebd854fe8a86d6feaeab51078180df5615bfdbd5cff05"
+    },
+    {
+      "path": "vendor/three/RoomEnvironment.js",
+      "bytes": 3737,
+      "sha256": "f57dbf407cc45cc43e3206a95275a9f3d2dee1ec78e9b9e5bcc5e645065fa5ce"
     },
     {
       "path": "vendor/three/SkeletonUtils.js",
@@ -14082,8 +14097,8 @@
     },
     {
       "path": "workbench-renderer.js",
-      "bytes": 30869,
-      "sha256": "cf0abf2e2f1efb567989662b35a54324035b413c5094be952733b68b2e0ee064"
+      "bytes": 31100,
+      "sha256": "53a6b715e8db9578dad57396d67dc4a6ec43b92c3e945db80cc86b3b4d99aa42"
     },
     {
       "path": "workbench.css",
@@ -14092,8 +14107,8 @@
     },
     {
       "path": "workbench.html",
-      "bytes": 14433,
-      "sha256": "16b987f7bbf9329ebfae8cdc3a01ebd54c7602783fcd7d3ab55fcfa180ddded2"
+      "bytes": 14724,
+      "sha256": "4d83b496d67a16954ebde87ad24466a59683a259280b378915c2ffe6d4acd7df"
     },
     {
       "path": "workbench.js",
@@ -14102,11 +14117,11 @@
     },
     {
       "path": "yuuka-source.js",
-      "bytes": 3336,
-      "sha256": "05d4d3653124d6067f5dd5b12378b33cf9a0f063a9af3b3dd4def4d34852dbf0"
+      "bytes": 3324,
+      "sha256": "78713856860d7fd3cb13f30c3947068a91a835d46e95b052ee2198923d6af09d"
     }
   ],
-  "applicationSourceCommit": "55af18b401f5fddd18d978926ba722f30e31f2f6",
+  "applicationSourceCommit": "a1a94b4a3994c466afb031d52d283053dfa527b8",
   "publisher": "GitHub Pages",
   "publicRepository": "0everey/motion-room",
   "publishingSource": {
@@ -15065,5 +15080,5 @@
       "sha256": "dfdce829053f85cf59511b616f3addd1c3940344b3eb9e64d6838fcd5be9a8f4"
     }
   ],
-  "totalPublishedApplicationFiles": 3010
+  "totalPublishedApplicationFiles": 3013
 }

@@ -1,6 +1,7 @@
 import {PRIORITY} from './resource-queue.js';
 import {fetchMotion} from './mvp.js';
 import {fetchNativeRoot} from './native-root.js';
+import {isEnvironment} from './preview-environments.js';
 
 export const SESSION_SCHEMA='motion-workbench.recipe.v1';
 const clone=value=>structuredClone(value);
@@ -71,7 +72,7 @@ export function validateRecipe(input,catalog){
   if(recipe.speed===undefined)recipe.speed=1;
   if(recipe.layout===undefined)recipe.layout='compare';
   if(!['compare','world'].includes(recipe.layout))throw new Error('展示布局无效。');
-  if(recipe.view){const v=recipe.view;if(!finite(v.yaw,-1000000,1000000)||!finite(v.pitch,-.65,.75)||!finite(v.zoom,.5,2.5)||typeof v.follow!=='boolean'||typeof v.skeleton!=='boolean'||typeof v.grid!=='boolean'||(v.focus!=='all'&&!actorIds.has(v.focus)))throw new Error('配方视角参数无效。');}
+  if(recipe.view){const v=recipe.view;if(!finite(v.yaw,-1000000,1000000)||!finite(v.pitch,-.65,.75)||!finite(v.zoom,.5,2.5)||typeof v.follow!=='boolean'||typeof v.skeleton!=='boolean'||typeof v.grid!=='boolean'||(v.focus!=='all'&&!actorIds.has(v.focus))||(v.environment!==undefined&&!isEnvironment(v.environment)))throw new Error('配方视角参数无效。');}
   if(!['trajectory','in-place','animator'].includes(recipe.rootMode)||typeof recipe.loop!=='boolean'||!finite(recipe.time,0,3600)||!finite(recipe.speed,.1,4))throw new Error('播放或根轨迹参数无效。');
   return recipe;
 }

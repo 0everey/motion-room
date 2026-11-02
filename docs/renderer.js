@@ -5,6 +5,7 @@ import {sampleMotion} from './mvp.js';
 import {MODEL_ASSET,CHARACTER_PROFILES,DEFAULT_CHARACTER} from './character.js';
 import {materialTextures} from './klee-source.js';
 import {HELD_ITEMS,isHeldItem,loadHeldItem,mountHeldItem} from './held-items.js';
+import {PreviewStage} from './preview-stage.js';
 
 const ASSETS=[MODEL_ASSET,'character.js','vendor/three/three.module.min.js','vendor/three/GLTFLoader.js','vendor/three/BufferGeometryUtils.js'];
 const Q=()=>new THREE.Quaternion(),V=()=>new THREE.Vector3();
@@ -80,19 +81,13 @@ export class MotionRenderer{
     this.webgl.setPixelRatio(Math.min(devicePixelRatio||1,1.75));this.webgl.setClearColor(0,0);
     this.webgl.outputColorSpace=THREE.SRGBColorSpace;this.webgl.toneMapping=THREE.NoToneMapping;
     this.scene=new THREE.Scene();this.camera=new THREE.PerspectiveCamera(38,1,0.03,300);
-    this.scene.add(new THREE.HemisphereLight(0xffffff,0xb2a69d,1.0));
-    const key=new THREE.DirectionalLight(0xffffff,1.5);key.position.set(-2,5,4);this.scene.add(key);
-    const fill=new THREE.DirectionalLight(0xc7d6ff,0.35);fill.position.set(3,2,-3);this.scene.add(fill);
-    this.floor=new THREE.Group();this.scene.add(this.floor);
-    const disk=new THREE.Mesh(new THREE.CircleGeometry(1.2,96),new THREE.MeshBasicMaterial({color:0xf2ede4,transparent:true,opacity:0.66,depthWrite:false}));disk.rotation.x=-Math.PI/2;disk.position.y=-0.012;this.floor.add(disk);
-    for(const radius of [1.1,1.16]){const ring=new THREE.Mesh(new THREE.RingGeometry(radius,radius+0.004,96),new THREE.MeshBasicMaterial({color:0xb59b6c,transparent:true,opacity:0.48,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=-0.008;this.floor.add(ring);}
-    const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=128;const ctx=shadowCanvas.getContext('2d'),g=ctx.createRadialGradient(64,64,4,64,64,64);g.addColorStop(0,'rgba(54,46,43,.26)');g.addColorStop(1,'rgba(54,46,43,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128);
-    const shadow=new THREE.Mesh(new THREE.PlaneGeometry(1.25,0.75),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));shadow.rotation.x=-Math.PI/2;shadow.position.y=-0.006;this.floor.add(shadow);
+    this.stage=new PreviewStage(this.webgl);this.floor=this.stage.floor;
     this.heldItemKey='none';this.heldGeneration=0;this.heldReady=false;this.heldError=null;this.characterProfile=CHARACTER_PROFILES[character]||CHARACTER_PROFILES[DEFAULT_CHARACTER];this.hipName=this.characterProfile.hip;this.bindInput();this.resizeObserver=new ResizeObserver(()=>onChange());this.resizeObserver.observe(canvas);
     canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();onError(new Error('图形上下文已丢失，请刷新页面恢复。'));});
     this.loadModel();
   }
-  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1),'held-items.js',...(this.characterProfile.offlineAssets||[]),...(HELD_ITEMS[this.heldItemKey]?.asset?[HELD_ITEMS[this.heldItemKey].asset]:[])];}
+  getOfflineAssets(){return [this.characterProfile.asset,...ASSETS.slice(1),'held-items.js','preview-environments.js','preview-stage.js','vendor/three/RoomEnvironment.js',...(this.characterProfile.offlineAssets||[]),...(HELD_ITEMS[this.heldItemKey]?.asset?[HELD_ITEMS[this.heldItemKey].asset]:[])];}
+  setEnvironment(key){if(this.stage.setProfile(key))this.onChange();}
   unmountHeldItem(){this.attachedHeld?.removeFromParent();this.attachedHeld=null;this.heldReady=false;}
   mountCurrentHeldItem(){if(!this.modelReady||!this.character||!this.heldTemplate||this.heldItemKey==='none')return false;this.dropActors?.();this.unmountHeldItem();this.attachedHeld=mountHeldItem(this.character,this.bones,this.rests,this.characterProfile,this.heldItemKey,this.heldTemplate);this.heldReady=true;this.onChange();return true;}
   async setHeldItem(key){
@@ -208,6 +203,8 @@ export class MotionRenderer{
     if(this.character)this.character.visible=this.model&&(!this.motion||!!this.motion.rotations);
     if(this.helper)this.helper.visible=this.skeleton&&!!this.motion?.rotations;
     if(this.trailLine)this.trailLine.visible=this.trail;
+    const stageBounds=this.character?new THREE.Box3().setFromObject(this.character):new THREE.Box3().setFromCenterAndSize(center,new THREE.Vector3(2,3,2));
+    this.character?.traverse(o=>{if(o.isMesh)o.castShadow=true;});this.stage.bind(this.scene,stageBounds,width,height,this.trail);
     this.webgl.render(this.scene,this.camera);return sampled;
   }
 }

@@ -72,3 +72,6 @@ https://quaternius.com/packs/universalanimationlibrary.html
 实际免费原包：https://quaternius.itch.io/universal-animation-library
 采用Driving_Loop及Sitting_Enter/Exit/Idle_Loop/Talking_Loop五个真实take；所有角色仍仅人物重定向，不含载具接触物理。
 本轮再增15个0 A.D.骑马人物独立动作（骑射、投掷、单手/双手近战与持械行进），骑行合计30。新增原件/人物MVP2派生均沿CC BY-SA 3.0，署名Wildfire Games并逐项保官方来源与改动说明；预览去水平起点、保真实人体矩阵key时段归零，不含马/弓矛道具与正式载具接触。
+Preview environments: Mixamo's public viewer was studied as a visual reference for the neutral gray default; this stage is independently implemented and includes no Adobe viewer code or scene assets.
+Local reflection room: Three.js r170 RoomEnvironment, MIT, https://github.com/mrdoob/three.js/blob/r170/examples/jsm/environments/RoomEnvironment.js . Existing vendor/three/LICENSE applies; only the module import path is adapted.
+Alternative dark grid, warm studio podium and daylight ground: original procedural scenes for Motion Room. No external HDR, scenery image or new animation asset is required.
